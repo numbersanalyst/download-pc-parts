@@ -79,7 +79,7 @@ export function MagicCard({
     <div
       ref={cardRef}
       onClick={onClick}
-      className={cn("group relative flex w-full h-[400px] rounded-xl", className)}
+      className={cn("group relative flex size-full rounded-xl", className)}
     >
       <div className="absolute inset-px z-10 rounded-xl bg-background" />
       <div className="relative z-30 animate-in fade-in duration-300">{children}</div>
