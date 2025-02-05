@@ -24,7 +24,7 @@ export default function Configure() {
   const [selectedProcessor, selectedProcessorHandler] = useState<Number | null>(null);
 
   return (
-    <main className="w-screen flex justify-center">
+    <main className="flex justify-center">
       <div className="flex flex-col gap-8 w-full max-w-6xl relative p-12">
         <Link className="absolute z-50 top-2 bg-black text-white rounded-3xl p-3" href="/">
           Go back
