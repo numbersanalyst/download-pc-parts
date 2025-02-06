@@ -132,7 +132,8 @@ export default function Configure() {
           <Separator className="block md:hidden px-2" orientation="horizontal"/>
           <Separator className="hidden md:block py-2" orientation="vertical"/>
 
-          <ScrollArea className="w-full md:w-1/2 h-full max-h-[500px]">
+          <ScrollArea className="w-full md:w-1/2 h-full max-h-[500px] relative">
+            <div className="absolute left-0 right-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent z-10"></div>
             <div className="flex flex-col gap-2 p-10">
               <div>
                 <p className="text-md opacity-75">Manufacture</p>
