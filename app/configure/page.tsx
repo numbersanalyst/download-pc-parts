@@ -51,7 +51,7 @@ export default function Configure() {
                 width={270}
                 height={270}
               />
-              <p className="opacity-50 lg:absolute text-center w-full mt-2 lg:mt-5">AMD processors</p>
+              <p className="text-gray-500 lg:absolute text-center w-full mt-2 lg:mt-5">AMD processors</p>
             </div>
           </MagicCard>
           <MagicCard
@@ -74,7 +74,7 @@ export default function Configure() {
                 width={200}
                 height={200}
               />
-              <p className="opacity-50 lg:absolute text-center w-full mt-2 lg:mt-5">Intel processors</p>
+              <p className="text-gray-500 lg:absolute text-center w-full mt-2 lg:mt-5">Intel processors</p>
             </div>
           </MagicCard>
         </div>
@@ -83,9 +83,9 @@ export default function Configure() {
           <div className="flex flex-col gap-4 mt-10">
             <h2 className="text-2xl font-bold">Select your processor</h2>
             <div className="relative">
-              <div className="absolute left-0 top-0 bottom-0 w-6 bg-gradient-to-r from-background/75 to-transparent z-10" />
-              <div className="absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-background/75 to-transparent z-10" />
-              <Carousel className="w-full" opts={{slidesToScroll: "auto"}} >
+              <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-background/50 dark:from-background/75 to-transparent z-10" />
+              <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-background/50 dark:from-background/75 to-transparent z-10" />
+              <Carousel className="w-full" opts={{ slidesToScroll: "auto" }} >
                 <CarouselContent className="-ml-2 md:-ml-4">
                   {processors[selectedCpuBrand].map((processor) => (
                     <CarouselItem key={processor.id} className="pl-2 md:pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 min-w-0 cursor-pointer" onClick={() => selectedProcessorHandler(processor.id)}>
@@ -119,7 +119,7 @@ export default function Configure() {
             </div>
           </div>
         )}
-        
+
         <Card className="flex flex-col md:flex-row min-h-[500px]">
           <div className="w-full md:w-1/2 min-w-[300px] flex items-center justify-center p-10">
             <img
@@ -129,21 +129,53 @@ export default function Configure() {
             />
           </div>
 
-          <Separator className="block md:hidden px-2" orientation="horizontal"/>
-          <Separator className="hidden md:block py-2" orientation="vertical"/>
+          <Separator className="block md:hidden px-2" orientation="horizontal" />
+          <Separator className="hidden md:block py-2" orientation="vertical" />
 
-          <ScrollArea className="w-full md:w-1/2 h-full max-h-[500px] relative">
-            <div className="absolute left-0 right-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent z-10"></div>
-            <div className="flex flex-col gap-2 p-10">
+          <ScrollArea className="w-full md:w-1/2 h-full max-h-[500px] h-full relative">
+            <div className="flex flex-col gap-4 p-10">
               <div>
-                <p className="text-md opacity-75">Manufacture</p>
+                <p className="text-md text-gray-500">Manufacture</p>
                 <p className="text-2xl font-semibold">AMD</p>
               </div>
               <div>
-                <p className="text-md opacity-75">Model</p>
+                <p className="text-md text-gray-500">Model</p>
                 <p className="text-2xl font-semibold">Ryzen 9 7950X3D</p>
               </div>
+              <div>
+                <p className="text-md text-gray-500">Microarchitecture</p>
+                <p className="text-2xl font-semibold">Granite Ridge</p>
+              </div>
+              <div>
+                <p className="text-md text-gray-500">Socket</p>
+                <p className="text-2xl font-semibold">AM5</p>
+              </div>
+              <div>
+                <p className="text-md text-gray-500">Core Count</p>
+                <p className="text-2xl font-semibold">8</p>
+              </div>
+              <div>
+                <p className="text-md text-gray-500">Thread Count</p>
+                <p className="text-2xl font-semibold">16</p>
+              </div>
+              <div>
+                <p className="text-md text-gray-500">Performance Core Clock</p>
+                <p className="text-2xl font-semibold">4.7 GHz</p>
+              </div>
+              <div>
+                <p className="text-md text-gray-500">Performance Core Boost Clock</p>
+                <p className="text-2xl font-semibold">5.2 GHz</p>
+              </div>
+              <div>
+                <p className="text-md text-gray-500">TDP</p>
+                <p className="text-2xl font-semibold">120 W</p>
+              </div>
+              <div>
+                <p className="text-md text-gray-500">Integrated Graphics</p>
+                <p className="text-2xl font-semibold">Radeon</p>
+              </div>
             </div>
+            <div className="absolute left-2 right-2 bottom-0 h-32 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none"></div>
           </ScrollArea>
         </Card>
       </div>
