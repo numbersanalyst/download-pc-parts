@@ -121,10 +121,20 @@ export default function Configure() {
         )}
 
         <Card className="flex flex-col md:flex-row min-h-[500px]">
-          <div className="w-full md:w-1/2 min-w-[300px] flex items-center justify-center p-10">
-            <img
+          <div className="w-full md:w-1/2 min-w-[300px] flex items-center justify-center p-4 md:p-10 relative">
+            <p className="text-6xl md:text-8xl text-center font-bold absolute pointer-events-none
+              text-white
+              mix-blend-difference
+              opacity-75
+              contrast-200
+              brightness-200">
+              Details about your CPU
+            </p>
+            <Image
               src="/amd-ryzen-9-7950X3D.png"
               alt="amd-ryzen-9-7950X3D cpu"
+              width={350}
+              height={350}
               className="object-contain w-[350px] h-[350px]"
             />
           </div>
@@ -132,7 +142,7 @@ export default function Configure() {
           <Separator className="block md:hidden px-2" orientation="horizontal" />
           <Separator className="hidden md:block py-2" orientation="vertical" />
 
-          <ScrollArea className="w-full md:w-1/2 h-full max-h-[500px] h-full relative">
+          <ScrollArea className="w-full md:w-1/2 h-full max-h-[500px]">
             <div className="flex flex-col gap-4 p-10">
               <div>
                 <p className="text-md text-gray-500">Manufacture</p>
