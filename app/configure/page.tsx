@@ -30,7 +30,7 @@ export default function Configure() {
           Go back
         </Link>
 
-        <div className="flex h-[500px] lg:h-[400px] flex-col gap-4 lg:flex-row">
+        <div className="flex h-[500px] lg:h-[400px] flex-col gap-4 lg:flex-row select-none">
           <MagicCard
             className={cn(
               "cursor-pointer flex-col items-center justify-center text-2xl shadow-2xl",
@@ -90,7 +90,7 @@ export default function Configure() {
                   {processors[selectedCpuBrand].map((processor) => (
                     <CarouselItem key={processor.id} className="pl-2 md:pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 min-w-0 cursor-pointer" onClick={() => selectedProcessorHandler(processor.id)}>
                       <Card>
-                        <CardContent className="flex flex-col items-center justify-center p-6">
+                        <CardContent className="flex flex-col items-center justify-center p-6 select-none">
                           {/* FOR STACKBLITZ IMG INSTEAD OF IMAGE */}
                           {/* <img
                             src={processor.image}
