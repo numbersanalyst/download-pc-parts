@@ -122,7 +122,7 @@ export default function Configure() {
 
         <Card className="flex flex-col md:flex-row min-h-[500px]">
           <div className="w-full md:w-1/2 min-w-[300px] flex items-center justify-center p-4 md:p-10 relative">
-            <p className="text-6xl md:text-8xl text-center font-bold absolute pointer-events-none
+            <p className="text-6xl md:text-8xl text-center font-bold absolute select-none
               text-white
               mix-blend-difference
               opacity-75
