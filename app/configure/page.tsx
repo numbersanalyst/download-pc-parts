@@ -19,6 +19,8 @@ import { processors } from "@/data/processors";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
+import Scene from "@/components/configuration/hero";
+
 type ProcessorType = {
   id: number;
   model: string;
@@ -29,9 +31,9 @@ type ProcessorType = {
   coreCount: number;
   threadCount: number;
   coreClock: string;
-  boostClock: string;
+  boostClock: string | null;
   tdp: string;
-  integratedGraphics: string;
+  integratedGraphics: string | null;
 };
 
 export default function Configure() {
@@ -41,6 +43,8 @@ export default function Configure() {
   return (
     <main className="flex justify-center">
       <div className="flex flex-col gap-8 w-full max-w-6xl relative p-12">
+        <Scene />
+
         <Link className="absolute z-50 top-2 bg-black text-white rounded-3xl p-3" href="/">
           Go back
         </Link>
@@ -184,7 +188,7 @@ export default function Configure() {
               </div>
               <div>
                 <p className="text-md text-gray-500">Performance Core Boost Clock</p>
-                <p className="text-2xl font-semibold">{selectedProcessor.boostClock}</p>
+                <p className="text-2xl font-semibold">{selectedProcessor.boostClock || "N/A"}</p>
               </div>
               <div>
                 <p className="text-md text-gray-500">TDP</p>
