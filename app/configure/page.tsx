@@ -106,12 +106,6 @@ export default function Configure() {
                     <CarouselItem key={processor.id} className="pl-2 md:pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 min-w-0 cursor-pointer" onClick={() => selectedProcessorHandler(processor)}>
                       <Card>
                         <CardContent className="flex flex-col items-center justify-center p-6 select-none">
-                          {/* FOR STACKBLITZ IMG INSTEAD OF IMAGE */}
-                          {/* <img
-                            src={processor.image}
-                            alt={processor.model + " CPU image"}
-                            className="object-contain text-center select-none w-[130px] h-[130px]"
-                          /> */}
                           <Image
                             src={processor.image}
                             alt={processor.model + " CPU image"}
