@@ -19,9 +19,24 @@ import { processors } from "@/data/processors";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
+type ProcessorType = {
+  id: number;
+  model: string;
+  price: number;
+  image: string;
+  microarchitecture: string;
+  socket: string;
+  coreCount: number;
+  threadCount: number;
+  coreClock: string;
+  boostClock: string;
+  tdp: string;
+  integratedGraphics: string;
+};
+
 export default function Configure() {
   const [selectedCpuBrand, selectedCpuBrandHandler] = useState<"AMD" | "Intel" | "">("");
-  const [selectedProcessor, selectedProcessorHandler] = useState<Number | null>(null);
+  const [selectedProcessor, selectedProcessorHandler] = useState<ProcessorType | "">("");
 
   return (
     <main className="flex justify-center">
@@ -88,7 +103,7 @@ export default function Configure() {
               <Carousel className="w-full" opts={{ slidesToScroll: "auto" }} >
                 <CarouselContent className="-ml-2 md:-ml-4">
                   {processors[selectedCpuBrand].map((processor) => (
-                    <CarouselItem key={processor.id} className="pl-2 md:pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 min-w-0 cursor-pointer" onClick={() => selectedProcessorHandler(processor.id)}>
+                    <CarouselItem key={processor.id} className="pl-2 md:pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 min-w-0 cursor-pointer" onClick={() => selectedProcessorHandler(processor)}>
                       <Card>
                         <CardContent className="flex flex-col items-center justify-center p-6 select-none">
                           {/* FOR STACKBLITZ IMG INSTEAD OF IMAGE */}
@@ -120,6 +135,7 @@ export default function Configure() {
           </div>
         )}
 
+        {selectedProcessor && (
         <Card className="flex flex-col md:flex-row min-h-[500px]">
           <div className="w-full md:w-1/2 min-w-[300px] flex items-center justify-center p-4 md:p-10 relative">
             <p className="text-6xl md:text-8xl text-center font-bold absolute select-none
@@ -131,8 +147,8 @@ export default function Configure() {
               Details about your CPU
             </p>
             <Image
-              src="/amd-ryzen-9-7950X3D.png"
-              alt="amd-ryzen-9-7950X3D cpu"
+              src={selectedProcessor.image}
+              alt={selectedProcessor.model + " CPU image"}
               width={350}
               height={350}
               className="object-contain w-[350px] h-[350px]"
@@ -146,48 +162,50 @@ export default function Configure() {
             <div className="flex flex-col gap-4 p-10">
               <div>
                 <p className="text-md text-gray-500">Manufacture</p>
-                <p className="text-2xl font-semibold">AMD</p>
+                <p className="text-2xl font-semibold">{selectedCpuBrand}</p>
               </div>
               <div>
                 <p className="text-md text-gray-500">Model</p>
-                <p className="text-2xl font-semibold">Ryzen 9 7950X3D</p>
+                <p className="text-2xl font-semibold">{selectedProcessor.model}</p>
               </div>
               <div>
                 <p className="text-md text-gray-500">Microarchitecture</p>
-                <p className="text-2xl font-semibold">Granite Ridge</p>
+                <p className="text-2xl font-semibold">{selectedProcessor.microarchitecture}</p>
               </div>
               <div>
                 <p className="text-md text-gray-500">Socket</p>
-                <p className="text-2xl font-semibold">AM5</p>
+                <p className="text-2xl font-semibold">{selectedProcessor.socket}</p>
               </div>
               <div>
                 <p className="text-md text-gray-500">Core Count</p>
-                <p className="text-2xl font-semibold">8</p>
+                <p className="text-2xl font-semibold">{selectedProcessor.coreCount}</p>
               </div>
               <div>
                 <p className="text-md text-gray-500">Thread Count</p>
-                <p className="text-2xl font-semibold">16</p>
+                <p className="text-2xl font-semibold">{selectedProcessor.threadCount}</p>
               </div>
               <div>
                 <p className="text-md text-gray-500">Performance Core Clock</p>
-                <p className="text-2xl font-semibold">4.7 GHz</p>
+                <p className="text-2xl font-semibold">{selectedProcessor.coreClock}</p>
               </div>
               <div>
                 <p className="text-md text-gray-500">Performance Core Boost Clock</p>
-                <p className="text-2xl font-semibold">5.2 GHz</p>
+                <p className="text-2xl font-semibold">{selectedProcessor.boostClock}</p>
               </div>
               <div>
                 <p className="text-md text-gray-500">TDP</p>
-                <p className="text-2xl font-semibold">120 W</p>
+                <p className="text-2xl font-semibold">{selectedProcessor.tdp}</p>
               </div>
               <div>
                 <p className="text-md text-gray-500">Integrated Graphics</p>
-                <p className="text-2xl font-semibold">Radeon</p>
+                <p className="text-2xl font-semibold">{selectedProcessor.integratedGraphics || "N/A"}</p>
               </div>
             </div>
             <div className="absolute left-2 right-2 bottom-0 h-32 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none"></div>
           </ScrollArea>
         </Card>
+        )}
+
       </div>
     </main>
   );
