@@ -54,8 +54,8 @@ export default function Hero() {
             
             <Model />
             
-            {/* @ts-expect-error */}
-            <OrbitControls 
+            {/* @ts-expect-error: OrbitControls type mismatch in @react-three/drei */}
+            <OrbitControls
               enableZoom={false}
               enablePan={false}
               dampingFactor={0.05}
