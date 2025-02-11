@@ -54,7 +54,7 @@ export default function Hero() {
             
             <Model />
             
-            {/* @ts-ignore */}
+            {/* @ts-expect-error */}
             <OrbitControls 
               enableZoom={false}
               enablePan={false}

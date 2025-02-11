@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 import {
   Carousel,
@@ -17,7 +17,7 @@ import { MagicCard } from "@/components/magicui/magic-card";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import Hero from "@/components/configuration/hero";
+// import Hero from "@/components/configuration/hero";
 
 import { processors } from "@/data/processors";
 
