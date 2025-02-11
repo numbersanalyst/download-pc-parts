@@ -1,5 +1,11 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "framer-motion";
+
 import {
   Carousel,
   CarouselContent,
@@ -9,17 +15,11 @@ import {
 } from "@/components/ui/carousel";
 import { MagicCard } from "@/components/magicui/magic-card";
 import { Card, CardContent } from "@/components/ui/card";
-
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
-
-import { processors } from "@/data/processors";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
 import Hero from "@/components/configuration/hero";
+
+import { processors } from "@/data/processors";
 
 type ProcessorType = {
   id: number;
@@ -110,7 +110,12 @@ export default function Configure() {
         </div>
 
         {selectedCpuBrand && (
-          <div className="flex flex-col gap-4 mt-10">
+          <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="flex flex-col gap-4 mt-10"
+          >
             <h2 className="text-2xl font-bold">Available models</h2>
             <div className="relative">
               <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-background/50 dark:from-background/75 to-transparent z-10" />
@@ -141,78 +146,84 @@ export default function Configure() {
                 <CarouselNext />
               </Carousel>
             </div>
-          </div>
+          </motion.div>
         )}
 
         {selectedProcessor && (
-        <Card className="flex flex-col md:flex-row min-h-[500px]">
-          <div className="w-full md:w-1/2 min-w-[300px] flex items-center justify-center p-4 md:p-10 relative">
-            <p className="text-6xl md:text-8xl text-center font-bold absolute select-none
-              text-white
-              mix-blend-difference
-              opacity-75
-              contrast-200
-              brightness-200">
-              Details about your CPU
-            </p>
-            <Image
-              src={selectedProcessor.image}
-              alt={selectedProcessor.model + " CPU image"}
-              width={350}
-              height={350}
-              className="object-contain w-[350px] h-[350px]"
-            />
-          </div>
-
-          <Separator className="block md:hidden px-2" orientation="horizontal" />
-          <Separator className="hidden md:block py-2" orientation="vertical" />
-
-          <ScrollArea className="w-full md:w-1/2 h-full max-h-[500px]">
-            <div className="flex flex-col gap-4 p-10">
-              <div>
-                <p className="text-md text-gray-500">Manufacture</p>
-                <p className="text-2xl font-semibold">{selectedCpuBrand}</p>
-              </div>
-              <div>
-                <p className="text-md text-gray-500">Model</p>
-                <p className="text-2xl font-semibold">{selectedProcessor.model}</p>
-              </div>
-              <div>
-                <p className="text-md text-gray-500">Microarchitecture</p>
-                <p className="text-2xl font-semibold">{selectedProcessor.microarchitecture}</p>
-              </div>
-              <div>
-                <p className="text-md text-gray-500">Socket</p>
-                <p className="text-2xl font-semibold">{selectedProcessor.socket}</p>
-              </div>
-              <div>
-                <p className="text-md text-gray-500">Core Count</p>
-                <p className="text-2xl font-semibold">{selectedProcessor.coreCount}</p>
-              </div>
-              <div>
-                <p className="text-md text-gray-500">Thread Count</p>
-                <p className="text-2xl font-semibold">{selectedProcessor.threadCount}</p>
-              </div>
-              <div>
-                <p className="text-md text-gray-500">Performance Core Clock</p>
-                <p className="text-2xl font-semibold">{selectedProcessor.coreClock}</p>
-              </div>
-              <div>
-                <p className="text-md text-gray-500">Performance Core Boost Clock</p>
-                <p className="text-2xl font-semibold">{selectedProcessor.boostClock || "N/A"}</p>
-              </div>
-              <div>
-                <p className="text-md text-gray-500">TDP</p>
-                <p className="text-2xl font-semibold">{selectedProcessor.tdp}</p>
-              </div>
-              <div>
-                <p className="text-md text-gray-500">Integrated Graphics</p>
-                <p className="text-2xl font-semibold">{selectedProcessor.integratedGraphics || "N/A"}</p>
-              </div>
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <Card className="flex flex-col md:flex-row min-h-[500px] h-full">
+            <div className="w-full md:w-1/2 min-w-[300px] flex items-center justify-center p-4 md:p-10 relative">
+              <p className="text-6xl md:text-8xl text-center font-bold absolute select-none
+                text-white
+                mix-blend-difference
+                opacity-75
+                contrast-200
+                brightness-200">
+                Details about your CPU
+              </p>
+              <Image
+                src={selectedProcessor.image}
+                alt={selectedProcessor.model + " CPU image"}
+                width={350}
+                height={350}
+                className="object-contain w-[350px] h-[350px]"
+              />
             </div>
-            <div className="absolute left-2 right-2 bottom-0 h-32 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none"></div>
-          </ScrollArea>
-        </Card>
+
+            <Separator className="block md:hidden px-2" orientation="horizontal" />
+            <Separator className="hidden md:block py-2" orientation="vertical" />
+
+            <ScrollArea className="w-full md:w-1/2 h-full max-h-[500px]">
+              <div className="flex flex-col gap-4 p-10">
+                <div>
+                  <p className="text-md text-gray-500">Manufacture</p>
+                  <p className="text-2xl font-semibold">{selectedCpuBrand}</p>
+                </div>
+                <div>
+                  <p className="text-md text-gray-500">Model</p>
+                  <p className="text-2xl font-semibold">{selectedProcessor.model}</p>
+                </div>
+                <div>
+                  <p className="text-md text-gray-500">Microarchitecture</p>
+                  <p className="text-2xl font-semibold">{selectedProcessor.microarchitecture}</p>
+                </div>
+                <div>
+                  <p className="text-md text-gray-500">Socket</p>
+                  <p className="text-2xl font-semibold">{selectedProcessor.socket}</p>
+                </div>
+                <div>
+                  <p className="text-md text-gray-500">Core Count</p>
+                  <p className="text-2xl font-semibold">{selectedProcessor.coreCount}</p>
+                </div>
+                <div>
+                  <p className="text-md text-gray-500">Thread Count</p>
+                  <p className="text-2xl font-semibold">{selectedProcessor.threadCount}</p>
+                </div>
+                <div>
+                  <p className="text-md text-gray-500">Performance Core Clock</p>
+                  <p className="text-2xl font-semibold">{selectedProcessor.coreClock}</p>
+                </div>
+                <div>
+                  <p className="text-md text-gray-500">Performance Core Boost Clock</p>
+                  <p className="text-2xl font-semibold">{selectedProcessor.boostClock || "N/A"}</p>
+                </div>
+                <div>
+                  <p className="text-md text-gray-500">TDP</p>
+                  <p className="text-2xl font-semibold">{selectedProcessor.tdp}</p>
+                </div>
+                <div>
+                  <p className="text-md text-gray-500">Integrated Graphics</p>
+                  <p className="text-2xl font-semibold">{selectedProcessor.integratedGraphics || "N/A"}</p>
+                </div>
+              </div>
+              <div className="absolute left-2 right-2 bottom-0 h-32 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none"></div>
+            </ScrollArea>
+          </Card>
+        </motion.div>
         )}
 
       </div>
