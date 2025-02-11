@@ -19,7 +19,7 @@ import { processors } from "@/data/processors";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-import Scene from "@/components/configuration/hero";
+import Hero from "@/components/configuration/hero";
 
 type ProcessorType = {
   id: number;
@@ -43,7 +43,18 @@ export default function Configure() {
   return (
     <main className="flex justify-center">
       <div className="flex flex-col gap-8 w-full max-w-6xl relative p-12">
-        <Scene />
+
+      {/* Dont working on stackblitz */}
+      {/* <Hero /> */}
+
+        <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center w-full gap-8">
+          <div className="w-16 h-16 text-2xl flex justify-center items-center bg-accent rounded-full">1</div>
+          <div className="flex flex-col">
+            <p className="text-2xl">Select your CPU</p>
+            <p className="text-xl text-gray-500">Choose brand, model and you are ready to go</p>
+          </div>
+        </div>
+        <Separator />
 
         <Link className="absolute z-50 top-2 bg-black text-white rounded-3xl p-3" href="/">
           Go back
@@ -100,7 +111,7 @@ export default function Configure() {
 
         {selectedCpuBrand && (
           <div className="flex flex-col gap-4 mt-10">
-            <h2 className="text-2xl font-bold">Select your processor</h2>
+            <h2 className="text-2xl font-bold">Available models</h2>
             <div className="relative">
               <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-background/50 dark:from-background/75 to-transparent z-10" />
               <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-background/50 dark:from-background/75 to-transparent z-10" />
