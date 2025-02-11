@@ -7,9 +7,17 @@ export default function Home() {
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <Image
-          src="/logo-1.png"
+          className="dark:hidden"
+          src="/logo.png"
           alt="Download PC Parts logo"
-          className="dark:invert dark:saturate-50 dark:rotate-hue-180"
+          width={230}
+          height={230}
+          priority
+        />
+         <Image
+         className="hidden dark:block"
+          src="/logo-dark.png"
+          alt="Download PC Parts logo"
           width={230}
           height={230}
           priority
