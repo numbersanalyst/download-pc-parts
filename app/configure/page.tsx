@@ -124,7 +124,10 @@ export default function Configure() {
                 <CarouselContent className="-ml-2 md:-ml-4">
                   {processors[selectedCpuBrand].map((processor) => (
                     <CarouselItem key={processor.id} className="pl-2 md:pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 min-w-0 cursor-pointer" onClick={() => selectedProcessorHandler(processor)}>
-                      <Card className={cn(selectedCpuBrand === "AMD" && selectedProcessor?.model === processor.model && "border border-red-500 border-opacity-60", selectedCpuBrand === "Intel" && selectedProcessor?.model === processor.model && "border border-blue-500 border-opacity-60")}>
+                      <Card className={cn(
+                        selectedCpuBrand === "AMD" && selectedProcessor && selectedProcessor.model === processor.model && "border border-red-500 border-opacity-60",
+                        selectedCpuBrand === "Intel" && selectedProcessor && selectedProcessor.model === processor.model && "border border-blue-500 border-opacity-60"
+                      )}>
                         <CardContent className="flex flex-col items-center justify-center p-6 select-none">
                           <Image
                             src={processor.image}
