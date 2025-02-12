@@ -36,13 +36,19 @@ type ProcessorType = {
   integratedGraphics: string | null;
 };
 
+const scrollToElement = (id: string, secondTime?: boolean) => {
+  const element = document.querySelector(id);
+  if (!element && !secondTime) setTimeout(() => scrollToElement(id, true), 100);
+  element?.scrollIntoView({ behavior: "smooth" });
+};
+
 export default function Configure() {
   const [selectedCpuBrand, selectedCpuBrandHandler] = useState<"AMD" | "Intel" | "">("");
   const [selectedProcessor, selectedProcessorHandler] = useState<ProcessorType | "">("");
 
   return (
     <main className="flex justify-center">
-      <div className="flex flex-col gap-8 w-full max-w-6xl relative p-12">
+      <div className="flex flex-col gap-8 w-full max-w-6xl relative p-8 md:p-12">
 
       {/* Dont working on stackblitz */}
       {/* <Hero /> */}
@@ -71,7 +77,7 @@ export default function Configure() {
             gradientSize={300}
             gradientFrom="#ffc0c0"
             gradientTo="#ff9980"
-            onClick={() => selectedCpuBrandHandler("AMD")}
+            onClick={() => {selectedCpuBrandHandler("AMD"); scrollToElement("#cpu-carousel")}}
           >
             <div className="relative">
               <Image
@@ -94,7 +100,7 @@ export default function Configure() {
             gradientSize={300}
             gradientFrom="#ccccff"
             gradientTo="#66ccff"
-            onClick={() => selectedCpuBrandHandler("Intel")}
+            onClick={() => {selectedCpuBrandHandler("Intel"); scrollToElement("#cpu-carousel")}}
           >
             <div className="relative">
               <Image
@@ -116,14 +122,21 @@ export default function Configure() {
           transition={{ duration: 0.7 }}
           className="flex flex-col gap-4 mt-10"
           >
-            <h2 className="text-2xl font-bold">Available models</h2>
+            <h2 id="cpu-carousel" className="text-2xl font-bold">Available models</h2>
             <div className="relative">
               <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-background/50 dark:from-background/75 to-transparent z-10" />
               <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-background/50 dark:from-background/75 to-transparent z-10" />
-              <Carousel className="w-full" opts={{ slidesToScroll: "auto" }} >
+              <Carousel className="w-full" opts={{ slidesToScroll: "auto" }}>
                 <CarouselContent className="-ml-2 md:-ml-4">
                   {processors[selectedCpuBrand].map((processor) => (
-                    <CarouselItem key={processor.id} className="pl-2 md:pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 min-w-0 cursor-pointer" onClick={() => selectedProcessorHandler(processor)}>
+                    <CarouselItem 
+                      key={processor.id} 
+                      className="pl-2 md:pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 min-w-0 cursor-pointer group" 
+                      onClick={() => {
+                        selectedProcessorHandler(processor);
+                        scrollToElement("#cpu-details");
+                      }}
+                    >
                       <Card className={cn(
                         selectedCpuBrand === "AMD" && selectedProcessor && selectedProcessor.model === processor.model && "border border-red-500 border-opacity-60",
                         selectedCpuBrand === "Intel" && selectedProcessor && selectedProcessor.model === processor.model && "border border-blue-500 border-opacity-60"
@@ -134,7 +147,7 @@ export default function Configure() {
                             alt={processor.model + " CPU image"}
                             width={130}
                             height={130}
-                            className="object-contain text-center select-none w-[130px] h-[130px]"
+                            className="object-contain text-center select-none w-[130px] h-[130px] group-hover:scale-110 transition-scale duration-300 ease-in-out"
                           />
                           <div className="text-center mt-4">
                             <p className="text-lg font-semibold whitespace-nowrap">{processor.model}</p>
@@ -158,9 +171,9 @@ export default function Configure() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
         >
-          <Card className="flex flex-col md:flex-row min-h-[500px] h-full">
-            <div className="w-full md:w-1/2 min-w-[300px] flex items-center justify-center p-4 md:p-10 relative">
-              <p className="text-6xl md:text-8xl text-center font-bold absolute select-none
+          <Card id="cpu-details" className="flex flex-col md:flex-row min-h-[500px] h-full">
+            <div className="w-full md:w-1/2  flex items-center justify-center p-4 md:p-10 relative">
+              <p className="text-5xl sm:text-6xl md:text-8xl text-center font-bold absolute select-none
                 text-white
                 mix-blend-difference
                 opacity-75
