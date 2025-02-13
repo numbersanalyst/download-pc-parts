@@ -66,6 +66,10 @@ export default function Configure() {
           Go back
         </Link>
 
+        <Link className="absolute z-50 top-2 right-10 bg-black text-white rounded-3xl p-3" href="/summary">
+          Summary
+        </Link>
+
         <div className="flex h-[500px] lg:h-[400px] flex-col gap-4 lg:flex-row select-none">
           <MagicCard
             className={cn(
