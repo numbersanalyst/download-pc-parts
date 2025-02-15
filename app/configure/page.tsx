@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
@@ -19,22 +18,8 @@ import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 // import Hero from "@/components/configuration/hero";
 
+import { useStoreSelectors } from "@/stores/store";
 import { processors } from "@/data/processors";
-
-type ProcessorType = {
-  id: number;
-  model: string;
-  price: number;
-  image: string;
-  microarchitecture: string;
-  socket: string;
-  coreCount: number;
-  threadCount: number;
-  coreClock: string;
-  boostClock: string | null;
-  tdp: string;
-  integratedGraphics: string | null;
-};
 
 const scrollToElement = (id: string, secondTime?: boolean) => {
   const element = document.querySelector(id);
@@ -43,8 +28,10 @@ const scrollToElement = (id: string, secondTime?: boolean) => {
 };
 
 export default function Configure() {
-  const [selectedCpuBrand, selectedCpuBrandHandler] = useState<"AMD" | "Intel" | "">("");
-  const [selectedProcessor, selectedProcessorHandler] = useState<ProcessorType | "">("");
+  const selectedCpuBrand = useStoreSelectors.use.selectedCpuBrand();
+  const selectedProcessor = useStoreSelectors.use.selectedProcessor();
+  const setCpuBrand = useStoreSelectors.use.setCpuBrand();
+  const setProcessor = useStoreSelectors.use.setProcessor();
 
   return (
     <main className="flex justify-center">
@@ -81,7 +68,7 @@ export default function Configure() {
             gradientSize={300}
             gradientFrom="#ffc0c0"
             gradientTo="#ff9980"
-            onClick={() => {selectedCpuBrandHandler("AMD"); scrollToElement("#cpu-carousel")}}
+            onClick={() => {setCpuBrand("AMD"); scrollToElement("#cpu-carousel")}}
           >
             <div className="relative">
               <Image
@@ -104,7 +91,7 @@ export default function Configure() {
             gradientSize={300}
             gradientFrom="#ccccff"
             gradientTo="#66ccff"
-            onClick={() => {selectedCpuBrandHandler("Intel"); scrollToElement("#cpu-carousel")}}
+            onClick={() => {setCpuBrand("Intel"); scrollToElement("#cpu-carousel")}}
           >
             <div className="relative">
               <Image
@@ -137,7 +124,7 @@ export default function Configure() {
                       key={processor.id} 
                       className="pl-2 md:pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 min-w-0 cursor-pointer group" 
                       onClick={() => {
-                        selectedProcessorHandler(processor);
+                        setProcessor(processor);
                         scrollToElement("#cpu-details");
                       }}
                     >
