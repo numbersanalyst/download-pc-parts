@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 export function ConfettiSideCannons() {
   const handleClick = () => {
-    const end = Date.now() + 3 * 1000; // 3 seconds
+    const end = Date.now() + 1000;
     const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1"];
 
     const frame = () => {

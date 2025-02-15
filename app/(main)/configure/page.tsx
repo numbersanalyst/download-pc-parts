@@ -20,6 +20,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { useStoreSelectors } from "@/stores/store";
 import { processors } from "@/data/processors";
+import { FileInput, MoveLeft } from "lucide-react";
 
 const scrollToElement = (id: string, secondTime?: boolean) => {
   const element = document.querySelector(id);
@@ -38,6 +39,18 @@ export default function Configure() {
       {/* Dont working on stackblitz */}
       {/* <Hero /> */}
 
+      <div className="flex flex-col sm:flex-row gap-y-2 gap-x-4 w-full">
+        <Link className="bg-accent/75 rounded-xl text-xl p-6 flex items-center gap-x-6 flex-1" href="/">
+          <MoveLeft />
+          Go back
+        </Link>
+        
+        <Link className="bg-accent/75 rounded-xl text-xl p-6 flex items-center justify-end gap-x-6 flex-1" href="/summary">
+          Proceed to summary
+          <FileInput />
+        </Link>
+      </div>
+
       <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center w-full gap-8">
         <div className="w-16 h-16 text-2xl flex justify-center items-center bg-accent rounded-full">1</div>
         <div className="flex flex-col">
@@ -46,14 +59,6 @@ export default function Configure() {
         </div>
       </div>
       <Separator />
-
-      <Link className="absolute z-50 top-2 bg-black text-white rounded-3xl p-3" href="/">
-        Go back
-      </Link>
-
-      <Link className="absolute z-50 top-2 right-10 bg-black text-white rounded-3xl p-3" href="/summary">
-        Summary
-      </Link>
 
       <div className="flex h-[500px] lg:h-[400px] flex-col gap-4 lg:flex-row select-none">
         <MagicCard
@@ -136,7 +141,7 @@ export default function Configure() {
                           alt={processor.model + " CPU image"}
                           width={130}
                           height={130}
-                          className="object-contain text-center select-none w-[130px] h-[130px] group-hover:scale-110 transition-scale duration-300 ease-in-out"
+                          className="object-contain text-center select-none w-[130px] h-[130px] group-hover:scale-105 transition-scale duration-300 ease-in-out"
                         />
                         <div className="text-center mt-4">
                           <p className="text-lg font-semibold whitespace-nowrap">{processor.model}</p>

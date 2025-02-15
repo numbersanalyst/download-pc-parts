@@ -1,11 +1,13 @@
 import { ConfettiSideCannons } from "@/components/summary/confetti";
+import { MoveLeft } from "lucide-react";
 
 import Link from "next/link";
 
 export default function Summary() {
   return (
     <>
-      <Link className="absolute z-50 top-2 bg-black text-white rounded-3xl p-3" href="/configure">
+      <Link className="bg-accent/75 rounded-xl text-xl p-6 flex items-center gap-x-6 flex-1" href="/configure">
+        <MoveLeft />
         Go back
       </Link>
 
