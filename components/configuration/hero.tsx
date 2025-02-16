@@ -1,4 +1,5 @@
 "use client";
+
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import { useState, useEffect, useCallback, Suspense, useRef } from "react";
@@ -18,7 +19,7 @@ function Model() {
   );
 }
 
-export default function Hero() {
+export function Hero() {
   const [isMounted, setIsMounted] = useState(false);
   const [showText, setShowText] = useState(true);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -41,7 +42,7 @@ export default function Hero() {
   if (!isMounted) return null;
 
   return (
-    <section ref={sectionRef} className={cn("relative h-[200vh]")}>
+    <section ref={sectionRef} className="relative h-[200vh]">
       <div className="fixed top-0 left-0 w-full h-screen">
         <Canvas
           camera={{ position: [0, 2, 5], fov: 50 }}

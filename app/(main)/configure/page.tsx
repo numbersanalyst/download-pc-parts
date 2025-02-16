@@ -1,240 +1,27 @@
-"use client";
-
-import Image from "next/image";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
-
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { MagicCard } from "@/components/magicui/magic-card";
-import { Card, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { ScrollArea } from "@/components/ui/scroll-area";
-// import Hero from "@/components/configuration/hero";
-
-import { useStoreSelectors } from "@/stores/store";
-import { processors } from "@/data/processors";
-import { FileInput, MoveLeft } from "lucide-react";
-
-const scrollToElement = (id: string, secondTime?: boolean) => {
-  const element = document.querySelector(id);
-  if (!element && !secondTime) setTimeout(() => scrollToElement(id, true), 100);
-  element?.scrollIntoView({ behavior: "smooth" });
-};
+import { Navigation } from "@/components/configuration/navigation";
+import { SelectionHeader } from "@/components/configuration/selection-header";
+import { SelectCpuBrand } from "@/components/configuration/select-cpu-brand";
+import { SelectCpuModel } from "@/components/configuration/select-cpu-model";
+import { SelectedCpuDetails } from "@/components/configuration/selected-cpu-details";
+// import { Hero } from "@/components/configuration/hero";
 
 export default function Configure() {
-  const selectedCpuBrand = useStoreSelectors.use.selectedCpuBrand();
-  const selectedProcessor = useStoreSelectors.use.selectedProcessor();
-  const setCpuBrand = useStoreSelectors.use.setCpuBrand();
-  const setProcessor = useStoreSelectors.use.setProcessor();
-
   return (
     <>
+      <Navigation />
+
       {/* Dont working on stackblitz */}
       {/* <Hero /> */}
 
-      <div className="flex flex-col sm:flex-row gap-y-2 gap-x-4 w-full">
-        <Link className="bg-accent/75 rounded-xl text-xl p-6 flex items-center gap-x-6 flex-1" href="/">
-          <MoveLeft />
-          Go back
-        </Link>
-        
-        <Link className="bg-accent/75 rounded-xl text-xl p-6 flex items-center justify-end gap-x-6 flex-1" href="/summary">
-          Proceed to summary
-          <FileInput />
-        </Link>
-      </div>
+      <SelectionHeader 
+        step={1}
+        title="Select your CPU" 
+        description="Choose brand, model and you are ready to go" 
+      />
 
-      <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center w-full gap-8">
-        <div className="w-16 h-16 text-2xl flex justify-center items-center bg-accent rounded-full">1</div>
-        <div className="flex flex-col">
-          <p className="text-2xl">Select your CPU</p>
-          <p className="text-xl text-gray-500">Choose brand, model and you are ready to go</p>
-        </div>
-      </div>
-      <Separator />
-
-      <div className="flex h-[500px] lg:h-[400px] flex-col gap-4 lg:flex-row select-none">
-        <MagicCard
-          className={cn(
-            "cursor-pointer flex-col items-center justify-center text-2xl shadow-2xl",
-            selectedCpuBrand === "AMD" && "ring-1 ring-red-500 ring-opacity-60"
-          )}
-          gradientColor={"#ff0000"}
-          gradientOpacity={0.1}
-          gradientSize={300}
-          gradientFrom="#ffc0c0"
-          gradientTo="#ff9980"
-          onClick={() => { setCpuBrand("AMD"); scrollToElement("#cpu-carousel") }}
-        >
-          <div className="relative">
-            <Image
-              className="dark:invert"
-              src={"/amd-logo.svg"}
-              alt="amd brand logo"
-              width={270}
-              height={270}
-            />
-            <p className="text-gray-500 lg:absolute text-center w-full mt-2 lg:mt-5">AMD processors</p>
-          </div>
-        </MagicCard>
-        <MagicCard
-          className={cn(
-            "cursor-pointer flex-col items-center justify-center text-2xl shadow-2xl",
-            selectedCpuBrand === "Intel" && "ring-1 ring-blue-500 ring-opacity-60"
-          )}
-          gradientColor={"#0099ff"}
-          gradientOpacity={0.1}
-          gradientSize={300}
-          gradientFrom="#ccccff"
-          gradientTo="#66ccff"
-          onClick={() => { setCpuBrand("Intel"); scrollToElement("#cpu-carousel") }}
-        >
-          <div className="relative">
-            <Image
-              className="dark:invert dark:hue-rotate-180"
-              src={"/intel-logo.svg"}
-              alt="intel brand logo"
-              width={200}
-              height={200}
-            />
-            <p className="text-gray-500 lg:absolute text-center w-full mt-2 lg:mt-5">Intel processors</p>
-          </div>
-        </MagicCard>
-      </div>
-
-      {selectedCpuBrand && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="flex flex-col gap-4 mt-10"
-        >
-          <h2 id="cpu-carousel" className="text-2xl font-bold">Available models</h2>
-          <div className="relative">
-            <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-background/50 dark:from-background/75 to-transparent z-10" />
-            <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-background/50 dark:from-background/75 to-transparent z-10" />
-            <Carousel className="w-full" opts={{ slidesToScroll: "auto" }}>
-              <CarouselContent className="-ml-2 md:-ml-4">
-                {processors[selectedCpuBrand].map((processor) => (
-                  <CarouselItem
-                    key={processor.id}
-                    className="pl-2 md:pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 min-w-0 cursor-pointer group"
-                    onClick={() => {
-                      setProcessor(processor);
-                      scrollToElement("#cpu-details");
-                    }}
-                  >
-                    <Card className={cn(
-                      selectedCpuBrand === "AMD" && selectedProcessor && selectedProcessor.model === processor.model && "border border-red-500 border-opacity-60",
-                      selectedCpuBrand === "Intel" && selectedProcessor && selectedProcessor.model === processor.model && "border border-blue-500 border-opacity-60"
-                    )}>
-                      <CardContent className="flex flex-col items-center justify-center p-6 select-none">
-                        <Image
-                          src={processor.image}
-                          alt={processor.model + " CPU image"}
-                          width={130}
-                          height={130}
-                          className="object-contain text-center select-none w-[130px] h-[130px] group-hover:scale-105 transition-scale duration-300 ease-in-out"
-                        />
-                        <div className="text-center mt-4">
-                          <p className="text-lg font-semibold whitespace-nowrap">{processor.model}</p>
-                          <p className="text-gray-600">${processor.price}</p>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
-            </Carousel>
-          </div>
-        </motion.div>
-      )}
-
-      {selectedProcessor && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1 }}
-        >
-          <Card id="cpu-details" className="flex flex-col md:flex-row min-h-[500px] h-full">
-            <div className="w-full md:w-1/2  flex items-center justify-center p-4 md:p-10 relative">
-              <p className="text-5xl sm:text-6xl md:text-8xl text-center font-bold absolute select-none
-                text-white
-                mix-blend-difference
-                opacity-75
-                contrast-200
-                brightness-200">
-                Details about your CPU
-              </p>
-              <Image
-                src={selectedProcessor.image}
-                alt={selectedProcessor.model + " CPU image"}
-                width={350}
-                height={350}
-                className="object-contain w-[350px] h-[350px]"
-              />
-            </div>
-
-            <Separator className="block md:hidden px-2" orientation="horizontal" />
-            <Separator className="hidden md:block py-2" orientation="vertical" />
-
-            <ScrollArea className="w-full md:w-1/2 h-full max-h-[500px]">
-              <div className="flex flex-col gap-4 p-10">
-                <div>
-                  <p className="text-md text-gray-500">Manufacture</p>
-                  <p className="text-2xl font-semibold">{selectedCpuBrand}</p>
-                </div>
-                <div>
-                  <p className="text-md text-gray-500">Model</p>
-                  <p className="text-2xl font-semibold">{selectedProcessor.model}</p>
-                </div>
-                <div>
-                  <p className="text-md text-gray-500">Microarchitecture</p>
-                  <p className="text-2xl font-semibold">{selectedProcessor.microarchitecture}</p>
-                </div>
-                <div>
-                  <p className="text-md text-gray-500">Socket</p>
-                  <p className="text-2xl font-semibold">{selectedProcessor.socket}</p>
-                </div>
-                <div>
-                  <p className="text-md text-gray-500">Core Count</p>
-                  <p className="text-2xl font-semibold">{selectedProcessor.coreCount}</p>
-                </div>
-                <div>
-                  <p className="text-md text-gray-500">Thread Count</p>
-                  <p className="text-2xl font-semibold">{selectedProcessor.threadCount}</p>
-                </div>
-                <div>
-                  <p className="text-md text-gray-500">Performance Core Clock</p>
-                  <p className="text-2xl font-semibold">{selectedProcessor.coreClock}</p>
-                </div>
-                <div>
-                  <p className="text-md text-gray-500">Performance Core Boost Clock</p>
-                  <p className="text-2xl font-semibold">{selectedProcessor.boostClock || "N/A"}</p>
-                </div>
-                <div>
-                  <p className="text-md text-gray-500">TDP</p>
-                  <p className="text-2xl font-semibold">{selectedProcessor.tdp}</p>
-                </div>
-                <div>
-                  <p className="text-md text-gray-500">Integrated Graphics</p>
-                  <p className="text-2xl font-semibold">{selectedProcessor.integratedGraphics || "N/A"}</p>
-                </div>
-              </div>
-              <div className="absolute left-2 right-2 bottom-0 h-32 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none"></div>
-            </ScrollArea>
-          </Card>
-        </motion.div>
-      )}
+      <SelectCpuBrand />
+      <SelectCpuModel />
+      <SelectedCpuDetails />
     </>
   );
 }
