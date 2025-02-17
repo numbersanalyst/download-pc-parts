@@ -4,14 +4,14 @@ import Image from "next/image";
 
 interface AmdBrandCardProps {
   selected: boolean;
-  onClick: () => void;
+  onClick?: () => void;
   thing?: string;
 }
 
 export const AmdBrandCard = ({
   selected,
   onClick,
-  thing="processors",
+  thing = "processors",
 }: AmdBrandCardProps) => {
   return (
     <MagicCard
@@ -27,16 +27,18 @@ export const AmdBrandCard = ({
       onClick={onClick}
     >
       <div className="relative">
-        <Image
-          className="dark:invert"
-          src={"/amd-logo.svg"}
-          alt="amd brand logo"
-          width={270}
-          height={270}
-        />
-        <p className="text-gray-500 lg:absolute text-center w-full mt-2 lg:mt-5">
+        <div className="flex justify-center items-center">
+          <Image
+            className="dark:invert"
+            src={"/amd-logo.svg"}
+            alt="amd brand logo"
+            width={270}
+            height={270}
+          />
+        </div>
+        <div className="flex justify-center items-center text-nowrap text-gray-500 lg:absolute text-center w-full mt-2 lg:mt-5">
           AMD {thing}
-        </p>
+        </div>
       </div>
     </MagicCard>
   );

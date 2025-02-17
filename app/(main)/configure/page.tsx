@@ -3,6 +3,7 @@ import { SelectionHeader } from "@/components/configuration/selection-header";
 import { SelectCpuBrand } from "@/components/configuration/select-cpu-brand";
 import { SelectCpuModel } from "@/components/configuration/select-cpu-model";
 import { SelectedCpuDetails } from "@/components/configuration/selected-cpu-details";
+import { SelectGpuBrand } from "@/components/configuration/select-gpu-brand";
 // import { Hero } from "@/components/configuration/hero";
 
 export default function Configure() {
@@ -22,6 +23,18 @@ export default function Configure() {
       <SelectCpuBrand />
       <SelectCpuModel />
       <SelectedCpuDetails />
+
+
+
+      <p className="mt-24">TESTING GPU SELECTION</p>
+
+      <SelectionHeader 
+        step={2}
+        title="Select your GPU" 
+        description="Choose brand, model and you are ready to go" 
+      />
+
+      <SelectGpuBrand />
     </>
   );
 }

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 interface IntelBrandCardProps {
   selected: boolean;
-  onClick: () => void;
+  onClick?: () => void;
   thing?: string;
 }
 
@@ -27,16 +27,18 @@ export const IntelBrandCard = ({
       onClick={onClick}
     >
       <div className="relative">
-        <Image
-          className="dark:invert dark:hue-rotate-180"
-          src={"/intel-logo.svg"}
-          alt="intel brand logo"
-          width={200}
-          height={200}
-        />
-        <p className="text-gray-500 lg:absolute text-center w-full mt-2 lg:mt-5">
+        <div className="flex justify-center items-center">
+            <Image
+            className="dark:invert dark:hue-rotate-180"
+            src={"/intel-logo.svg"}
+            alt="intel brand logo"
+            width={200}
+            height={200}
+            />
+        </div>
+        <div className="flex justify-center items-center text-nowrap text-gray-500 lg:absolute text-center w-full mt-2 lg:mt-5">
           Intel {thing}
-        </p>
+        </div>
       </div>
     </MagicCard>
   );
