@@ -1,3 +1,4 @@
+import { Banner } from "@/components/marketing/banner";
 import { ModeToggle } from "@/components/theme-changer";
 import Image from "next/image";
 import Link from 'next/link';
@@ -22,6 +23,7 @@ export default function Home() {
           height={230}
           priority
         />
+        <Banner/>
         <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2">
             Get started by editing{" "}
