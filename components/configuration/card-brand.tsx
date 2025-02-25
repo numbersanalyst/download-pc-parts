@@ -13,7 +13,6 @@ interface BrandCardProps extends React.HTMLAttributes<HTMLDivElement> {
   gradientFrom: string;
   gradientTo: string;
   ringColor: string;
-  darkInvert?: boolean;
   darkHueRotate?: boolean;
 }
 
@@ -29,7 +28,6 @@ export const BrandCard = ({
   gradientFrom,
   gradientTo,
   ringColor,
-  darkInvert = true,
   darkHueRotate = false,
   ...props
 }: BrandCardProps) => {
@@ -38,6 +36,7 @@ export const BrandCard = ({
       className={cn(
         "cursor-pointer flex-col items-center justify-center text-2xl shadow-2xl",
         selected && `ring-1 ${ringColor} ring-opacity-60`,
+        className
       )}
       gradientOpacity={0.1}
       gradientSize={300}
