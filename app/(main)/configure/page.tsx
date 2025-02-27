@@ -4,6 +4,7 @@ import { SelectCpuBrand } from "@/components/configuration/select-cpu-brand";
 import { SelectCpuModel } from "@/components/configuration/select-cpu-model";
 import { SelectedCpuDetails } from "@/components/configuration/selected-cpu-details";
 import { SelectGpuBrand } from "@/components/configuration/select-gpu-brand";
+import { SelectGpuModel } from "@/components/configuration/select-gpu-model";
 // import { Hero } from "@/components/configuration/hero";
 
 export default function Configure() {
@@ -35,6 +36,7 @@ export default function Configure() {
       />
 
       <SelectGpuBrand />
+      <SelectGpuModel />
     </>
   );
 }

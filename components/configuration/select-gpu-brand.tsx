@@ -2,6 +2,7 @@
 
 import { useStoreSelectors } from "@/stores/store";
 import { BrandCard } from "./card-brand";
+import { scrollToElement } from "@/lib/utils";
 
 export const SelectGpuBrand = () => {
   const selectedGpuBrand = useStoreSelectors.use.selectedGpuBrand();
@@ -12,7 +13,10 @@ export const SelectGpuBrand = () => {
       <BrandCard
         thing="AMD graphics cards"
         selected={selectedGpuBrand === "AMD"}
-        onClick={() => setGpuBrand("AMD")}
+        onClick={() => {
+          setGpuBrand("AMD");
+          scrollToElement("#gpu-carousel");
+        }}
         logoSrc={"/amd-logo.svg"}
         logoAlt="AMD brand logo"
         logoSize={220}
@@ -24,7 +28,10 @@ export const SelectGpuBrand = () => {
       <BrandCard
         thing="Intel graphics cards"
         selected={selectedGpuBrand === "Intel"}
-        onClick={() => setGpuBrand("Intel")}
+        onClick={() => {
+          setGpuBrand("Intel");
+          scrollToElement("#gpu-carousel");
+        }}
         logoSrc={"/intel-logo.svg"}
         logoAlt="Intel brand logo"
         logoSize={160}
@@ -37,7 +44,10 @@ export const SelectGpuBrand = () => {
       <BrandCard
         thing="Nvidia graphics cards"
         selected={selectedGpuBrand === "Nvidia"}
-        onClick={() => setGpuBrand("Nvidia")}
+        onClick={() => {
+          setGpuBrand("Nvidia");
+          scrollToElement("#gpu-carousel");
+        }}
         logoSrc={"/nvidia-logo.svg"}
         logoAlt="Nvidia brand logo"
         logoSize={150}
