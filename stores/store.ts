@@ -18,22 +18,29 @@ type ProcessorType = {
 
 type StoreData = {
   selectedCpuBrand: "AMD" | "Intel" | "";
+  selectedGpuBrand: "AMD" | "Intel" | "Nvidia" | "";
+
   selectedProcessor: ProcessorType | null;
 
   setCpuBrand: (brand: "AMD" | "Intel" | "") => void;
+  setGpuBrand: (brand: "AMD" | "Intel" | "Nvidia" | "") => void;
   setProcessor: (processor: ProcessorType | null) => void;
   resetData: () => void;
 };
 
 const useStore = create<StoreData>((set) => ({
   selectedCpuBrand: "",
+  selectedGpuBrand: "",
+
   selectedProcessor: null,
 
   setCpuBrand: (brand) => set({ selectedCpuBrand: brand }),
+  setGpuBrand: (brand) => set({ selectedGpuBrand: brand }),
   setProcessor: (processor) => set({ selectedProcessor: processor }),
   resetData: () =>
     set({
       selectedCpuBrand: "",
+      selectedGpuBrand: "",
       selectedProcessor: null,
     }),
 }));

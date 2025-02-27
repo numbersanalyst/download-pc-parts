@@ -1,11 +1,18 @@
+"use client";
+
+import { useStoreSelectors } from "@/stores/store";
 import { BrandCard } from "./card-brand";
 
 export const SelectGpuBrand = () => {
+  const selectedGpuBrand = useStoreSelectors.use.selectedGpuBrand();
+  const setGpuBrand = useStoreSelectors.use.setGpuBrand();
+
   return (
     <div className="flex h-[800px] lg:h-[340px] flex-col gap-4 lg:flex-row select-none">
       <BrandCard
         thing="AMD graphics cards"
-        selected={false}
+        selected={selectedGpuBrand === "AMD"}
+        onClick={() => setGpuBrand("AMD")}
         logoSrc={"/amd-logo.svg"}
         logoAlt="AMD brand logo"
         logoSize={220}
@@ -16,7 +23,8 @@ export const SelectGpuBrand = () => {
       />
       <BrandCard
         thing="Intel graphics cards"
-        selected={false}
+        selected={selectedGpuBrand === "Intel"}
+        onClick={() => setGpuBrand("Intel")}
         logoSrc={"/intel-logo.svg"}
         logoAlt="Intel brand logo"
         logoSize={160}
@@ -28,7 +36,8 @@ export const SelectGpuBrand = () => {
       />
       <BrandCard
         thing="Nvidia graphics cards"
-        selected={false}
+        selected={selectedGpuBrand === "Nvidia"}
+        onClick={() => setGpuBrand("Nvidia")}
         logoSrc={"/nvidia-logo.svg"}
         logoAlt="Nvidia brand logo"
         logoSize={150}
