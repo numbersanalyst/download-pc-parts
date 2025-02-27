@@ -11,5 +11,5 @@ export const scrollToElement = (id: string, secondTime?: boolean) => {
   if (!element && !secondTime) {
     setTimeout(() => scrollToElement(id, true), 100);
   }
-  element?.scrollIntoView({ behavior: "smooth" });
+  element?.scrollIntoView({ behavior: "smooth", block: "center" });
 };

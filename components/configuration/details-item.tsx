@@ -5,7 +5,7 @@ interface DetailsItemProps {
 
 export const DetailsItem = ({ title, data }: DetailsItemProps) => {
   return (
-    <div>
+    <div className="break-keep">
       <p className="text-md text-gray-500">{title}</p>
       <p className="text-2xl font-semibold">{data || "N/A"}</p>
     </div>
