@@ -1,6 +1,6 @@
 import Image from "next/image";
-import logoImage from "/logo.png";
-import menuIcon from "/menu.svg";
+import logoImage from "@/public/logo.png";
+import menuIcon from "@/public/icon/menu.svg";
 
 export const Navbar = () => {
   return (
