@@ -6,6 +6,7 @@ import { SelectedCpuDetails } from "@/components/configuration/selected-cpu-deta
 import { SelectGpuBrand } from "@/components/configuration/select-gpu-brand";
 import { SelectGpuModel } from "@/components/configuration/select-gpu-model";
 import { SelectedGpuDetails } from "@/components/configuration/selected-gpu-details";
+import { SelectRam } from "@/components/configuration/select-ram";
 // import { Hero } from "@/components/configuration/hero";
 
 export default function Configure() {
@@ -33,6 +34,13 @@ export default function Configure() {
       <SelectGpuBrand />
       <SelectGpuModel />
       <SelectedGpuDetails />
+
+      <SelectionHeader
+        step={3}
+        title="Select your RAM"
+        description="Choose amount of RAM and you are ready to go"
+      />
+      <SelectRam />
     </>
   );
 }
