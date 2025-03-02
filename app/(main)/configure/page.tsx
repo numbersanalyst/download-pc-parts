@@ -16,26 +16,20 @@ export default function Configure() {
       {/* Dont working on stackblitz */}
       {/* <Hero /> */}
 
-      <SelectionHeader 
+      <SelectionHeader
         step={1}
-        title="Select your CPU" 
-        description="Choose brand, model and you are ready to go" 
+        title="Select your CPU"
+        description="Choose brand, model and you are ready to go"
       />
-
       <SelectCpuBrand />
       <SelectCpuModel />
       <SelectedCpuDetails />
 
-
-
-      <p className="mt-24">TESTING GPU SELECTION</p>
-
-      <SelectionHeader 
+      <SelectionHeader
         step={2}
-        title="Select your GPU" 
-        description="Choose brand, model and you are ready to go" 
+        title="Select your GPU"
+        description="Choose brand, model and you are ready to go"
       />
-
       <SelectGpuBrand />
       <SelectGpuModel />
       <SelectedGpuDetails />

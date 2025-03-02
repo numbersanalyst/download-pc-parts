@@ -13,7 +13,7 @@ export const SelectionHeader = ({
 }: SelectionHeaderProps) => {
   return (
     <>
-      <div className="mt-10 flex flex-col sm:flex-row items-start sm:items-center w-full gap-8">
+      <div className="mt-10 md:mt-20 flex flex-col sm:flex-row items-start sm:items-center w-full gap-8">
         <div className="w-16 h-16 text-2xl flex justify-center items-center bg-accent rounded-full">
           {step}
         </div>
