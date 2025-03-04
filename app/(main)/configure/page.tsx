@@ -41,6 +41,8 @@ export default function Configure() {
         description="Choose amount of RAM and you are ready to go"
       />
       <SelectRam />
+
+      <Navigation className="mt-36 mb-16"/>
     </>
   );
 }
