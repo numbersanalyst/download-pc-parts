@@ -10,7 +10,7 @@ export type RamType = {
   latency: string;
 };
 
-export const rams : RamType[] = [
+export const rams: RamType[] = [
   {
     id: 1,
     model: "2GB DDR3",

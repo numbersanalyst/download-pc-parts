@@ -12,7 +12,7 @@ export type GraphicsCardsType = {
   ports: string;
 };
 
-export const graphicsCards : Record<string, GraphicsCardsType[]> = {
+export const graphicsCards: Record<string, GraphicsCardsType[]> = {
   Nvidia: [
     {
       id: 1,
@@ -119,7 +119,7 @@ export const graphicsCards : Record<string, GraphicsCardsType[]> = {
       ports: "3x DisplayPort 1.4a, 1x HDMI 2.1a",
     },
     {
-    id: 9,
+      id: 9,
       model: "GeForce RTX 4090 Ti",
       price: 2500,
       image: "/rtx-4090ti.png",
@@ -129,7 +129,7 @@ export const graphicsCards : Record<string, GraphicsCardsType[]> = {
       boostClock: "2610 MHz",
       tdp: "475 W",
       powerConnectors: "1x 16-pin",
-      ports: "3x DisplayPort 2.1, 1x HDMI 2.1a"
+      ports: "3x DisplayPort 2.1, 1x HDMI 2.1a",
     },
     {
       id: 10,
@@ -142,7 +142,7 @@ export const graphicsCards : Record<string, GraphicsCardsType[]> = {
       boostClock: "2800 MHz",
       tdp: "500 W",
       powerConnectors: "2x 16-pin",
-      ports: "4x DisplayPort 2.1, 1x HDMI 2.1b"
+      ports: "4x DisplayPort 2.1, 1x HDMI 2.1b",
     },
     {
       id: 11,
@@ -168,7 +168,7 @@ export const graphicsCards : Record<string, GraphicsCardsType[]> = {
       boostClock: "N/A",
       tdp: "700 W",
       powerConnectors: "SXM5 (dedicated)",
-      ports: "NVLink 4.0, PCIe 5.0 x16"
+      ports: "NVLink 4.0, PCIe 5.0 x16",
     },
     {
       id: 13,
@@ -181,7 +181,7 @@ export const graphicsCards : Record<string, GraphicsCardsType[]> = {
       boostClock: "1740 MHz",
       tdp: "300 W",
       powerConnectors: "2x 8-pin",
-      ports: "4x DisplayPort 1.4a, 1x VirtualLink"
+      ports: "4x DisplayPort 1.4a, 1x VirtualLink",
     },
     {
       id: 14,
@@ -194,7 +194,7 @@ export const graphicsCards : Record<string, GraphicsCardsType[]> = {
       boostClock: "N/A",
       tdp: "350 W",
       powerConnectors: "PCIe 5.0 + 12VHPWR",
-      ports: "PCIe 5.0 x16, NVLink Bridge"
+      ports: "PCIe 5.0 x16, NVLink Bridge",
     },
     {
       id: 15,
@@ -261,7 +261,7 @@ export const graphicsCards : Record<string, GraphicsCardsType[]> = {
       boostClock: "1905 MHz",
       tdp: "225 W",
       powerConnectors: "1x 6-pin + 1x 8-pin",
-      ports: "1x HDMI 2.0b, 3x DisplayPort 1.4"
+      ports: "1x HDMI 2.0b, 3x DisplayPort 1.4",
     },
     {
       id: 5,
@@ -274,7 +274,7 @@ export const graphicsCards : Record<string, GraphicsCardsType[]> = {
       boostClock: "2310 MHz",
       tdp: "335 W",
       powerConnectors: "2x 8-pin",
-      ports: "1x HDMI 2.1, 3x DisplayPort 1.4a"
+      ports: "1x HDMI 2.1, 3x DisplayPort 1.4a",
     },
     {
       id: 6,
@@ -287,7 +287,7 @@ export const graphicsCards : Record<string, GraphicsCardsType[]> = {
       boostClock: "2430 MHz",
       tdp: "263 W",
       powerConnectors: "2x 8-pin",
-      ports: "1x HDMI 2.1a, 3x DisplayPort 2.1"
+      ports: "1x HDMI 2.1a, 3x DisplayPort 2.1",
     },
     {
       id: 7,
@@ -300,7 +300,7 @@ export const graphicsCards : Record<string, GraphicsCardsType[]> = {
       boostClock: "2554 MHz",
       tdp: "250 W",
       powerConnectors: "1x 6-pin + 1x 8-pin",
-      ports: "6x mini DisplayPort 1.4"
+      ports: "6x mini DisplayPort 1.4",
     },
     {
       id: 8,
@@ -353,7 +353,7 @@ export const graphicsCards : Record<string, GraphicsCardsType[]> = {
       tdp: "50 W",
       powerConnectors: "PCIe",
       ports: "4x mini DisplayPort 1.2",
-    }
+    },
   ],
   Intel: [
     {
@@ -393,7 +393,7 @@ export const graphicsCards : Record<string, GraphicsCardsType[]> = {
       boostClock: "2400 MHz",
       tdp: "225 W",
       powerConnectors: "1x 8-pin + 1x 6-pin",
-      ports: "3x DisplayPort 2.0, 1x HDMI 2.1"
+      ports: "3x DisplayPort 2.0, 1x HDMI 2.1",
     },
     {
       id: 4,
@@ -406,7 +406,7 @@ export const graphicsCards : Record<string, GraphicsCardsType[]> = {
       boostClock: "2200 MHz",
       tdp: "200 W",
       powerConnectors: "1x 8-pin",
-      ports: "3x DisplayPort 2.0, 1x HDMI 2.1"
+      ports: "3x DisplayPort 2.0, 1x HDMI 2.1",
     },
     {
       id: 5,
@@ -419,7 +419,7 @@ export const graphicsCards : Record<string, GraphicsCardsType[]> = {
       boostClock: "1500 MHz",
       tdp: "150 W",
       powerConnectors: "PCIe + 6-pin",
-      ports: "4x Mini DisplayPort 1.4, PCIe 4.0 x16"
-    }
+      ports: "4x Mini DisplayPort 1.4, PCIe 4.0 x16",
+    },
   ],
 };

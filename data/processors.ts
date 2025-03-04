@@ -13,8 +13,7 @@ export type ProcessorType = {
   integratedGraphics: string | null;
 };
 
-
-export const processors : Record<string, ProcessorType[]> = {
+export const processors: Record<string, ProcessorType[]> = {
   AMD: [
     {
       id: 1,
