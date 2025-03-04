@@ -1,4 +1,18 @@
-export const graphicsCards = {
+export type GraphicsCardsType = {
+  id: number;
+  model: string;
+  price: number;
+  image: string;
+  vram: string;
+  memoryBus: string;
+  coreClock: string;
+  boostClock: string;
+  tdp: string;
+  powerConnectors: string;
+  ports: string;
+};
+
+export const graphicsCards : Record<string, GraphicsCardsType[]> = {
   Nvidia: [
     {
       id: 1,
@@ -142,7 +156,6 @@ export const graphicsCards = {
       tdp: "300 W",
       powerConnectors: "1x 16-pin",
       ports: "4x DisplayPort 1.4a",
-      features: "NVLink, 142 RT Cores"
     },
     {
       id: 12,
@@ -154,7 +167,7 @@ export const graphicsCards = {
       coreClock: "1770 MHz",
       boostClock: "N/A",
       tdp: "700 W",
-      powerConnectors: "SXM5 (dedykowany)",
+      powerConnectors: "SXM5 (dedicated)",
       ports: "NVLink 4.0, PCIe 5.0 x16"
     },
     {
@@ -195,7 +208,6 @@ export const graphicsCards = {
       tdp: "1200 W",
       powerConnectors: "Dedicated Rack Power",
       ports: "PCIe 6.0 x16, NVLink 5.0",
-      architecture: "Blackwell"
     },
   ],
   AMD: [
@@ -300,9 +312,8 @@ export const graphicsCards = {
       coreClock: "1203 MHz",
       boostClock: "1243 MHz",
       tdp: "50 W",
-      powerConnectors: "PCIe (bez dodatkowego zasilania)",
+      powerConnectors: "PCIe (without additional power connector)",
       ports: "4x mini DisplayPort 1.4",
-      features: "Certyfikacje dla AutoCAD i SolidWorks"
     },
     {
       id: 9,
@@ -316,7 +327,6 @@ export const graphicsCards = {
       tdp: "190 W",
       powerConnectors: "1x 8-pin",
       ports: "4x DisplayPort 2.1",
-      features: "Obsługa 8K HDR, AV1 kodowanie"
     },
     {
       id: 10,
@@ -330,7 +340,6 @@ export const graphicsCards = {
       tdp: "35 W",
       powerConnectors: "PCIe",
       ports: "2x DisplayPort 1.2",
-      features: "Passive cooling, ECC Memory"
     },
     {
       id: 11,
@@ -344,7 +353,6 @@ export const graphicsCards = {
       tdp: "50 W",
       powerConnectors: "PCIe",
       ports: "4x mini DisplayPort 1.2",
-      certifications: "ISV Certified"
     }
   ],
   Intel: [

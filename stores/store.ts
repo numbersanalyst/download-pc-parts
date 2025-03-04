@@ -1,46 +1,9 @@
 import { create } from "zustand";
 import { createSelectors } from "./create-selectors";
 
-type ProcessorType = {
-  id: number;
-  model: string;
-  price: number;
-  image: string;
-  microarchitecture: string;
-  socket: string;
-  coreCount: number;
-  threadCount: number;
-  coreClock: string;
-  boostClock: string | null;
-  tdp: string;
-  integratedGraphics: string | null;
-};
-
-type GraphicsCardsType = {
-  id: number;
-  model: string;
-  price: number;
-  image: string;
-  vram: string;
-  memoryBus: string;
-  coreClock: string;
-  boostClock: string;
-  tdp: string;
-  powerConnectors: string;
-  ports: string;
-};
-
-type RamType = {
-  id: number;
-  model: string;
-  price: number;
-  image: string;
-  type: string;
-  capacity: string;
-  speed: string;
-  voltage: string;
-  latency: string;
-};
+import { ProcessorType } from "@/data/processors";
+import { GraphicsCardsType } from "@/data/graphics-cards";
+import { RamType } from "@/data/rams";
 
 type StoreData = {
   selectedCpuBrand: "AMD" | "Intel" | "";

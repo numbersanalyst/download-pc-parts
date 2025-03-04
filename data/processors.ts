@@ -1,4 +1,20 @@
-export const processors = {
+export type ProcessorType = {
+  id: number;
+  model: string;
+  price: number;
+  image: string;
+  microarchitecture: string;
+  socket: string;
+  coreCount: number;
+  threadCount: number;
+  coreClock: string;
+  boostClock: string | null;
+  tdp: string;
+  integratedGraphics: string | null;
+};
+
+
+export const processors : Record<string, ProcessorType[]> = {
   AMD: [
     {
       id: 1,

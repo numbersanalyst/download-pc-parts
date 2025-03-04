@@ -1,4 +1,16 @@
-export const rams = [
+export type RamType = {
+  id: number;
+  model: string;
+  price: number;
+  image: string;
+  type: string;
+  capacity: string;
+  speed: string;
+  voltage: string;
+  latency: string;
+};
+
+export const rams : RamType[] = [
   {
     id: 1,
     model: "2GB DDR3",
