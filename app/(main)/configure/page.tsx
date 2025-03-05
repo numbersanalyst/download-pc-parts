@@ -44,7 +44,7 @@ export default function Configure() {
       <SelectRam />
       <SelectedRamDetails />
 
-      <Navigation className="mt-36 mb-16"/>
+      <Navigation className="mt-6 md:mt-12 mb-16"/>
     </>
   );
 }
