@@ -17,7 +17,7 @@ export const SelectCpuBrand = () => {
           setCpuBrand("AMD");
           scrollToElement("#cpu-carousel");
         }}
-        logoSrc={"/amd-logo.svg"}
+        logoSrc={"logos/amd-logo.svg"}
         logoAlt="AMD brand logo"
         logoSize={270}
         gradientColor="#ff0000"
@@ -32,7 +32,7 @@ export const SelectCpuBrand = () => {
           setCpuBrand("Intel");
           scrollToElement("#cpu-carousel");
         }}
-        logoSrc={"/intel-logo.svg"}
+        logoSrc={"logos/intel-logo.svg"}
         logoAlt="Intel brand logo"
         logoSize={200}
         gradientColor="#0099ff"

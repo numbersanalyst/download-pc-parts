@@ -17,7 +17,7 @@ export const SelectGpuBrand = () => {
           setGpuBrand("AMD");
           scrollToElement("#gpu-carousel");
         }}
-        logoSrc={"/amd-logo.svg"}
+        logoSrc={"logos/amd-logo.svg"}
         logoAlt="AMD brand logo"
         logoSize={220}
         gradientColor="#ff0000"
@@ -32,7 +32,7 @@ export const SelectGpuBrand = () => {
           setGpuBrand("Intel");
           scrollToElement("#gpu-carousel");
         }}
-        logoSrc={"/intel-logo.svg"}
+        logoSrc={"logos/intel-logo.svg"}
         logoAlt="Intel brand logo"
         logoSize={160}
         gradientColor="#0099ff"
@@ -48,7 +48,7 @@ export const SelectGpuBrand = () => {
           setGpuBrand("Nvidia");
           scrollToElement("#gpu-carousel");
         }}
-        logoSrc={"/nvidia-logo.svg"}
+        logoSrc={"logos/nvidia-logo.svg"}
         logoAlt="Nvidia brand logo"
         logoSize={150}
         gradientColor="#7ab547"
