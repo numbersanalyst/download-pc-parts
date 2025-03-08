@@ -49,7 +49,7 @@ export const BrandCard = ({
       <div className="relative">
         <div className="flex justify-center items-center">
           <Image
-            className={cn("dark:invert", darkHueRotate && "dark:hue-rotate-180")}
+            className={cn("dark:invert text-center", darkHueRotate && "dark:hue-rotate-180")}
             src={logoSrc}
             alt={logoAlt}
             width={logoSize}

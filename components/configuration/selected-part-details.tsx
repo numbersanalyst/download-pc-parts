@@ -51,7 +51,7 @@ export const SelectedComponentDetails = ({
             alt={`${selectedItem.model} ${type} image`}
             width={350}
             height={350}
-            className="object-contain w-[350px] h-[350px]"
+            className="object-contain w-[350px] h-[350px] text-center"
           />
         </div>
 
