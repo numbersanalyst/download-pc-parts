@@ -1,6 +1,6 @@
 import { NavigationBtn } from "@/components/nav-btn";
 import { ConfettiSideCannons, triggerConfetti } from "@/components/summary/confetti";
-import { PcComponent } from "@/components/summary/pc-component";
+import { SelectedCpu } from "@/components/summary/selected-cpu";
 import { MoveLeft } from "lucide-react";
 
 export default function Summary() {
@@ -16,7 +16,7 @@ export default function Summary() {
           You can now download your new PC parts
         </h2>
 
-        <PcComponent />
+        <SelectedCpu />
 
         <ConfettiSideCannons />
       </div>
