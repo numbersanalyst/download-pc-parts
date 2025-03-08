@@ -27,8 +27,14 @@ const useStore = create<StoreData>((set) => ({
   selectedGraphicCard: null,
   selectedRam: null,
 
-  setCpuBrand: (brand) => set({ selectedCpuBrand: brand }),
-  setGpuBrand: (brand) => set({ selectedGpuBrand: brand }),
+  setCpuBrand: (brand) => set({ 
+    selectedCpuBrand: brand,
+    selectedProcessor: null 
+  }),
+  setGpuBrand: (brand) => set({ 
+    selectedGpuBrand: brand,
+    selectedGraphicCard: null 
+  }),
   setProcessor: (processor) => set({ selectedProcessor: processor }),
   setGraphicCard: (gpu) => set({ selectedGraphicCard: gpu }),
   setRam: (ram) => set({ selectedRam: ram }),
