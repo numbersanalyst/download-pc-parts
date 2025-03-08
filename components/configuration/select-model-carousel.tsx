@@ -11,7 +11,7 @@ type ItemType = {
   model: string;
   price: number;
   image: string;
-  [key: string]: any;
+  [key: string]: string | number | null;
 }
 
 interface SelectModelCarouselProps<T extends ItemType> {

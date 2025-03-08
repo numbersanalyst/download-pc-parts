@@ -18,7 +18,7 @@ type SelectedComponentDetailsProps = {
   selectedItem: {
     image: string;
     model: string;
-    [key: string]: any;
+    [key: string]: string | number | null;
   };
   properties: Property[];
 };
