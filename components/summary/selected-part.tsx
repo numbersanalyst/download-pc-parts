@@ -25,13 +25,13 @@ export const PcPart = ({
       className="flex w-full max-w-[560px] h-[135px] cursor-pointer group"
       onClick={onClick}
     >
-      <div className="w-1/3 flex justify-center items-center hover:-rotate-6 transition-rotate duration-300 ease-in-out">
-        <Image src={partSrc} alt={partAlt} width={95} height={95} className="w-[95px] h-[95px] object-contain p-1"/>
+      <div className="w-1/4 p-2 flex justify-center items-center hover:-rotate-6 transition-rotate duration-300 ease-in-out">
+        <Image src={partSrc} alt={partAlt} width={95} height={95} className="w-[105px] h-[105px] object-contain text-center p-1"/>
       </div>
 
       <Separator orientation="vertical" className="h-full" />
 
-      <div className="w-2/3">
+      <div className="w-3/4">
         <div className="px-6 flex justify-between items-center h-full">
           <div className="flex flex-col justify-center w-full flex-1 shrink overflow-hidden">
             <p>{brand}</p>

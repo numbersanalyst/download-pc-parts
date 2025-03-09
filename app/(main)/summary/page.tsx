@@ -1,6 +1,8 @@
 import { NavigationBtn } from "@/components/nav-btn";
 import { ConfettiSideCannons, triggerConfetti } from "@/components/summary/confetti";
 import { SelectedCpu } from "@/components/summary/selected-cpu";
+import { SelectedGpu } from "@/components/summary/selected-gpu";
+import { SelectedRam } from "@/components/summary/selected-ram";
 import { MoveLeft } from "lucide-react";
 
 export default function Summary() {
@@ -17,6 +19,8 @@ export default function Summary() {
         </h2>
 
         <SelectedCpu />
+        <SelectedGpu />
+        <SelectedRam />
 
         <ConfettiSideCannons />
       </div>
