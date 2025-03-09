@@ -10,8 +10,7 @@ export const SelectedRam = () => {
     selectedRam && (
       <PcPart
         partSrc={selectedRam.image}
-        partAlt="Selected RAM image"
-        brand="RAM"
+        type="RAM"
         title={selectedRam.model}
         subtitle={`${selectedRam.capacity} / ${selectedRam.speed} / ${selectedRam.latency} / ${selectedRam.voltage}`}
       />

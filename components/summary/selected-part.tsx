@@ -5,8 +5,8 @@ import { ArrowRightIcon } from "lucide-react";
 
 interface PcPartProps {
   partSrc: string;
-  partAlt: string;
-  brand: string;
+  type: string;
+  brand?: string;
   title: string;
   subtitle: string;
   onClick?: () => void;
@@ -14,7 +14,7 @@ interface PcPartProps {
 
 export const PcPart = ({
   partSrc,
-  partAlt,
+  type,
   brand,
   title,
   subtitle,
@@ -22,19 +22,27 @@ export const PcPart = ({
 }: PcPartProps) => {
   return (
     <Card
-      className="flex w-full max-w-[560px] h-[135px] cursor-pointer group"
+      className="flex w-full max-w-[560px] min-h-[135px] h-fit cursor-pointer group"
       onClick={onClick}
     >
       <div className="w-1/4 p-2 flex justify-center items-center hover:-rotate-6 transition-rotate duration-300 ease-in-out">
-        <Image src={partSrc} alt={partAlt} width={95} height={95} className="w-[105px] h-[105px] object-contain text-center p-1"/>
+        <Image
+          src={partSrc}
+          alt={`Selected ${type} image`}
+          width={95}
+          height={95}
+          className="w-[105px] h-[105px] object-contain text-centerp-1"
+        />
       </div>
 
       <Separator orientation="vertical" className="h-full" />
 
       <div className="w-3/4">
-        <div className="px-6 flex justify-between items-center h-full">
+        <div className="px-4 md:px-6 flex justify-between items-center h-full">
           <div className="flex flex-col justify-center w-full flex-1 shrink overflow-hidden">
-            <p>{brand}</p>
+            <p>
+              {brand} {type}
+            </p>
             <p className="text-2xl font-semibold">{title}</p>
             <div className="relative w-full">
               <p className="text-md text-gray-500 truncate">{subtitle}</p>

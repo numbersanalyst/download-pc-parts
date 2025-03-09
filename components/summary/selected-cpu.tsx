@@ -11,8 +11,8 @@ export const SelectedCpu = () => {
     selectedProcessor && (
       <PcPart
         partSrc={selectedProcessor.image}
-        partAlt="Selected CPU image"
-        brand={`${selectedCpuBrand} CPU`}
+        type="CPU"
+        brand={selectedCpuBrand}
         title={selectedProcessor.model}
         subtitle={`${selectedProcessor.microarchitecture} / ${selectedProcessor.coreClock} / ${selectedProcessor.coreCount} core(s) / ${selectedProcessor.threadCount} thread(s)`}
       />

@@ -11,8 +11,8 @@ export const SelectedGpu = () => {
     selectedGraphicCard && (
       <PcPart
         partSrc={selectedGraphicCard.image}
-        partAlt="Selected GPU image"
-        brand={`${selectedGpuBrand} GPU`}
+        brand={selectedGpuBrand}
+        type="GPU"
         title={selectedGraphicCard.model}
         subtitle={`${selectedGraphicCard.vram} / ${selectedGraphicCard.tdp} / ${selectedGraphicCard.coreClock} / ${selectedGraphicCard.memoryBus}`}
       />
