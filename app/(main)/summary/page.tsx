@@ -1,9 +1,6 @@
-import { SelectedCpuDetails } from "@/components/configuration/selected-cpu-details";
-import { SelectionHeader } from "@/components/configuration/selection-header";
 import { NavigationBtn } from "@/components/nav-btn";
 import { ConfettiSideCannons, triggerConfetti } from "@/components/summary/confetti";
-import { InstallationDetails } from "@/components/summary/installation-details";
-import { InstallationOptions } from "@/components/summary/installation-options";
+import { CpuInstallation } from "@/components/summary/cpu-installation";
 import { SelectedCpu } from "@/components/summary/selected-cpu";
 import { SelectedGpu } from "@/components/summary/selected-gpu";
 import { SelectedRam } from "@/components/summary/selected-ram";
@@ -27,10 +24,7 @@ export default function Summary() {
         <SelectedRam />
       </div>
 
-      <SelectionHeader step={1} title="Upgrade your CPU" description="Follow steps bellow to upgrade your processor" />
-      <SelectedCpuDetails />
-      <InstallationDetails />
-      <InstallationOptions />
+      <CpuInstallation />
     
       <ConfettiSideCannons />
     </>
