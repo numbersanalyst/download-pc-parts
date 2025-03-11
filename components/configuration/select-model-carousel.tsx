@@ -52,7 +52,7 @@ export const SelectModelCarousel = <T extends ItemType>({
           <CarouselContent className="-ml-2 md:-ml-4">
             {items.map((item) => {
               const isSelected = selectedItem && selectedItem.model === item.model;
-              const borderColor = (brand && brandBorderColors[brand]) || "border-white";
+              const borderColor = (brand && brandBorderColors[brand]) || "border-gray-500";
               const borderClass = isSelected ? `border ${borderColor} border-opacity-60` : "";
               
               return (
