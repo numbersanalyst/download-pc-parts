@@ -197,6 +197,20 @@ export const processors: Record<string, ProcessorType[]> = {
       tdp: "280 W",
       integratedGraphics: null,
     },
+    {
+      id: 14,
+      model: "Ryzen 7 9800X3D",
+      price: 479,
+      image: "cpu/amd/amd-ryzen-7-9800x3.png",
+      microarchitecture: "Zen 5",
+      socket: "AM5",
+      coreCount: 8,
+      threadCount: 16,
+      coreClock: "4.7 GHz",
+      boostClock: "5.2 GHz",
+      tdp: "120 W",
+      integratedGraphics: "Radeon Graphics",
+    },
   ],
   Intel: [
     {
