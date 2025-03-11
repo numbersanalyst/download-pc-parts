@@ -280,7 +280,7 @@ export const graphicsCards: Record<string, GraphicsCardsType[]> = {
       id: 6,
       model: "Radeon RX 7800 XT",
       price: 500,
-      image: "gpu/amd/Rx-7800-Xt.png",
+      image: "gpu/amd/RX-7800-XT.png",
       vram: "16 GB GDDR6",
       memoryBus: "256-bit",
       coreClock: "2124 MHz",
