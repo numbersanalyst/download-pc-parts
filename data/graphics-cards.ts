@@ -354,6 +354,20 @@ export const graphicsCards: Record<string, GraphicsCardsType[]> = {
       powerConnectors: "PCIe",
       ports: "4x mini DisplayPort 1.2",
     },
+    {
+      id: 12,
+      model: "RX 9070 XT",
+      price: 950,
+      image: "gpu/amd/RX-9070XT.png",
+      vram: "16 GB GDDR6",
+      memoryBus: "256-bit",
+      coreClock: "1660 MHz",
+      boostClock: "2970 MHz",
+      tdp: "750 W",
+      powerConnectors: "3x 8-pin",
+      ports: "1x HDMI 2.1b, 3x DisplayPort 2.1a"
+    }
+    
   ],
   Intel: [
     {
