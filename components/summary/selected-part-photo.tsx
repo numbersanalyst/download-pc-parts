@@ -17,9 +17,10 @@ export const SelectedPartPhoto = ({ text, imgSrc }: SelectedPartPhotoProps) => {
       <Image
         src={imgSrc}
         alt={text}
-        width={450}
-        height={450}
-        className="object-contain w-[450px] max-h-[450px] text-center"
+        width={550}
+        height={550}
+        quality={100}
+        className="object-contain w-[550px] max-h-[550px] text-center"
       />
     </div>
   )
