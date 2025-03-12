@@ -2,7 +2,7 @@ import logoImage from "@/public/logos/logo.png";
 
 export const Hero = () => {
     return (
-    <div className="bg-black text-white bg-[linear-gradient(to_bottom,#000,#200D42_34%,#4F21A1_65%,#A46EDB_82%)] py-[72px]">
+    <div className="bg-black text-white bg-[linear-gradient(to_bottom,#000,#200D42_34%,#4F21A1_65%,#A46EDB_82%)] py-[72px] relative overflow-clip">
     <div className="container">
         <div className="flex items-center justify-center">
             <a href="#" className="inline-flex gap-3 border py-1 px-2 rounded-lg border-white/30">
@@ -24,6 +24,7 @@ export const Hero = () => {
              <button className="bg-white text-black py-3 px-5 rounded-lg font-medium">Get for free</button>
         </div>
     </div>
+    <div className="absolute h-[375px] w-[750px] rounded-[100%] left-1/2 -translate-x-1/2 border border-[#B48CDE] bg-[radial-gradient(closest-side,#000_82%,#9560EB)] top-[calc(100%-96px)]"></div>
     </div>
     );
 };
