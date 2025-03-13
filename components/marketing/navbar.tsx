@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logoImage from "@/public/logos/logo.png";
+import logoImage from "@/public/logos/logo-dark.png";
 import menuIcon from "@/public/icon/menu.svg";
 
 export const Navbar = () => {
@@ -8,7 +8,7 @@ export const Navbar = () => {
     <div className="px-4 ">
       <div className="py-4 flex items-center justify-between">
         <div className="relative">
-          <div className="absolute w-full top-2 bottom-0 bg-[linear-gradient(to_right,#F87BFF,#FB92CF,#FFDD98,#C2F0B1,#2FD8FE)]"></div>
+          <div className="absolute w-full top-2 bottom-0 bg-[linear-gradient(to_right,#F87BFF,#FB92CF,#FFDD98,#C2F0B1,#2FD8FE)] blur-md opacity-25"></div>
           <Image src={logoImage} alt="Saas logo" className="h-12 w-12 relative" />
         </div>
         <div className="border border-white border-opacity-30 h-10 w-10 inline-flex justify-center items-center rounded-lg">
@@ -20,7 +20,7 @@ export const Navbar = () => {
           <a href="#" className="text-opacity-60 text-white hover:text-opacity-100 transition">Upadates</a>
           <a href="#" className="text-opacity-60 text-white hover:text-opacity-100 transition">Help</a>
           <a href="#" className="text-opacity-60 text-white hover:text-opacity-100 transition">Customers</a>
-          <button className="bg-white py-2 px-4 rounded-lg">Get for free</button>
+          <button className="bg-white py-2 px-4 rounded-lg dark:text-black">Get for free</button>
         </nav>
       </div>
      </div>
