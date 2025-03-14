@@ -1,6 +1,7 @@
 import Image from "next/image";
 import logoImage from "@/public/logos/logo-dark.png";
 import menuIcon from "@/public/icon/menu.svg";
+import Link from "next/link";
 
 export const Navbar = () => {
   return (
@@ -20,7 +21,7 @@ export const Navbar = () => {
           <a href="#" className="text-opacity-60 text-white hover:text-opacity-100 transition">Upadates</a>
           <a href="#" className="text-opacity-60 text-white hover:text-opacity-100 transition">Help</a>
           <a href="#" className="text-opacity-60 text-white hover:text-opacity-100 transition">Customers</a>
-          <button className="bg-white py-2 px-4 rounded-lg dark:text-black">Get for free</button>
+          <Link href={"/configure"} className="bg-white py-2 px-4 rounded-lg dark:text-black">Get for free</Link>
         </nav>
       </div>
      </div>
