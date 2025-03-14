@@ -73,19 +73,23 @@ body {
 
 @layer components {
   @keyframes moving-banner {
-    from { background-position: 0% 0; }
-    to { background-position: 100% 0; }
+    from {
+      background-position: 0% 0;
+    }
+    to {
+      background-position: 100% 0;
+    }
   }
 
   .rainbow-banner-gradient-1 {
-    mask-image: linear-gradient(to bottom, white, transparent), 
-                radial-gradient(circle at top center, white, transparent);
+    mask-image: linear-gradient(to bottom, white, transparent),
+      radial-gradient(circle at top center, white, transparent);
     mask-composite: intersect;
     animation: moving-banner 16s linear infinite reverse;
-    --start: rgba(0,87,255,0.5);
-    --mid: rgba(255,0,166,0.77);
-    --end: rgba(255,77,0,0.4);
-    --via: rgba(164,255,68,0.4);
+    --start: rgba(0, 87, 255, 0.5);
+    --mid: rgba(255, 0, 166, 0.77);
+    --end: rgba(255, 77, 0, 0.4);
+    --via: rgba(164, 255, 68, 0.4);
     background-image: repeating-linear-gradient(
       60deg,
       var(--end),
@@ -108,13 +112,13 @@ body {
 
   .rainbow-banner-gradient-2 {
     mask-image: linear-gradient(to bottom, white, transparent),
-                radial-gradient(circle at top center, white, transparent);
+      radial-gradient(circle at top center, white, transparent);
     mask-composite: intersect;
     animation: moving-banner 20s linear infinite;
-    --start: rgba(255,120,120,0.5);
-    --mid: rgba(36,188,255,0.4);
-    --end: rgba(64,0,255,0.51);
-    --via: rgba(255,89,0,0.56);
+    --start: rgba(255, 120, 120, 0.5);
+    --mid: rgba(36, 188, 255, 0.4);
+    --end: rgba(64, 0, 255, 0.51);
+    --via: rgba(255, 89, 0, 0.56);
     background-image: repeating-linear-gradient(
       45deg,
       var(--end),
@@ -133,5 +137,17 @@ body {
     );
     background-size: 200% 100%;
     mix-blend-mode: color-dodge;
+  }
+
+  .steps {
+    counter-reset: step;
+  }
+
+  .steps li {
+    counter-increment: step;
+  }
+
+  .steps li .step-circle::before {
+    content: counter(step);
   }
 }
