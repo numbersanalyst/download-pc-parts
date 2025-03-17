@@ -7,7 +7,7 @@ import { ModeToggle } from "../theme-changer";
 export const Navbar = () => {
   return (
     <div className="bg-black">
-    <div className="px-4 ">
+    <div className="px-4">
       <div className="py-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="relative">
@@ -19,13 +19,13 @@ export const Navbar = () => {
             <span className="font-medium leading-tight text-gray-300">PC Parts</span>
           </div>
         </div>
-        <div className="border border-white border-opacity-30 h-10 w-10 inline-flex justify-center items-center rounded-lg">
+        <div className="border border-white border-opacity-30 h-10 w-10 inline-flex justify-center items-center rounded-lg md:hidden">
           <Image src={menuIcon} alt="Menu icon" className="h-6 w-6" />
-        </div>|
-        <nav className="gap-6 items-center hidden sm:flex">
+        </div>
+        <nav className="gap-4 md:gap-6 items-center hidden md:flex">
           <a href="#" className="text-opacity-60 text-white hover:text-opacity-100 transition">About</a>
           <a href="#" className="text-opacity-60 text-white hover:text-opacity-100 transition">Features</a>
-          <a href="#" className="text-opacity-60 text-white hover:text-opacity-100 transition">Upadates</a>
+          <a href="#" className="text-opacity-60 text-white hover:text-opacity-100 transition">Updates</a>
           <a href="#" className="text-opacity-60 text-white hover:text-opacity-100 transition">Help</a>
           <a href="#" className="text-opacity-60 text-white hover:text-opacity-100 transition">Customers</a>
           <ModeToggle />
