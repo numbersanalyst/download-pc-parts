@@ -1,7 +1,8 @@
-import Image from "next/image"; // Używamy Next.js Image dla optymalizacji
-import logoImage from "@/public/logos/logo.png";
-import CPUImage from "@/public/logos/intel-core-i9-9900ks.png";
-import GPUImage from "@/public/logos/rtx-4090ti.png";
+import Image from "next/image"; 
+
+const logoImage = "/logos/logo.png";
+const CPUImage = "/logos/intel-core-i9-9900ks.png";
+const GPUImage = "/logos/rtx-4090ti.png";
 
 export const Hero = () => {
     return (
@@ -26,8 +27,8 @@ export const Hero = () => {
                     One Task 
                     <br/>at a Time
                 </h1>
-                <Image src={CPUImageImage} alt=""/>
-                <Image src={GPUImageImageImage} alt="" />
+                <Image src={CPUImageImage} height="200" width="200" alt="" className="absolute"/>
+                <Image src={GPUImageImageImage} alt="" height="200" width="200" alt="" className="absolute" />
                 </div>
                 </div>
                 <div className="flex justify-center">
