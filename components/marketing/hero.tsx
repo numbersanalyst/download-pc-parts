@@ -21,10 +21,14 @@ export const Hero = () => {
                     </a>
                 </div>
                 <div className="flex justify-center">
+                    <div className="inline-flex relative">
                 <h1 className="text-7xl sm:text-9xl font-bold tracking-tighter text-center mt-8 inline-flex">
                     One Task 
                     <br/>at a Time
                 </h1>
+                <Image src={CPUImageImage} alt=""/>
+                <Image src={GPUImageImageImage} alt="" />
+                </div>
                 </div>
                 <div className="flex justify-center">
                 <p className="text-center text-xl mt-8 max-w-md">
