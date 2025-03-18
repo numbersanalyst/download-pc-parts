@@ -1,8 +1,9 @@
-import Image from "next/image";
-import logoImage from "@/public/logos/logo-dark.png";
-import menuIcon from "@/public/icon/menu.svg";
 import Link from "next/link";
+import Image from "next/image";
 import { ModeToggle } from "../theme-changer";
+
+import logoImage from "@/public/logos/logo-dark.png";
+import menuIcon from "@/public/icons/menu.svg";
 
 export const Navbar = () => {
   return (
