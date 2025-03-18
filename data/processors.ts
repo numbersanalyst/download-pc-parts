@@ -3,6 +3,7 @@ export type ProcessorType = {
   model: string;
   price: number;
   image: string;
+  secondImage?: string;
   microarchitecture: string;
   socket: string;
   coreCount: number;
@@ -20,6 +21,7 @@ export const processors: Record<string, ProcessorType[]> = {
       model: "A10-7700K",
       price: 80,
       image: "cpu/amd/amd-a10-7700k.png",
+      secondImage: "cpu/amd/socket/amd-a10-7700k-pf.png",
       microarchitecture: "Steamroller",
       socket: "FM2+",
       coreCount: 4,

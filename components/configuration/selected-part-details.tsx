@@ -47,7 +47,7 @@ export const SelectedComponentDetails = ({
             Details about your {type}
           </p>
           <Image
-            src={selectedItem.image}
+            src={selectedItem?.secondImage &&  typeof selectedItem?.secondImage === "string" ? selectedItem.secondImage : selectedItem.image}
             alt={`${selectedItem.model} ${type} image`}
             width={350}
             height={350}
