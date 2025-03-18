@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import logoImage from "@/public/logos/logo-dark.png";
 import cpuImage from "@/public/cpu/intel/intel-i9-14900k.png";
-import gpuImage from "@/public/gpu/nvidia/rtx-4090ti.png";
+import gpuImage from "@/public/gpu/nvidia/rtx-3080.png";
 
 export const Hero = () => {
     return (
@@ -30,17 +30,17 @@ export const Hero = () => {
                         </h1>
                         <Image 
                             src={cpuImage} 
-                            height={200} 
-                            width={200} 
+                            height={300} 
+                            width={300} 
                             alt="CPU image" 
-                            className="absolute right-[-300px] top-[-50px] hidden lg:block" 
+                            className="absolute right-[-350px] top-[105px] rotate-3 hidden lg:block" 
                         />
                         <Image 
                             src={gpuImage} 
-                            height={200} 
-                            width={200} 
+                            height={320} 
+                            width={320} 
                             alt="GPU image" 
-                            className="absolute left-[-300px] top-[-50px] hidden lg:block" 
+                            className="absolute left-[-355px] top-[110px] -rotate-12 hidden lg:block" 
                         />
                     </div>
                 </div>
