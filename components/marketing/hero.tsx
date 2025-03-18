@@ -1,8 +1,8 @@
 import Image from "next/image"; 
 
-const logoImage = "/logos/logo.png";
-const CPUImage = "/logos/intel-core-i9-9900ks.png";
-const GPUImage = "/logos/rtx-4090ti.png";
+import logoImage from "@/public/logos/logo-dark.png";
+import cpuImage from "@/public/cpu/intel/intel-i9-14900k.png";
+import gpuImage from "@/public/gpu/nvidia/rtx-4090ti.png";
 
 export const Hero = () => {
     return (
@@ -28,19 +28,18 @@ export const Hero = () => {
                             One Task 
                             <br />at a Time
                         </h1>
-                        {/* Obrazki CPU i GPU */}
                         <Image 
-                            src={CPUImage} 
+                            src={cpuImage} 
                             height={200} 
                             width={200} 
-                            alt="CPU" 
+                            alt="CPU image" 
                             className="absolute right-[-300px] top-[-50px] hidden lg:block" 
                         />
                         <Image 
-                            src={GPUImage} 
+                            src={gpuImage} 
                             height={200} 
                             width={200} 
-                            alt="GPU" 
+                            alt="GPU image" 
                             className="absolute left-[-300px] top-[-50px] hidden lg:block" 
                         />
                     </div>
