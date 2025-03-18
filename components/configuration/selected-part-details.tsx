@@ -40,12 +40,6 @@ export const SelectedComponentDetails = ({
         className="flex flex-col md:flex-row min-h-[500px] h-full z-20"
       >
         <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-10 relative">
-          <p
-            className="text-5xl sm:text-6xl md:text-8xl text-center font-bold absolute select-none
-              text-white mix-blend-difference opacity-75 contrast-200 brightness-200"
-          >
-            Details about your {type}
-          </p>
           <Image
             src={selectedItem?.secondImage &&  typeof selectedItem?.secondImage === "string" ? selectedItem.secondImage : selectedItem.image}
             alt={`${selectedItem.model} ${type} image`}

@@ -428,7 +428,6 @@ export const processors: Record<string, ProcessorType[]> = {
       model: "Xeon E-2146G",
       price: 300,
       image: "cpu/intel/intel-xeon-e-2146g.png",
-      secondImage: "cpu/intel/socket/intel-xeon-e-2146g-pf.png",
       microarchitecture: "Coffee Lake",
       socket: "LGA 1151",
       coreCount: 6,
