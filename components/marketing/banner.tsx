@@ -1,4 +1,4 @@
-import { Banner } from "./banner-template"
+import { Banner } from "@/components/ui/banner-template";
 
 export function RainbowBanner() {
   return (
@@ -10,5 +10,5 @@ export function RainbowBanner() {
         className="bg-violet-700 bg-opacity-20"
       />
     </div>
-  )
+  );
 }
