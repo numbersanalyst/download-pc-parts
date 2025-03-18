@@ -1,9 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import logoImage from "@/public/logos/logo-dark.png";
 import cpuImage from "@/public/cpu/intel/intel-i9-14900k.png";
 import gpuImage from "@/public/gpu/nvidia/rtx-3080.png";
-import Link from "next/link";
 
 export const Hero = () => {
   return (
