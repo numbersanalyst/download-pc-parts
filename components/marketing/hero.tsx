@@ -4,6 +4,7 @@ import Link from "next/link";
 import logoImage from "@/public/logos/logo-dark.png";
 import cpuImage from "@/public/cpu/intel/intel-i9-14900k.png";
 import gpuImage from "@/public/gpu/amd/RX-9070XT.png";
+import { RainbowButton } from "../magicui/rainbow-button";
 
 export const Hero = () => {
   return (
@@ -54,8 +55,10 @@ export const Hero = () => {
         </div>
 
         <div className="flex justify-center mt-8">
-          <Link href={"/configure"} className="bg-white text-black py-3 px-6 rounded-lg font-medium">
-            Get for free
+          <Link href={"/configure"}>
+            <RainbowButton>
+              Get for free
+            </RainbowButton>
           </Link>
         </div>
       </div>
