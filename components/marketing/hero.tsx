@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import logoImage from "@/public/logos/logo-dark.png";
 import cpuImage from "@/public/cpu/intel/intel-i9-14900k.png";
-import gpuImage from "@/public/gpu/nvidia/rtx-3080.png";
+import gpuImage from "@/public/gpu/amd/RX-9070XT.png";
 
 export const Hero = () => {
   return (
@@ -34,14 +34,14 @@ export const Hero = () => {
               height={300}
               width={300}
               alt="CPU image"
-              className="absolute right-[-350px] top-[105px] rotate-3 hidden lg:block"
+              className="absolute right-[-350px] top-[80px] rotate-3 hidden lg:block"
             />
             <Image
               src={gpuImage}
               height={320}
               width={320}
               alt="GPU image"
-              className="absolute left-[-355px] top-[110px] -rotate-12 hidden lg:block"
+              className="absolute left-[-320px] top-[80px] -rotate-3 hidden lg:block"
             />
           </div>
         </div>
