@@ -33,64 +33,64 @@ export const LogoTicker = () => {
             <Image
               src={acmeLogo}
               alt="Acme logo"
-              className="flex-none w-auto"
+              className="flex-none w-auto h-10 sm:h-12 md:h-auto"
             />
             <Image
               src={quantumLogo}
               alt="Quantum logo"
-              className="flex-none w-auto"
+              className="flex-none w-auto h-10 sm:h-12 md:h-auto"
             />
             <Image
               src={echoLogo}
               alt="Echo logo"
-              className="flex-none w-auto"
+              className="flex-none w-auto h-10 sm:h-12 md:h-auto"
             />
             <Image
               src={celestialLogo}
               alt="Celestial logo"
-              className="flex-none w-auto"
+              className="flex-none w-auto h-10 sm:h-12 md:h-auto"
             />
             <Image
               src={pulseLogo}
               alt="Pulse logo"
-              className="flex-none w-auto"
+              className="flex-none w-auto h-10 sm:h-12 md:h-auto"
             />
             <Image
               src={apexLogo}
               alt="Apex logo"
-              className="flex-none w-auto"
+              className="flex-none w-auto h-10 sm:h-12 md:h-auto"
             />
 
             {/* Same logos to fill the gap */}
             <Image
               src={acmeLogo}
               alt="Acme logo"
-              className="flex-none w-auto"
+              className="flex-none w-auto h-10 sm:h-12 md:h-auto"
             />
             <Image
               src={quantumLogo}
               alt="Quantum logo"
-              className="flex-none w-auto"
+              className="flex-none w-auto h-10 sm:h-12 md:h-auto"
             />
             <Image
               src={echoLogo}
               alt="Echo logo"
-              className="flex-none w-auto"
+              className="flex-none w-auto h-10 sm:h-12 md:h-auto"
             />
             <Image
               src={celestialLogo}
               alt="Celestial logo"
-              className="flex-none w-auto"
+              className="flex-none w-auto h-10 sm:h-12 md:h-auto"
             />
             <Image
               src={pulseLogo}
               alt="Pulse logo"
-              className="flex-none w-auto"
+              className="flex-none w-auto h-10 sm:h-12 md:h-auto"
             />
             <Image
               src={apexLogo}
               alt="Apex logo"
-              className="flex-none w-auto"
+              className="flex-none w-auto h-10 sm:h-12 md:h-auto"
             />
           </motion.div>
         </div>
