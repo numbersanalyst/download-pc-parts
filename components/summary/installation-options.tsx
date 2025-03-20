@@ -1,11 +1,20 @@
+"use client";
+
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Bot, ListOrdered } from "lucide-react";
 import { Step, Steps } from "./steps";
 import { Terminal, Code, RotateCcw } from "lucide-react";
 import { CodeBlock } from "@/components/ui/code-block";
+import { useStoreSelectors } from "@/stores/store";
 
 function InstallationOptions() {
+  const selectedProcessor = useStoreSelectors.use.selectedProcessor();
+
+  const cpuNameValue = selectedProcessor 
+    ? `${selectedProcessor.model} ${selectedProcessor.coreClock}`
+    : "Your Custom CPU Name";
+
   return (
     <Tabs defaultValue="tab-1" className="text-center">
       <ScrollArea>
@@ -43,69 +52,37 @@ function InstallationOptions() {
       >
         <Steps>
           <Step
-            title="Install the following dependencies:"
+            title="Open Windows Terminal as Administrator"
             icon={<Terminal className="h-5 w-5" />}
           >
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Dignissimos minima, temporibus recusandae eos omnis, architecto
-              vero velit provident praesentium ab voluptatibus ea voluptates
-              repellendus! Laudantium amet harum rerum culpa eum!
+              Right-click on the <strong>Start menu</strong> and select <strong>"Windows Terminal (Admin)"</strong> or search for
+              "Windows Terminal" in the Start menu, right-click it, and select <strong>"Run as administrator"</strong>.
             </p>
-
-            <CodeBlock
-              language="bash"
-              code={`npm install @/components/ui/button
-npm install @/components/ui/card
-npm install @/components/ui/input`}
-            />
           </Step>
           <Step
-            title="Copy and paste the following code:"
+            title="Run the PowerShell command to change CPU name"
             icon={<Code className="h-5 w-5" />}
           >
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Non
-              autem, explicabo voluptas hic assumenda laudantium deleniti
-              quisquam nam architecto eius voluptate velit temporibus optio
-              ratione pariatur aperiam in, praesentium culpa.
+              Copy and paste the following command into the PowerShell window. This will modify
+              the registry to change how Windows displays your CPU name.
             </p>
 
             <CodeBlock
-              language="tsx"
-              showLineNumbers={true}
-              code={`import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-
-export function ExampleComponent() {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Card Title</CardTitle>
-        <CardDescription>Card Description</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p>Card Content</p>
-      </CardContent>
-      <CardFooter>
-        <Button>Button</Button>
-      </CardFooter>
-    </Card>
-  )
-}`}
+              language="powershell"
+              code={`${cpuNameValue ? "" : "# Change the value to your desired CPU name\n"}Set-ItemProperty -Path "HKLM:\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0" -Name "ProcessorNameString" -Value "${cpuNameValue}"`}
             />
           </Step>
           <Step
-            title="Restart your PC."
+            title="Restart your computer to apply changes"
             icon={<RotateCcw className="h-5 w-5" />}
-          />
+          >
+            <p>
+              For the changes to take effect, you'll need to <strong>restart your computer</strong>.
+              Your new CPU name will be visible in System Information and other system tools after reboot.
+            </p>
+          </Step>
         </Steps>
       </TabsContent>
       <TabsContent
@@ -114,21 +91,52 @@ export function ExampleComponent() {
       >
         <Steps>
           <Step
-            title="Install the following dependencies:"
+            title="Open Registry Editor"
             icon={<Terminal className="h-5 w-5" />}
           >
-            <p>Lorem ipsum dolor sit amet</p>
+            <p>
+              Press <strong>Win+R</strong> on your keyboard to open the Run dialog.
+              Type <strong>"regedit"</strong> and press Enter or click OK. If prompted by User Account Control, click <strong>Yes</strong>.
+            </p>
           </Step>
           <Step
-            title="Copy and paste the following code:"
+            title="Navigate to the processor registry key"
             icon={<Code className="h-5 w-5" />}
           >
-            <p>Lorem ipsum dolor sit amet</p>
+            <p>
+              In Registry Editor, navigate to the following path by expanding the folders in the left panel:
+            </p>
+            
+            <CodeBlock
+              language="text"
+              code={`HKEY_LOCAL_MACHINE\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0`}
+            />
           </Step>
           <Step
-            title="Restart your PC."
+            title="Modify the ProcessorNameString value"
+            icon={<ListOrdered className="h-5 w-5" />}
+          >
+            <p>Use this value as your CPU name:</p>
+            <CodeBlock
+              language="text"
+              code={cpuNameValue}
+            />
+            <ul className="list-disc pl-5 space-y-1 mt-4">
+              <li>In the right panel, find the <strong>"ProcessorNameString"</strong> value.</li>
+              <li>Right-click on it and select <strong>"Modify"</strong>.</li>
+              <li>Enter your desired CPU name in the <strong>"Value data"</strong> field.</li>
+              <li>Click <strong>OK</strong> to save the changes.</li>
+            </ul>
+          </Step>
+          <Step
+            title="Restart your computer"
             icon={<RotateCcw className="h-5 w-5" />}
-          />
+          >
+            <p>
+              Close Registry Editor and <strong>restart your computer</strong> for the changes to take effect.
+              After restarting, check System Information to verify the CPU name has been updated.
+            </p>
+          </Step>
         </Steps>
       </TabsContent>
     </Tabs>
