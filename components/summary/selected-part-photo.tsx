@@ -3,9 +3,10 @@ import Image from "next/image";
 interface SelectedPartPhotoProps {
   text: string;
   imgSrc: string;
+  id?: string;
 }
 
-export const SelectedPartPhoto = ({ text, imgSrc }: SelectedPartPhotoProps) => {
+export const SelectedPartPhoto = ({ text, imgSrc, id }: SelectedPartPhotoProps) => {
   return (
     <div className="w-fit flex items-center justify-center p-4 md:p-10 relative">
       <p
@@ -21,6 +22,7 @@ export const SelectedPartPhoto = ({ text, imgSrc }: SelectedPartPhotoProps) => {
         height={550}
         quality={100}
         className="object-contain w-[550px] max-h-[550px] text-center"
+        id={id}
       />
     </div>
   )

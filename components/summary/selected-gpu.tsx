@@ -2,6 +2,7 @@
 
 import { useStoreSelectors } from "@/stores/store";
 import { PcPart } from "./selected-part";
+import { scrollToElement } from "@/lib/utils";
 
 export const SelectedGpu = () => {
   const selectedGpuBrand = useStoreSelectors.use.selectedGpuBrand();
@@ -14,6 +15,7 @@ export const SelectedGpu = () => {
         brand={selectedGpuBrand}
         type="GPU"
         title={selectedGraphicCard.model}
+        onClick={() => scrollToElement("#gpu-installation")}
         subtitle={`${selectedGraphicCard.vram} / ${selectedGraphicCard.tdp} / ${selectedGraphicCard.coreClock} / ${selectedGraphicCard.memoryBus}`}
       />
     )
