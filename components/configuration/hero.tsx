@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { Mouse } from "lucide-react";
 
 function Model() {
-  const { scene } = useGLTF("/computer_components.glb");
+  const { scene } = useGLTF("/models/computer_components.glb");
 
   return (
     <primitive 

@@ -55,7 +55,7 @@ export const Hero = () => {
         </div>
 
         <div className="flex justify-center mt-8">
-          <Link href={"/configure"}>
+          <Link href={"/configure"} scroll={false}>
             <RainbowButton>
               Get for free
             </RainbowButton>

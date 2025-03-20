@@ -48,7 +48,7 @@ export const Navbar = () => {
             <a href="#" className="text-opacity-60 text-white hover:text-opacity-100 transition">Help</a>
             <a href="#" className="text-opacity-60 text-white hover:text-opacity-100 transition">Customers</a>
             <ModeToggle />
-            <Link href={"/configure"} className="bg-white py-2 px-4 rounded-lg dark:text-black">Get for free</Link>
+            <Link href={"/configure"} scroll={false} className="bg-white py-2 px-4 rounded-lg dark:text-black">Get for free</Link>
           </nav>
         </div>
       </div>
@@ -64,7 +64,7 @@ export const Navbar = () => {
             <a href="#" className="text-white py-3 border-b border-white border-opacity-10">Customers</a>
             <div className="py-3 flex items-center gap-x-6">
               <ModeToggle />
-              <Link href={"/configure"} className="block w-full bg-white py-2 px-4 rounded-lg text-center dark:text-black">
+              <Link href={"/configure"} scroll={false} className="block w-full bg-white py-2 px-4 rounded-lg text-center dark:text-black">
                 Get for free
               </Link>
             </div>
