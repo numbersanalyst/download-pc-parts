@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ModeToggle } from "../theme-changer";
 
 import logoImage from "@/public/logos/logo-dark.png";
-import menuIcon from "@/public/icons/menu.svg";
+import { Menu } from "lucide-react";
 
 export const Navbar = () => {
   return (
@@ -21,7 +21,7 @@ export const Navbar = () => {
           </div>
         </div>
         <div className="border border-white border-opacity-30 h-10 w-10 inline-flex justify-center items-center rounded-lg md:hidden">
-          <Image src={menuIcon} alt="Menu icon" className="h-6 w-6" />
+          <Menu className="h-6 w-6 text-white"/>
         </div>
         <nav className="gap-4 md:gap-6 items-center hidden md:flex">
           <a href="#" className="text-opacity-60 text-white hover:text-opacity-100 transition">About</a>
