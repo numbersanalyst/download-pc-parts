@@ -1,3 +1,4 @@
+
 import { NavigationBtn } from "@/components/nav-btn";
 import { ConfettiSideCannons, triggerConfetti } from "@/components/summary/confetti";
 import { CpuInstallation } from "@/components/summary/cpu-installation";
