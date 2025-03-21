@@ -148,15 +148,14 @@ body {
     background-size: 200% 100%;
     mix-blend-mode: color-dodge;
   }
-
   .steps {
     counter-reset: step;
   }
-
-  .steps li {
+  
+  .steps > li {
     counter-increment: step;
   }
-
+  
   .steps li .step-circle::before {
     content: counter(step);
   }

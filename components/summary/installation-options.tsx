@@ -1,56 +1,67 @@
 "use client";
 
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Bot, ListOrdered } from "lucide-react";
 import { Step, Steps } from "./steps";
 import { Terminal, Code, RotateCcw } from "lucide-react";
 import { CodeBlock } from "@/components/ui/code-block";
 import { useStoreSelectors } from "@/stores/store";
+import { motion } from "framer-motion";
+import { useState } from "react";
+
+type CustomTabsTriggerProps = {
+  value: string;
+  isActive: boolean | undefined;
+  children: React.ReactNode;
+}
+
+function CustomTabsTrigger({ value, isActive, children }: CustomTabsTriggerProps) {
+  return (
+    <TabsTrigger value={value} className="relative flex items-center gap-2 cursor-pointer text-sm font-semibold px-6 py-2 rounded-full transition-colors text-foreground/80 hover:text-primary data-[state=active]:bg-muted data-[state=active]:text-primary">
+      {children}
+      {isActive && (
+        <motion.div
+          layoutId="lamp"
+          className="absolute inset-0 w-full bg-primary/5 rounded-full z-1"
+          initial={false}
+          transition={{
+            type: "spring",
+            stiffness: 300,
+            damping: 30,
+          }}
+        >
+          <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-primary rounded-t-full">
+            <div className="absolute w-12 h-6 bg-primary/20 rounded-full blur-md -top-2 -left-2" />
+            <div className="absolute w-8 h-6 bg-primary/20 rounded-full blur-md -top-1" />
+            <div className="absolute w-4 h-4 bg-primary/20 rounded-full blur-sm top-0 left-2" />
+          </div>
+        </motion.div>
+      )}
+    </TabsTrigger>
+  );
+}
 
 function InstallationOptions() {
   const selectedProcessor = useStoreSelectors.use.selectedProcessor();
-
-  const cpuNameValue = selectedProcessor 
+  const cpuNameValue = selectedProcessor
     ? `${selectedProcessor.model} ${selectedProcessor.coreClock}`
     : "Your Custom CPU Name";
+  const [activeTab, setActiveTab] = useState("tab-1");
 
   return (
-    <Tabs defaultValue="tab-1" className="text-center">
-      <ScrollArea>
-        <TabsList className="mb-3 gap-1 bg-transparent">
-          <TabsTrigger
-            value="tab-1"
-            className="rounded-full px-5 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-none"
-          >
-            <Bot
-              className="-ms-0.5 me-1.5 opacity-60"
-              size={16}
-              strokeWidth={2}
-              aria-hidden="true"
-            />
-            Automatically
-          </TabsTrigger>
-          <TabsTrigger
-            value="tab-2"
-            className="rounded-full px-5 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-none"
-          >
-            <ListOrdered
-              className="-ms-0.5 me-1.5 opacity-60"
-              size={16}
-              strokeWidth={2}
-              aria-hidden="true"
-            />
-            Manual
-          </TabsTrigger>
-        </TabsList>
-        <ScrollBar orientation="horizontal" />
-      </ScrollArea>
-      <TabsContent
-        value="tab-1"
-        className="text-start container max-w-2xl py-12"
-      >
-        <Steps>
+    <Tabs defaultValue="tab-1" onValueChange={setActiveTab} className="text-center mt-5">
+      <TabsList className="gap-3 bg-transparent border border-border px-2 py-6 rounded-full shadow-lg mb-3">
+        <CustomTabsTrigger value="tab-1" isActive={activeTab === "tab-1"}>
+          <Bot className="-ms-0.5 me-1.5 opacity-60" size={16} strokeWidth={2} aria-hidden="true" />
+          Automatically
+        </CustomTabsTrigger>
+        <CustomTabsTrigger value="tab-2" isActive={activeTab === "tab-2"}>
+          <ListOrdered className="-ms-0.5 me-1.5 opacity-60" size={16} strokeWidth={2} aria-hidden="true" />
+          Manual
+        </CustomTabsTrigger>
+      </TabsList>
+      <TabsContent value="tab-1" className="text-start container max-w-2xl py-8">
+      <Steps>
           <Step
             title="Open Windows Terminal as Administrator"
             icon={<Terminal className="h-5 w-5" />}
@@ -85,11 +96,8 @@ function InstallationOptions() {
           </Step>
         </Steps>
       </TabsContent>
-      <TabsContent
-        value="tab-2"
-        className="text-start container max-w-2xl py-12"
-      >
-        <Steps>
+      <TabsContent value="tab-2" className="text-start container max-w-2xl py-8">
+      <Steps>
           <Step
             title="Open Registry Editor"
             icon={<Terminal className="h-5 w-5" />}
@@ -104,7 +112,7 @@ function InstallationOptions() {
             icon={<Code className="h-5 w-5" />}
           >
             <p>
-              In Registry Editor, navigate to the following path by expanding the folders in the left panel:
+              In Registry Editor, navigate to the following path by expanding the folders in the left panel or paste it into the address bar:
             </p>
             
             <CodeBlock

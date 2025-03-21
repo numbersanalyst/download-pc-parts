@@ -24,6 +24,7 @@ export interface StepProps {
 export function Step({ children, className, title, icon }: StepProps) {
   return (
     <li className={cn("relative pb-8 last:pb-0", className)}>
+      {/* Mobile view */}
       <div className="md:hidden flex items-center mb-2">
         <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-sm font-medium text-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 mr-3">
           <div className="step-circle" />
@@ -36,6 +37,7 @@ export function Step({ children, className, title, icon }: StepProps) {
         </h3>
       </div>
 
+      {/* Desktop view */}
       <div className="hidden md:block pl-12">
         <div className="absolute left-0 flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-sm font-medium text-zinc-200 dark:bg-zinc-800 dark:text-zinc-300">
           <div className="step-circle" />
