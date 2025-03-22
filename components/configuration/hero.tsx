@@ -27,7 +27,7 @@ export const HeroBackground = () => {
           width={650}
           className="dark:hidden block"
         />
-        <p className="text-sm text-gray-800 dark:text-gray-400">Best PC build from <a href="https://powergpu.com/" className="font-semibold">powergpu.com</a></p>
+        <p className="text-sm text-gray-800 dark:text-gray-400 z-10">Best PC build from <a href="https://powergpu.com/" className="font-semibold">powergpu.com</a></p>
       </div>
       <motion.div
         initial={{ opacity: 0.0, y: 40 }}
