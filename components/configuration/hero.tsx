@@ -3,7 +3,6 @@
 import { motion } from "motion/react";
 
 import { AuroraBackground } from "@/components/ui/aurora-background";
-// import { HeroModel } from "@/components/configuration/hero-model";
 import { scrollToElement } from "@/lib/utils";
 import Image from "next/image";
 
@@ -13,11 +12,6 @@ import darkPcImage from "@/public/pc/dark.webp";
 export const HeroBackground = () => {
   return (
     <AuroraBackground>
-      {/* Disabled due to performance issues */}
-      {/* <div className="absolute top-0 bottom-0 left-0 right-0">
-        <HeroModel />
-      </div> */}
-
       <div className="absolute top-0 bottom-0 left-0 right-0 flex flex-col justify-center items-center">
         <Image
           src={darkPcImage}
@@ -39,12 +33,13 @@ export const HeroBackground = () => {
         initial={{ opacity: 0.0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{
-          delay: 0.6,
+          delay: 0.8,
           duration: 1,
           ease: "easeInOut",
         }}
-        className="relative flex flex-col gap-4 items-center justify-center px-4"
+        className="relative flex flex-col gap-4 items-center justify-center px-4 w-full h-full"
       >
+        <div className="absolute top-0 bottom-0 left-0 right-0 radial-overlay z-[5]"></div>
         <div className="text-3xl md:text-7xl font-bold dark:text-white text-center relative z-10">
           Are you looking for something?
         </div>
