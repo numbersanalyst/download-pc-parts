@@ -9,7 +9,7 @@ export const SelectCpuBrand = () => {
   const setCpuBrand = useStoreSelectors.use.setCpuBrand();
 
   return (
-    <div className="flex h-[500px] lg:h-[400px] flex-col gap-4 lg:flex-row select-none">
+    <div className="flex h-[500px] lg:h-[400px] flex-col gap-4 lg:flex-row select-none" id="cpu-brands">
       <BrandCard
         thing="AMD processors"
         selected={selectedCpuBrand === "AMD"}

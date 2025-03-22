@@ -8,7 +8,7 @@ import { SelectGpuModel } from "@/components/configuration/select-gpu-model";
 import { SelectedGpuDetails } from "@/components/configuration/selected-gpu-details";
 import { SelectRam } from "@/components/configuration/select-ram";
 import { SelectedRamDetails } from "@/components/configuration/selected-ram-details";
-import { HeroBackground } from "@/components/configuration/hero-background";
+import { HeroBackground } from "@/components/configuration/hero";
 // import { Hero } from "@/components/configuration/hero";
 
 export default function Configure() {
