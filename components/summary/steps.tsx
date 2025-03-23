@@ -23,15 +23,15 @@ export interface StepProps {
 
 export function Step({ children, className, title, icon }: StepProps) {
   return (
-    <li className={cn("relative pb-8 last:pb-0", className)}>
+    <li className={cn("relative pb-10 last:pb-0", className)}>
       {/* Mobile view */}
       <div className="md:hidden flex items-center mb-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-sm font-medium text-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 mr-3">
+        <div className="flex h-8 w-8 items-center justify-center shrink-0 rounded-full bg-zinc-900 text-sm font-medium text-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 mr-3">
           <div className="step-circle" />
         </div>
         <h3 className="font-heading scroll-m-20 text-xl font-semibold tracking-tight flex items-center">
           {icon && (
-            <span className="mr-2 inline-flex items-center">{icon}</span>
+            <span className="hidden mr-2 sm:inline-flex items-center">{icon}</span>
           )}
           {title}
         </h3>

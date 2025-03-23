@@ -28,7 +28,12 @@ function CodeBlock({
         language={language}
         style={vscDarkPlus}
         showLineNumbers={showLineNumbers}
-        wrapLines={true}
+        codeTagProps={{
+          style: {
+            whiteSpace: "pre-wrap",
+            wordBreak: "break-word",
+          },
+        }}
         customStyle={{
           margin: 0,
           borderRadius: "0.5rem",
