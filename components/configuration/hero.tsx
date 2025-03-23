@@ -11,7 +11,7 @@ import darkPcImage from "@/public/pc/dark.webp";
 
 export const HeroBackground = () => {
   return (
-    <AuroraBackground>
+    <AuroraBackground className="min-h-[650px]">
       <div className="absolute top-0 bottom-0 left-0 right-0 flex flex-col justify-center items-center">
         <Image
           src={darkPcImage}
@@ -40,10 +40,10 @@ export const HeroBackground = () => {
         className="relative flex flex-col gap-4 items-center justify-center px-4 w-full h-full"
       >
         <div className="absolute top-0 bottom-0 left-0 right-0 radial-overlay z-[5]"></div>
-        <div className="text-3xl md:text-7xl font-bold dark:text-white text-center relative z-10">
+        <div className="text-4xl md:text-7xl font-bold dark:text-white text-center relative z-10">
           Are you looking for something?
         </div>
-        <div className="font-extralight text-base md:text-4xl dark:text-neutral-200 py-4 relative z-10">
+        <div className="font-extralight text-2xl md:text-4xl dark:text-neutral-200 py-4 text-center relative z-10">
           We can offer you the best PC parts
         </div>
         <button className="bg-black dark:bg-white rounded-full w-fit text-white dark:text-black px-4 py-2 relative z-10" onClick={() => {scrollToElement("#cpu-brands")}}>
