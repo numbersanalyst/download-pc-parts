@@ -3,7 +3,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Bot, ListOrdered } from "lucide-react";
 import { Step, Steps } from "./steps";
-import { Terminal, Code, RotateCcw } from "lucide-react";
+import { Terminal, Code } from "lucide-react";
 import { CodeBlock } from "@/components/ui/code-block";
 import { useStoreSelectors } from "@/stores/store";
 import { motion } from "framer-motion";
@@ -100,15 +100,6 @@ function InstallationOptions() {
               code={`${cpuNameValue ? "" : "# Change the value to your desired CPU name\n"}Set-ItemProperty -Path "HKLM:\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0" -Name "ProcessorNameString" -Value "${cpuNameValue}"`}
             />
           </Step>
-          <Step
-            title="Restart your computer to apply changes"
-            icon={<RotateCcw className="h-5 w-5" />}
-          >
-            <p>
-              For the changes to take effect, you'll need to <strong>restart your computer</strong>.
-              Your new CPU name will be visible in System Information and other system tools after reboot.
-            </p>
-          </Step>
         </Steps>
       </TabsContent>
       <TabsContent value="tab-2" className="text-start container max-w-2xl py-8">
@@ -150,15 +141,6 @@ function InstallationOptions() {
               <li>Enter your desired CPU name in the <strong>"Value data"</strong> field.</li>
               <li>Click <strong>OK</strong> to save the changes.</li>
             </ul>
-          </Step>
-          <Step
-            title="Restart your computer"
-            icon={<RotateCcw className="h-5 w-5" />}
-          >
-            <p>
-              Close Registry Editor and <strong>restart your computer</strong> for the changes to take effect.
-              After restarting, check System Information to verify the CPU name has been updated.
-            </p>
           </Step>
         </Steps>
       </TabsContent>
