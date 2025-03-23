@@ -42,9 +42,10 @@ function CustomTabsTrigger({ value, isActive, children }: CustomTabsTriggerProps
 }
 
 function InstallationOptions() {
+  const selectedCpuBrand = useStoreSelectors.use.selectedCpuBrand();
   const selectedProcessor = useStoreSelectors.use.selectedProcessor();
   const cpuNameValue = selectedProcessor
-    ? `${selectedProcessor.model} ${selectedProcessor.coreClock}`
+    ? `${selectedCpuBrand} ${selectedProcessor.model} ${selectedProcessor.coreClock}`
     : "Your Custom CPU Name";
   const [activeTab, setActiveTab] = useState("tab-1");
 
