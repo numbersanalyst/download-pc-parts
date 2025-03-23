@@ -11,8 +11,8 @@ export const SelectedPartHeader = ({
 }: SelectedPartHeaderProps) => {
   return (
     <>
-      <div className="mt-10 md:mt-20 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-        <div className="w-12 h-12 text-2xl flex justify-center items-center bg-accent rounded-full">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <div className="w-12 h-12 text-2xl flex justify-center items-center bg-accent rounded-full shrink-0">
           {step}
         </div>
         <div className="flex flex-col">

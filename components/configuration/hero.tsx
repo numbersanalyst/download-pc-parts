@@ -11,7 +11,7 @@ import darkPcImage from "@/public/pc/dark.webp";
 
 export const HeroBackground = () => {
   return (
-    <AuroraBackground className="min-h-[650px]">
+    <AuroraBackground className="min-h-[750px]">
       <div className="absolute top-0 bottom-0 left-0 right-0 flex flex-col justify-center items-center">
         <Image
           src={darkPcImage}

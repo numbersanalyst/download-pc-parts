@@ -22,7 +22,7 @@ export const PcPart = ({
 }: PcPartProps) => {
   return (
     <Card
-      className="flex w-full max-w-[560px] min-h-[135px] h-fit cursor-pointer group"
+      className="flex w-full max-w-[560px] h-[135px] cursor-pointer group"
       onClick={onClick}
     >
       <div className="w-1/4 p-2 flex justify-center items-center hover:-rotate-6 transition-rotate duration-300 ease-in-out">
