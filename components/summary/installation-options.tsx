@@ -49,7 +49,7 @@ function InstallationOptions() {
   const [activeTab, setActiveTab] = useState("tab-1");
 
   // Construct cpuNameValue based on the CPU brand
-  let cpuNameValue = selectedProcessor
+  const cpuNameValue = selectedProcessor
     ? selectedCpuBrand === "AMD"
       ? `${selectedCpuBrand} ${selectedProcessor.model} ${selectedProcessor.coreCount}-Core Processor`
       : selectedCpuBrand === "Intel"
