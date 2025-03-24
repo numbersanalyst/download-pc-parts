@@ -1,3 +1,5 @@
+"use client";
+
 import { Suspense, useEffect, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
@@ -47,7 +49,6 @@ function HeroModel() {
       <Suspense fallback={null}>
         <Model path="/3d/dream_computer_setup.glb" />
       </Suspense>
-      {/* @ts-expect-error: OrbitControls type mismatch in @react-three/drei */}
       <OrbitControls
         enableZoom={false}
         enablePan={false}
