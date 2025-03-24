@@ -3,6 +3,7 @@ import { Navbar } from "@/components/marketing/navbar";
 import { Hero } from "@/components/marketing/hero";
 import { LogoTicker } from "@/components/marketing/logo-ticker";
 import { Features } from "@/components/marketing/features";
+import { ProductShowcase } from "@/components/marketing/product-showcase";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <Hero />
       <LogoTicker />
       <Features />
+      <ProductShowcase />
     </>
   );
 }
