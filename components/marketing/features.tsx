@@ -20,7 +20,7 @@ const features = [
 
 export const Features = () => {
   return (
-    <div className="bg-black text-white">
+    <div className="bg-black text-white py-[72px]">
       <div className="container">
         <h2 className="text-center font-bold text-5xl tracking-tighter">
           Wszystko, czego potrzebujesz
@@ -28,16 +28,16 @@ export const Features = () => {
         <p className="text-center mt-5 text-xl text-white/70">
           Informacje dalsze
         </p>
-        <div className="mt-16 flex flex-col gap-4">
+        <div className="mt-16 flex sm:flex-col flex-row-auto gap-4">
           {features.map(({ title, description }) => (
             <div
               key={title}
-              className="border border-white/30 px-5 py-10 text-center rounded-xl"
+              className="border border-white/30 px-5 py-10 text-center rounded-xl sm:flex-1"
             >
               <div className="inline-flex h-14 w-14 bg-white text-black justify-center rounded-lg">
                 <Leaf className="h-full w-full object-cover" />
               </div>
-              <h3 className="mt-4 text-xl font-semibold">{title}</h3>
+              <h3 className="mt-6  font-bold">{title}</h3>
               <p className="mt-2 text-white/80">{description}</p>
             </div>
           ))}
