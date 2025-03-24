@@ -20,7 +20,7 @@ const features = [
 
 export const Features = () => {
   return (
-    <div className="bg-black text-white py-[72px] sm:py-24 flex justify-center">
+    <div className="bg-black text-white py-[72px] sm:py-24 flex">
       <div className="container">
         <h2 className="text-center font-bold text-5xl sm:text-6xl tracking-tighter">
           Wszystko, czego potrzebujesz
@@ -34,7 +34,7 @@ export const Features = () => {
           {features.map(({ title, description }) => (
             <div
               key={title}
-              className="border border-white/30 px-5 py-14 text-center rounded-xl sm:flex-1 sm:max-w-md"
+              className="border border-white/30 px-5 py-14 text-center rounded-xl sm:flex-1"
             >
               <div className="inline-flex w-14 h-14 bg-white text-black justify-center rounded-lg">
                 <Leaf className="size-full p-3 object-cover" />
