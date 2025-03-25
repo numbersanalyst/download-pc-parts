@@ -119,12 +119,15 @@ function InstallationGuide() {
 
     return (
         <div className="min-h-screen">
-            <div className="container mx-auto px-4 py-12">
-                <h1 className="text-4xl font-bold text-center mb-12">
+            <div className="container mx-auto px-4 py-12 mb-4">
+                <h1 className="text-4xl font-bold text-center mb-2">
                     Hardware Installation Guide
                 </h1>
+                <p className='text-center'>
+                    Click bellow on the component guidance you want to see
+                </p>
 
-                <div className="grid md:grid-cols-3 gap-6 mb-12">
+                <div className="grid md:grid-cols-3 gap-6 my-12">
                     {Object.entries(hardwareCards).map(([key, card]) => (
                         <Card
                             key={key}
@@ -132,7 +135,7 @@ function InstallationGuide() {
                 relative overflow-hidden rounded-xl p-6 cursor-pointer
                 transition-all duration-300 ease-in-out bg-background
                 ${selectedHardware === key
-                                    ? 'bg-secondary shadow-lg scale-105'
+                                    ? 'bg-secondary shadow-lg md:scale-105'
                                     : 'hover:shadow-lg hover:scale-102'
                                 }
               `}
@@ -156,18 +159,18 @@ function InstallationGuide() {
                 {selectedHardware && (
                     <Card className="p-8 relative mt-20">
                         <Tabs>
-                        <div className='absolute -top-7 left-0 right-0 flex justify-center'>
-                        <TabsList className="gap-3 bg-white dark:bg-black border border-border px-2 py-6 rounded-full shadow-lg mb-3">
-                            <CustomTabsTrigger value="tab-1" isActive={activeTab === "tab-1"}>
-                                <Bot className="-ms-0.5 me-1.5 opacity-60" size={16} strokeWidth={2} aria-hidden="true" />
-                                Automatically
-                            </CustomTabsTrigger>
-                            <CustomTabsTrigger value="tab-2" isActive={activeTab === "tab-2"}>
-                                <ListOrdered className="-ms-0.5 me-1.5 opacity-60" size={16} strokeWidth={2} aria-hidden="true" />
-                                Manual
-                            </CustomTabsTrigger>
-                        </TabsList>
-                        </div>
+                            <div className='absolute -top-7 left-0 right-0 flex justify-center'>
+                                <TabsList className="gap-3 bg-white dark:bg-black border border-border px-2 py-6 rounded-full shadow-lg mb-3">
+                                    <CustomTabsTrigger value="tab-1" isActive={activeTab === "tab-1"}>
+                                        <Bot className="-ms-0.5 me-1.5 opacity-60" size={16} strokeWidth={2} aria-hidden="true" />
+                                        Automatically
+                                    </CustomTabsTrigger>
+                                    <CustomTabsTrigger value="tab-2" isActive={activeTab === "tab-2"}>
+                                        <ListOrdered className="-ms-0.5 me-1.5 opacity-60" size={16} strokeWidth={2} aria-hidden="true" />
+                                        Manual
+                                    </CustomTabsTrigger>
+                                </TabsList>
+                            </div>
                         </Tabs>
                         <h2 className="text-2xl font-bold mb-2">{hardwareCards[selectedHardware].title}</h2>
 
@@ -175,30 +178,30 @@ function InstallationGuide() {
                             <h3 className="text-xl font-semibold mb-4">Installation Steps</h3>
                             <div className="space-y-4">
                                 <div className="flex items-start space-x-4">
-                                    <div className="flex-shrink-0 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white">
+                                    <div className="flex-shrink-0 w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
                                         1
                                     </div>
                                     <div>
                                         <h4 className="font-semibold">Preparation</h4>
-                                        <p className="text-gray-600">Ensure your workspace is clean and static-free. Gather all necessary tools.</p>
+                                        <p className="text-gray-600 dark:text-gray-300">Ensure your workspace is clean and static-free. Gather all necessary tools.</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start space-x-4">
-                                    <div className="flex-shrink-0 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white">
+                                    <div className="flex-shrink-0 w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
                                         2
                                     </div>
                                     <div>
                                         <h4 className="font-semibold">Power Down</h4>
-                                        <p className="text-gray-600">Completely shut down your system and disconnect all power sources.</p>
+                                        <p className="text-gray-600 dark:text-gray-300">Completely shut down your system and disconnect all power sources.</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start space-x-4">
-                                    <div className="flex-shrink-0 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white">
+                                    <div className="flex-shrink-0 w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
                                         3
                                     </div>
                                     <div>
                                         <h4 className="font-semibold">Installation</h4>
-                                        <p className="text-gray-600">Follow the manufacturer's guidelines for proper installation.</p>
+                                        <p className="text-gray-600 dark:text-gray-300">Follow the manufacturer's guidelines for proper installation.</p>
                                     </div>
                                 </div>
                             </div>
@@ -210,15 +213,15 @@ function InstallationGuide() {
                                 {hardwareCards[selectedHardware].scripts.map((script) => (
                                     <div
                                         key={script.name}
-                                        className="bg-gray-50 rounded-lg p-4 flex items-center justify-between hover:bg-gray-100 transition-colors"
+                                        className="bg-secondary hover:bg-secondary/50 rounded-lg p-4 flex items-center justify-between transition-colors"
                                     >
                                         <div className="flex items-center space-x-3">
-                                            <Terminal className="w-5 h-5 text-blue-500" />
+                                            <Terminal className="w-5 h-5 text-gray-500" />
                                             <span className="font-medium">{script.name}</span>
                                         </div>
                                         <button
                                             onClick={() => downloadScript(script.name, script.content)}
-                                            className="flex items-center space-x-2 text-blue-500 hover:text-blue-600"
+                                            className="flex items-center space-x-2 text-primary hover:text-gray-500"
                                         >
                                             <Download className="w-5 h-5" />
                                             <span>Download</span>
