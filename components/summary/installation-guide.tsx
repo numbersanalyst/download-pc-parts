@@ -6,6 +6,9 @@ import { Card } from '../ui/card';
 import { Tabs, TabsList } from '../ui/tabs';
 import { TabsTrigger } from '@radix-ui/react-tabs';
 import { motion } from "framer-motion";
+import { SelectedCpuDetails } from '../configuration/selected-cpu-details';
+import { SelectedGpuDetails } from '../configuration/selected-gpu-details';
+import { SelectedRamDetails } from '../configuration/selected-ram-details';
 
 interface HardwareCard {
     title: string;
@@ -155,6 +158,18 @@ function InstallationGuide() {
                         </Card>
                     ))}
                 </div>
+
+                {selectedHardware && selectedHardware === 'cpu' && (
+                    <SelectedCpuDetails />
+                )}
+
+                {selectedHardware && selectedHardware === 'gpu' && (
+                    <SelectedGpuDetails />
+                )}
+
+                {selectedHardware && selectedHardware === 'ram' && (
+                    <SelectedRamDetails />
+                )}
 
                 {selectedHardware && (
                     <Card className="p-8 relative mt-20">
