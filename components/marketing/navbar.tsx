@@ -10,6 +10,13 @@ import { ModeToggle } from "../theme-changer";
 import logoImage from "@/public/logos/logo-dark.png";
 import { Menu, X } from "lucide-react";
 
+import { Chakra_Petch } from "next/font/google";
+import clsx from "clsx";
+const chakraPetch = Chakra_Petch({
+  weight: "400",
+  subsets: ['latin'],
+})
+
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -27,8 +34,8 @@ export const Navbar = () => {
               <Image src={logoImage} alt="Saas logo" className="h-12 w-12 relative" />
             </div>
             <div className="flex flex-col text-white select-none">
-              <span className="font-medium leading-tight text-xl">Download</span>
-              <span className="font-medium leading-tight text-gray-300">PC Parts</span>
+              <span className={clsx("font-medium leading-tight text-xl", chakraPetch.className)}>Download</span>
+              <span className={clsx("font-medium leading-tight text-gray-300", chakraPetch.className)}>PC Parts</span>
             </div>
           </div>
           <button 

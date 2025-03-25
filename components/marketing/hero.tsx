@@ -5,6 +5,13 @@ import logoImage from "@/public/logos/logo-dark.png";
 import cpuImage from "@/public/cpu/intel/intel-i9-14900k.png";
 import gpuImage from "@/public/gpu/amd/RX-9070XT.png";
 import { RainbowButton } from "../magicui/rainbow-button";
+import clsx from "clsx";
+
+import { Chakra_Petch } from "next/font/google";
+const chakraPetch = Chakra_Petch({
+  weight: "400",
+  subsets: ['latin'],
+})
 
 export const Hero = () => {
   return (
@@ -26,9 +33,9 @@ export const Hero = () => {
 
         <div className="flex justify-center mt-8">
           <div className="inline-flex relative">
-            <h1 className="text-7xl sm:text-9xl font-bold tracking-tighter text-center inline-flex">
-              One Task
-              <br />at a Time
+            <h1 className={clsx("text-7xl sm:text-9xl font-bold tracking-tighter text-center inline-flex", chakraPetch.className)}>
+               DOWNLOAD
+              <br /> PC PARTS 
             </h1>
             <Image
               src={cpuImage}
