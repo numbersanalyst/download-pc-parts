@@ -7,6 +7,14 @@ import celestialLogo from "@/public/images/celestial.png";
 import pulseLogo from "@/public/images/pulse.png";
 import apexLogo from "@/public/images/apex.png";
 import Image from "next/image";
+import nvidiaLogo from "@/public/logos/nvidia_logo.jpg";
+import bequietLogo from "@/public/logos/be-quiet_Logo.jpg";
+import kingstoneLogo from "@/public/logos/kingston-logo.jpg";
+import intelLogo from "@/public/logos/intel-logo.svg";
+import lexarLogo from "@/public/logos/lexar-logo.jpg";
+import misLogo from "@/public/logos/mis-logo.jpg";
+import asusLogo from "@/public/logos/asus-logo.jpg";
+import amdLogo from "@/public/logos/amd-logo.svg";
 
 import { motion } from "framer-motion";
 
@@ -31,66 +39,85 @@ export const LogoTicker = () => {
             }}
           >
             <Image
-              src={acmeLogo}
-              alt="Acme logo"
+              src={nvidiaLogo}
+              alt="nvidia logo"
               className="flex-none w-auto h-10 lg:h-12"
             />
             <Image
-              src={quantumLogo}
-              alt="Quantum logo"
+              src={bequietLogo}
+              alt="be-quiet logo"
               className="flex-none w-auto h-10 lg:h-12"
             />
             <Image
-              src={echoLogo}
-              alt="Echo logo"
+              src={kingstoneLogo}
+              alt="kingstone logo"
               className="flex-none w-auto h-10 lg:h-12"
             />
             <Image
-              src={celestialLogo}
-              alt="Celestial logo"
+              src={intelLogo}
+              alt="intel logo"
+              className="flex-none w-auto h-10 lg:h-12 invert hue-rotate-180"
+            />
+            <Image
+              src={lexarLogo}
+              alt="lexar logo"
               className="flex-none w-auto h-10 lg:h-12"
             />
             <Image
-              src={pulseLogo}
-              alt="Pulse logo"
+              src={misLogo}
+              alt="mis logo"
               className="flex-none w-auto h-10 lg:h-12"
             />
             <Image
-              src={apexLogo}
-              alt="Apex logo"
-              className="flex-none w-auto h-10 lg:h-12"
-            />
-
-            {/* Same logos to fill the gap */}
-            <Image
-              src={acmeLogo}
-              alt="Acme logo"
+              src={asusLogo}
+              alt="asus logo"
               className="flex-none w-auto h-10 lg:h-12"
             />
             <Image
-              src={quantumLogo}
-              alt="Quantum logo"
+              src={amdLogo}
+              alt="amd logo"
+              className="flex-none w-auto h-10 lg:h-12 invert hue-rotate-180"
+            />
+            {/* koniec */}
+            <Image
+              src={nvidiaLogo}
+              alt="nvidia logo"
               className="flex-none w-auto h-10 lg:h-12"
             />
             <Image
-              src={echoLogo}
-              alt="Echo logo"
+              src={bequietLogo}
+              alt="be-quiet logo"
               className="flex-none w-auto h-10 lg:h-12"
             />
             <Image
-              src={celestialLogo}
-              alt="Celestial logo"
+              src={kingstoneLogo}
+              alt="kingstone logo"
               className="flex-none w-auto h-10 lg:h-12"
             />
             <Image
-              src={pulseLogo}
-              alt="Pulse logo"
+              src={intelLogo}
+              alt="intel logo"
+              className="flex-none w-auto h-10 lg:h-12 invert hue-rotate-180"
+            />
+            <Image
+              src={lexarLogo}
+              alt="lexar logo"
               className="flex-none w-auto h-10 lg:h-12"
             />
             <Image
-              src={apexLogo}
-              alt="Apex logo"
+              src={misLogo}
+              alt="mis logo"
               className="flex-none w-auto h-10 lg:h-12"
+            />
+            <Image
+              src={asusLogo}
+              alt="asus logo"
+              className="flex-none w-auto h-10 lg:h-12"
+            />
+            <Image
+              src={amdLogo}
+              alt="amd logo"
+              className="flex-none w-auto h-10 lg:h-12 invert hue-rotate-180"
             />
           </motion.div>
         </div>
