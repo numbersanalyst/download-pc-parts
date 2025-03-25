@@ -1,11 +1,5 @@
 "use client";
 
-import acmeLogo from "@/public/images/acme.png";
-import quantumLogo from "@/public/images/quantum.png";
-import echoLogo from "@/public/images/echo.png";
-import celestialLogo from "@/public/images/celestial.png";
-import pulseLogo from "@/public/images/pulse.png";
-import apexLogo from "@/public/images/apex.png";
 import Image from "next/image";
 import nvidiaLogo from "@/public/logos/nvidia_logo.jpg";
 import bequietLogo from "@/public/logos/be-quiet_Logo.jpg";
@@ -17,6 +11,17 @@ import asusLogo from "@/public/logos/asus-logo.jpg";
 import amdLogo from "@/public/logos/amd-logo.svg";
 
 import { motion } from "framer-motion";
+
+const logos = [
+  { src: nvidiaLogo, alt: "nvidia logo" },
+  { src: bequietLogo, alt: "be-quiet logo" },
+  { src: kingstoneLogo, alt: "kingstone logo" },
+  { src: intelLogo, alt: "intel logo", invert: true },
+  { src: lexarLogo, alt: "lexar logo" },
+  { src: misLogo, alt: "mis logo" },
+  { src: asusLogo, alt: "asus logo" },
+  { src: amdLogo, alt: "amd logo", invert: true },
+];
 
 export const LogoTicker = () => {
   return (
@@ -38,87 +43,23 @@ export const LogoTicker = () => {
               repeatType: "loop",
             }}
           >
-            <Image
-              src={nvidiaLogo}
-              alt="nvidia logo"
-              className="flex-none w-auto h-10 lg:h-12"
-            />
-            <Image
-              src={bequietLogo}
-              alt="be-quiet logo"
-              className="flex-none w-auto h-10 lg:h-12"
-            />
-            <Image
-              src={kingstoneLogo}
-              alt="kingstone logo"
-              className="flex-none w-auto h-10 lg:h-12"
-            />
-            <Image
-              src={intelLogo}
-              alt="intel logo"
-              className="flex-none w-auto h-10 lg:h-12 invert hue-rotate-180"
-            />
-            <Image
-              src={lexarLogo}
-              alt="lexar logo"
-              className="flex-none w-auto h-10 lg:h-12"
-            />
-            <Image
-              src={misLogo}
-              alt="mis logo"
-              className="flex-none w-auto h-10 lg:h-12"
-            />
-            <Image
-              src={asusLogo}
-              alt="asus logo"
-              className="flex-none w-auto h-10 lg:h-12"
-            />
-            <Image
-              src={amdLogo}
-              alt="amd logo"
-              className="flex-none w-auto h-10 lg:h-12 invert hue-rotate-180"
-            />
-            {/* koniec */}
-            <Image
-              src={nvidiaLogo}
-              alt="nvidia logo"
-              className="flex-none w-auto h-10 lg:h-12"
-            />
-            <Image
-              src={bequietLogo}
-              alt="be-quiet logo"
-              className="flex-none w-auto h-10 lg:h-12"
-            />
-            <Image
-              src={kingstoneLogo}
-              alt="kingstone logo"
-              className="flex-none w-auto h-10 lg:h-12"
-            />
-            <Image
-              src={intelLogo}
-              alt="intel logo"
-              className="flex-none w-auto h-10 lg:h-12 invert hue-rotate-180"
-            />
-            <Image
-              src={lexarLogo}
-              alt="lexar logo"
-              className="flex-none w-auto h-10 lg:h-12"
-            />
-            <Image
-              src={misLogo}
-              alt="mis logo"
-              className="flex-none w-auto h-10 lg:h-12"
-            />
-            <Image
-              src={asusLogo}
-              alt="asus logo"
-              className="flex-none w-auto h-10 lg:h-12"
-            />
-            <Image
-              src={amdLogo}
-              alt="amd logo"
-              className="flex-none w-auto h-10 lg:h-12 invert hue-rotate-180"
-            />
+            {logos.map((logo, index) => (
+              <Image
+                key={index}
+                src={logo.src}
+                alt={logo.alt}
+                className={`object-contain h-10 lg:h-14 filter grayscale opacity-65 transition-[opacity, grayscale] duration-300 ease-in-out hover:grayscale-0 hover:opacity-100 ${logo.invert ? 'invert hue-rotate-180' : ''}`}
+              />
+            ))}
+            {/* Image loop goes here */}
+            {logos.map((logo, index) => (
+              <Image
+                key={index + logos.length} // Ensure unique keys for the loop
+                src={logo.src}
+                alt={logo.alt}
+                className={`object-contain h-10 lg:h-14 filter grayscale opacity-65 transition-[opacity, grayscale] duration-300 ease-in-out hover:grayscale-0 hover:opacity-100 ${logo.invert ? 'invert hue-rotate-180' : ''}`}
+              />
+            ))}
           </motion.div>
         </div>
       </div>
