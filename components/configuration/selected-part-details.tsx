@@ -34,10 +34,11 @@ export const SelectedComponentDetails = ({
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1 }}
+      className="h-[800px] md:h-[500px]"
     >
       <Card
         id={`${type.toLowerCase()}-details`}
-        className="flex flex-col md:flex-row min-h-[500px] h-full z-20"
+        className="flex flex-col md:flex-row h-full z-20"
       >
         <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-10 relative">
           <Image
