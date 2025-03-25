@@ -8,7 +8,7 @@ interface NavigationProps {
 
 export const Navigation = ({className} : NavigationProps) => {
     return (
-        <div className={cn("flex flex-col sm:flex-row gap-y-2 gap-x-4 w-full", className)}>
+        <div className={cn("flex flex-col sm:flex-row gap-y-1 gap-x-4 w-full", className)}>
             <NavigationBtn path="/" text="Go back" icon={<MoveLeft />} />
             <NavigationBtn path="/summary" text="Summary" icon={<FileInput />} alignmentEnd />
         </div>

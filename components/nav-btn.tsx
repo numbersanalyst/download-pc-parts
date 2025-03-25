@@ -17,7 +17,7 @@ export const NavigationBtn = ({
   return (
     <Link
       className={cn(
-        "bg-accent/75 rounded-xl text-xl p-6 flex items-center gap-x-6 w-full",
+        "bg-accent/75 rounded-xl text-xl p-5 sm:p-6 flex items-center gap-x-6 w-full",
         alignmentEnd && "flex-row-reverse"
       )}
       href={path}
