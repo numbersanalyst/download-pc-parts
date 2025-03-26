@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import PlusIcon from "@/public/logos/plus.svg";
-import MinusIcon from "@/public/logos/minus.svg";
+import PlusIcon from "@/public/icons/plus.svg";
+import MinusIcon from "@/public/icons/minus.svg";
 import clsx from "clsx";
 
 const items = [
