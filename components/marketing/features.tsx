@@ -19,21 +19,15 @@ const features = [
   },
 ];
 
-import { Alef } from "next/font/google";
-const alef =  Alef({
-  weight: "400",
-  subsets: ['latin'],
-})
-
 export const Features = () => {
   return (
     <div className="bg-black text-white py-[72px] sm:py-24 flex">
       <div className="container">
-        <h2 className={clsx("text-center font-bold text-5xl sm:text-6xl tracking-tighter", alef.className)}>
+        <h2 className="text-center font-bold text-5xl sm:text-6xl tracking-tighter">
         Something about our product
         </h2>
         <div className="max-w-xl mx-auto">
-          <p className={clsx("text-center mt-5 text-xl text-white/70", alef.className)}>
+          <p className="text-center mt-5 text-xl text-white/70">
           See the key benefits of using our solution
           </p>
         </div>
