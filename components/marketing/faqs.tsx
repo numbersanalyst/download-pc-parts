@@ -1,8 +1,8 @@
 "use client";
-import React from "react";
-import PlusIcon from "@/public/icons/plus.svg";
-import MinusIcon from "@/public/icons/minus.svg";
+
 import clsx from "clsx";
+import { MinusIcon, PlusIcon } from "lucide-react";
+import { useState } from "react";
 
 const items = [
   {
@@ -28,7 +28,7 @@ const items = [
 ];
 
 const AccordionItem = ({ question, answer }: { question: string; answer: string }) => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="py-7 border-white/30" onClick={() => setIsOpen(!isOpen)}>

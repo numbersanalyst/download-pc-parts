@@ -1,6 +1,6 @@
 import Image from "next/image";
-import helixImage from "@/public/images/helix.png";
-import emojiStarImage from "@/public/logos/emojistar.png";
+import helixImage from "@/public/images/helix2.png";
+import emojiStarImage from "@/public/images/emojistar.png";
 
 export const CallToAction = () => {
   return (
