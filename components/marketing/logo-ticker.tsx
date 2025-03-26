@@ -1,13 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import nvidiaLogo from "@/public/logos/nvidia_logo.jpg";
-import bequietLogo from "@/public/logos/be-quiet_Logo.jpg";
-import kingstoneLogo from "@/public/logos/kingston-logo.jpg";
+import nvidiaLogo from "@/public/logos/nvidia_logo.webp";
+import bequietLogo from "@/public/logos/be-quiet_Logo.webp";
+import kingstoneLogo from "@/public/logos/kingston-logo.webp";
 import intelLogo from "@/public/logos/intel-logo.svg";
-import lexarLogo from "@/public/logos/lexar-logo.jpg";
-import misLogo from "@/public/logos/mis-logo.jpg";
-import asusLogo from "@/public/logos/asus-logo.jpg";
+import lexarLogo from "@/public/logos/lexar-logo.png";
+import misLogo from "@/public/logos/mis-logo.webp";
+import asusLogo from "@/public/logos/asus-logo.webp";
 import amdLogo from "@/public/logos/amd-logo.svg";
 
 import { motion } from "framer-motion";
@@ -48,7 +48,7 @@ export const LogoTicker = () => {
                 key={index}
                 src={logo.src}
                 alt={logo.alt}
-                className={`object-contain h-10 lg:h-14 filter grayscale opacity-65 transition-[opacity, grayscale] duration-300 ease-in-out hover:grayscale-0 hover:opacity-100 ${logo.invert ? 'invert hue-rotate-180' : ''}`}
+                className={`object-contain h-10 lg:h-12 filter grayscale opacity-65 transition-[opacity, grayscale] duration-300 ease-in-out hover:grayscale-0 hover:opacity-100 ${logo.invert ? 'invert hue-rotate-180' : ''}`}
               />
             ))}
             {/* Image loop goes here */}
@@ -57,7 +57,7 @@ export const LogoTicker = () => {
                 key={index + logos.length} // Ensure unique keys for the loop
                 src={logo.src}
                 alt={logo.alt}
-                className={`object-contain h-10 lg:h-14 filter grayscale opacity-65 transition-[opacity, grayscale] duration-300 ease-in-out hover:grayscale-0 hover:opacity-100 ${logo.invert ? 'invert hue-rotate-180' : ''}`}
+                className={`object-contain h-10 lg:h-12 filter grayscale opacity-65 transition-[opacity, grayscale] duration-300 ease-in-out hover:grayscale-0 hover:opacity-100 ${logo.invert ? 'invert hue-rotate-180' : ''}`}
               />
             ))}
           </motion.div>
