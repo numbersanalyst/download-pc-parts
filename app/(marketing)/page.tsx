@@ -4,7 +4,7 @@ import { Hero } from "@/components/marketing/hero";
 import { LogoTicker } from "@/components/marketing/logo-ticker";
 import { Features } from "@/components/marketing/features";
 import { ProductShowcase } from "@/components/marketing/product-showcase";
-
+import { FAQs } from "@/components/marketing/FAQs";
 export default function Home() {
   return (
     <>
@@ -14,6 +14,7 @@ export default function Home() {
       <LogoTicker />
       <Features />
       <ProductShowcase />
+      <FAQs />
     </>
   );
 }
