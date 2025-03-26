@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { Cpu, Wallpaper as Gpu, MemoryStick as Memory, ChevronRight, Terminal, Download, Bot, ListOrdered } from 'lucide-react';
+import { Terminal, Download, Bot, ListOrdered } from 'lucide-react';
 import { Card } from '../ui/card';
 import { Tabs, TabsList } from '../ui/tabs';
 import { TabsTrigger } from '@radix-ui/react-tabs';
@@ -9,11 +9,10 @@ import { motion } from "framer-motion";
 import { SelectedCpuDetails } from '../configuration/selected-cpu-details';
 import { SelectedGpuDetails } from '../configuration/selected-gpu-details';
 import { SelectedRamDetails } from '../configuration/selected-ram-details';
+import { HardwareSelection } from './hardware-selection';
 
-interface HardwareCard {
+interface HardwareData {
     title: string;
-    icon: React.ReactNode;
-    description: string;
     scripts: {
         name: string;
         content: string;
@@ -60,11 +59,9 @@ function InstallationGuide() {
     const [selectedHardware, setSelectedHardware] = useState<string | null>(null);
     const [activeTab, setActiveTab] = useState("tab-1");
 
-    const hardwareCards: Record<string, HardwareCard> = {
+    const hardwareData: Record<string, HardwareData> = {
         cpu: {
             title: 'CPU Installation',
-            icon: <Cpu className="w-8 h-8" />,
-            description: 'Learn how to safely install or upgrade your processor',
             scripts: [
                 {
                     name: 'cpu_performance.sh',
@@ -78,8 +75,6 @@ function InstallationGuide() {
         },
         gpu: {
             title: 'GPU Setup',
-            icon: <Gpu className="w-8 h-8" />,
-            description: 'Guide for graphics card installation and driver setup',
             scripts: [
                 {
                     name: 'gpu_overclock.sh',
@@ -93,8 +88,6 @@ function InstallationGuide() {
         },
         ram: {
             title: 'RAM Configuration',
-            icon: <Memory className="w-8 h-8" />,
-            description: 'Steps to install and optimize your memory modules',
             scripts: [
                 {
                     name: 'ram_optimize.sh',
@@ -130,34 +123,7 @@ function InstallationGuide() {
                     Click bellow on the component guidance you want to see
                 </p>
 
-                <div className="grid md:grid-cols-3 gap-6 my-12">
-                    {Object.entries(hardwareCards).map(([key, card]) => (
-                        <Card
-                            key={key}
-                            className={`
-                relative overflow-hidden rounded-xl p-6 cursor-pointer
-                transition-all duration-300 ease-in-out bg-background
-                ${selectedHardware === key
-                                    ? 'bg-secondary shadow-lg md:scale-105'
-                                    : 'hover:shadow-lg hover:scale-102'
-                                }
-              `}
-                            onClick={() => setSelectedHardware(key)}
-                        >
-                            <div className="flex items-center justify-between mb-4">
-                                <div className="text-gray-500 dark:text-gray-300">
-                                    {card.icon}
-                                </div>
-                                <ChevronRight className={`w-5 h-5 transition-transform duration-300 ${selectedHardware === key && 'rotate-90 '
-                                    }`} />
-                            </div>
-                            <h3 className="text-xl font-semibold mb-2">{card.title}</h3>
-                            <p className="text-sm">
-                                {card.description}
-                            </p>
-                        </Card>
-                    ))}
-                </div>
+                <HardwareSelection onSelect={setSelectedHardware} selectedHardware={selectedHardware} />
 
                 {selectedHardware && selectedHardware === 'cpu' && (
                     <SelectedCpuDetails />
@@ -187,7 +153,7 @@ function InstallationGuide() {
                                 </TabsList>
                             </div>
                         </Tabs>
-                        <h2 className="text-2xl font-bold mb-2">{hardwareCards[selectedHardware].title}</h2>
+                        <h2 className="text-2xl font-bold mb-2">{hardwareData[selectedHardware].title}</h2>
 
                         <div className="mb-8">
                             <h3 className="text-xl font-semibold mb-4">Installation Steps</h3>
@@ -225,7 +191,7 @@ function InstallationGuide() {
                         <div>
                             <h3 className="text-xl font-semibold mb-4">Configuration Scripts</h3>
                             <div className="grid md:grid-cols-2 gap-4">
-                                {hardwareCards[selectedHardware].scripts.map((script) => (
+                                {hardwareData[selectedHardware].scripts.map((script) => (
                                     <div
                                         key={script.name}
                                         className="bg-secondary hover:bg-secondary/50 rounded-lg p-4 flex items-center justify-between transition-colors"
