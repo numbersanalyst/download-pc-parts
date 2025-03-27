@@ -1,5 +1,5 @@
 import Image from "next/image";
-import appScreen from "@/public/images/app-screen.png";
+import appScreen from "@/public/images/product-showcase.webp";
 
 export const ProductShowcase = () => {
   return (
@@ -17,7 +17,7 @@ export const ProductShowcase = () => {
         <Image
           src={appScreen}
           alt="The product screenshot"
-          className="mt-14 w-full"
+          className="mt-14 w-full rounded-xl"
         />
       </div>
     </div>
