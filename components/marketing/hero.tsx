@@ -8,6 +8,7 @@ import { RainbowButton } from "../magicui/rainbow-button";
 import clsx from "clsx";
 
 import { Chakra_Petch } from "next/font/google";
+import { Book } from "lucide-react";
 const chakraPetch = Chakra_Petch({
   weight: "400",
   subsets: ['latin'],
@@ -26,7 +27,7 @@ export const Hero = () => {
             </span>
             <span className="inline-flex items-center gap-2">
               <span>Read More</span>
-              <Image src={logoImage} alt="Logo" width={20} height={20} />
+              <Book size={16} />
             </span>
           </a>
         </div>
@@ -34,8 +35,8 @@ export const Hero = () => {
         <div className="flex justify-center mt-8">
           <div className="inline-flex relative">
             <h1 className={clsx("text-7xl sm:text-9xl font-bold tracking-tighter text-center inline-flex", chakraPetch.className)}>
-               DOWNLOAD
-              <br /> PC PARTS 
+              DOWNLOAD
+              <br /> PC PARTS
             </h1>
             <Image
               src={cpuImage}
@@ -56,8 +57,7 @@ export const Hero = () => {
 
         <div className="flex justify-center">
           <p className="text-center text-xl mt-8 max-w-md">
-            Celebrate the joy of accomplishment with an app designed to track
-            progress, motivate your efforts, and celebrate your successes.
+            Trusted by the World’s Most Gullible Tech Enthusiasts. Seamlessly acquire top-tier hardware components with unparalleled speed and efficiency.
           </p>
         </div>
 

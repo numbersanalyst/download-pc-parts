@@ -6,25 +6,30 @@ import { useState } from "react";
 
 const items = [
   {
-    question: "What payment methods do you accept?",
+    question: "Is it safe to download PC parts?",
     answer:
-      "We accept all major credit cards, PayPal, and various other payment methods depending on your location. Please contact our support team for more information on accepted payment methods in your region.",
+      "Absolutely! Our downloads are 100% virus-free and come with a built-in warranty against digital dust bunnies. Plus, our open-source code is so transparent, it’s practically waving hello.",
   },
   {
-    question: "How does the pricing work for teams?",
+    question: "How much does it cost?",
     answer:
-      "Our pricing is per user, per month. This means you only pay for the number of team members you have on your account. Discounts are available for larger teams and annual subscriptions.",
+      "It’s free! Because innovation like this shouldn’t cost a dime.",
   },
   {
-    question: "Can I change my plan later?",
+    question: "Can I download an entire PC at once?",
     answer:
-      "Yes, you can upgrade or downgrade your plan at any time. Changes to your plan will be prorated and reflected in your next billing cycle.",
+      "Not yet—our servers are still recovering from the last attempt. But we’re working on it! For now, you’ll have to download parts one by one and enjoy the thrill of virtual assembly.",
   },
   {
-    question: "Is my data secure?",
+    question: "Will downloading PC parts make my computer faster?",
     answer:
-      "Security is our top priority. We use state-of-the-art encryption and comply with the best industry practices to ensure that your data is stored securely and accessed only by authorized users.",
+      "In theory, yes! In reality, your computer might just sit there, confused, wondering why you’re doing this to it.",
   },
+  {
+    question: "What operating systems can I download PC parts for?",
+    answer:
+      "Currently, we only support Windows 10 and Windows 11. We plan to add support for other operating systems in the future.",
+  }
 ];
 
 const AccordionItem = ({ question, answer }: { question: string; answer: string }) => {
