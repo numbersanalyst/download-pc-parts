@@ -1,8 +1,7 @@
 import { NavigationBtn } from "@/components/nav-btn";
-import { ConfettiSideCannons, triggerConfetti } from "@/components/summary/confetti";
 import { MoveLeft } from "lucide-react";
 import { InstallationGuide } from "@/components/summary/installation-guide";
-import {NoSelectionOverlay} from "@/components/summary/no-selection-overlay";
+import { ConfettiWithSelectionCheck } from "@/components/summary/confetti-with-selection-check";
 
 export default function Summary() {
 
@@ -15,8 +14,7 @@ export default function Summary() {
 
       <InstallationGuide />
 
-      <NoSelectionOverlay/>
-      <ConfettiSideCannons />
+      <ConfettiWithSelectionCheck />
     </main>
   );
 }
