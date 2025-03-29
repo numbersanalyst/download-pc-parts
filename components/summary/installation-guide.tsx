@@ -81,8 +81,69 @@ function InstallationGuide() {
       scripts: [
         {
           name: "cpu_changer.ps1",
-          content:
-            '#!/bin/bash\n\n# CPU Performance Optimization Script\necho "Optimizing CPU settings..."',
+          content: `
+          # Check if running as administrator
+          if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+              Write-Host "This script requires administrator privileges. Restarting with elevated permissions..." -ForegroundColor Yellow
+              Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File \`"$PSCommandPath\`"" -Verb RunAs
+              exit
+          }
+          
+          # Script header
+          Write-Host "CPU Name Changer Script" -ForegroundColor Cyan
+          Write-Host "------------------------" -ForegroundColor Cyan
+          
+          # Display current CPU name
+          $currentName = (Get-ItemProperty -Path "HKLM:\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0").ProcessorNameString
+          Write-Host "Current CPU name: $currentName" -ForegroundColor Cyan
+          
+          # Ask for confirmation to change CPU name with default 'Y'
+          $changeConfirm = Read-Host "Do you want to change the CPU name to '${cpuNameValue}'? (Y/N) [Default: Y]"
+          if ([string]::IsNullOrEmpty($changeConfirm)) { $changeConfirm = "Y" }
+          
+          if ($changeConfirm.ToUpper() -eq "Y") {
+              # Change CPU name immediately
+              Write-Host "Changing CPU name..." -ForegroundColor Green
+              try {
+                  Set-ItemProperty -Path "HKLM:\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0" -Name "ProcessorNameString" -Value "${cpuNameValue}"
+                  Write-Host "CPU name changed successfully." -ForegroundColor Green
+              } catch {
+                  Write-Host "An error occurred while changing the CPU name: $_" -ForegroundColor Red
+              }
+          
+              # Ask for confirmation to make the change persist with default 'N'
+              $persistConfirm = Read-Host "Do you want to make this change persist after restarts? (Y/N) [Default: N]"
+              if ([string]::IsNullOrEmpty($persistConfirm)) { $persistConfirm = "N" }
+          
+              if ($persistConfirm.ToUpper() -eq "Y") {
+                  # Set up persistence with a scheduled task
+                  $taskName = "SetCPUNameAtStartup"
+                  try {
+                      $task = Get-ScheduledTask -TaskName $taskName -ErrorAction Stop
+                      Write-Host "Scheduled task '$taskName' already exists." -ForegroundColor Yellow
+                  } catch {
+                      # Create the scheduled task
+                      $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-Command \`"Set-ItemProperty -Path 'HKLM:\HARDWARE\DESCRIPTION\System\CentralProcessor\0' -Name 'ProcessorNameString' -Value '${cpuNameValue}'\`""
+                      $trigger = New-ScheduledTaskTrigger -AtStartup
+                      $principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
+                      try {
+                          Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal -Description "Set CPU name at startup"
+                          Write-Host "Scheduled task '$taskName' created to persist CPU name change." -ForegroundColor Green
+                      } catch {
+                          Write-Host "An error occurred while creating the scheduled task: $_" -ForegroundColor Red
+                      }
+                  }
+              } else {
+                  Write-Host "The CPU name change will not persist after restart." -ForegroundColor Yellow
+              }
+          } else {
+              Write-Host "Operation cancelled." -ForegroundColor Yellow
+          }
+          
+          # Pause for user to read output
+          Write-Host "Press any key to exit..." -ForegroundColor Cyan
+          $null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+          `,
         },
         {
           name: "cpu_monitor.sh",
@@ -124,7 +185,8 @@ function InstallationGuide() {
   };
 
   const downloadScript = (name: string, content: string) => {
-    const blob = new Blob([content], { type: "text/plain" });
+    const contentWithCRLF = content.replace(/\n/g, "\r\n");
+    const blob = new Blob([contentWithCRLF], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
