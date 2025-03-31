@@ -11,19 +11,19 @@ export const triggerConfetti = () => {
     if (Date.now() > end) return;
 
     confetti({
-      particleCount: 2,
+      particleCount: 5,
       angle: 60,
-      spread: 55,
+      spread: 75,
       startVelocity: 60,
-      origin: { x: 0, y: 0.5 },
+      origin: { x: 0, y: 0.6 },
       colors: colors,
     });
     confetti({
-      particleCount: 2,
+      particleCount: 5,
       angle: 120,
-      spread: 55,
+      spread: 75,
       startVelocity: 60,
-      origin: { x: 1, y: 0.5 },
+      origin: { x: 1, y: 0.6 },
       colors: colors,
     });
 

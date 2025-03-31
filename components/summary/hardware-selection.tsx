@@ -13,7 +13,7 @@ const HardwareSelection = ({
   selectedHardware,
 }: HardwareSelectionProps) => {
   return (
-    <div className="grid md:grid-cols-3 gap-6 my-12">
+    <div className="grid md:grid-cols-3 gap-6 my-12" id="hardware-selection">
       <HardwareCardItem
         id="cpu"
         title="CPU Installation"
