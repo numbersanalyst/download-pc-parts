@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,6 +8,7 @@ import cpuImage from "@/public/cpu/intel/intel-i9-14900k.png";
 import gpuImage from "@/public/gpu/amd/RX-9070XT.png";
 import { RainbowButton } from "../magicui/rainbow-button";
 import clsx from "clsx";
+import {motion} from 'framer-motion';
 
 import { Chakra_Petch } from "next/font/google";
 import { Book } from "lucide-react";
@@ -21,7 +24,7 @@ export const Hero = () => {
 
       <div className="container mx-auto max-w-screen-xl relative">
         <div className="flex items-center justify-center">
-          <a href="#contact" className="inline-flex gap-3 border py-1 px-3 rounded-lg border-white/30">
+          <a href="#" className="inline-flex gap-3 border py-1 px-3 rounded-lg border-white/30">
             <span className="bg-[linear-gradient(to_right,#F87AFF,#FB93D0,#FFDD99,#C3F0B2,#2FD8FE)] text-transparent bg-clip-text">
               Version 2.0 is here
             </span>
@@ -38,20 +41,34 @@ export const Hero = () => {
               DOWNLOAD
               <br /> PC PARTS
             </h1>
+            <motion.div className="absolute right-[-350px] top-[80px] rotate-3 hidden lg:block"
+            drag
+            dragSnapToOrigin
+
+            >
             <Image
               src={cpuImage}
               height={300}
               width={300}
               alt="CPU image"
-              className="absolute right-[-350px] top-[80px] rotate-3 hidden lg:block"
+              className="max-w-none"
+              draggable="false"
             />
+            </motion.div>
+            <motion.div className="absolute left-[-320px] top-[80px] -rotate-3 hidden lg:block"
+             drag
+             dragSnapToOrigin
+            >
+
             <Image
               src={gpuImage}
               height={320}
               width={320}
               alt="GPU image"
-              className="absolute left-[-320px] top-[80px] -rotate-3 hidden lg:block"
+              className="max-w-none"
+              draggable="false"
             />
+            </motion.div>
           </div>
         </div>
 
