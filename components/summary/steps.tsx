@@ -50,7 +50,7 @@ export function Step({ children, className, title, icon }: StepProps) {
         </h3>
       </div>
 
-      <div className="mt-2 md:pl-12">{children}</div>
+      <div className="mt-1 md:pl-12">{children}</div>
     </li>
   );
 }

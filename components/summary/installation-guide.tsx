@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Terminal, Download, Bot, ListOrdered, Code } from "lucide-react";
+import { Terminal, Download, Bot, ListOrdered, Code, Check, PlayCircle } from "lucide-react";
 import { Card } from "../ui/card";
 import { Tabs, TabsContent, TabsList } from "../ui/tabs";
 import { TabsTrigger } from "@radix-ui/react-tabs";
@@ -265,21 +265,34 @@ function InstallationGuide() {
 
               <TabsContent value="tab-1">
                 <Steps>
-                  <Step title="Open Windows Terminal as Administrator" icon={<Terminal className="h-5 w-5" />}>
+                  <Step
+                    title="Download Script"
+                    icon={<Download className="size-5" />}
+                  >
+                    
                     <p>
-                      Right-click on the <strong>Start menu</strong> and select <strong>"Windows Terminal (Admin)"</strong> or search for
-                      "Windows Terminal" in the Start menu, right-click it, and select <strong>"Run as administrator"</strong>.
+                      Use button or scroll bellow and download from <b>Configuration Scripts</b> - <b>{hardwareData[selectedHardware].scripts[0].name}</b> script.
+                    </p>
+
+                    <button className="mt-2 px-12 py-2 bg-secondary rounded-md" onClick={()=>{downloadScript(hardwareData[selectedHardware].scripts[0].name, hardwareData[selectedHardware].scripts[0].content)}}>Download now</button>
+                  </Step>
+                  <Step
+                    title="Run with PowerShell"
+                    icon={<PlayCircle className="size-5" />}
+                  >
+                    <p>
+                      Right-click on the file and select <b>"Run with PowerShell"</b> from the context menu.
                     </p>
                   </Step>
-                  <Step title="Run the PowerShell command to change CPU name" icon={<Code className="h-5 w-5" />}>
+                  <Step title="Install" icon={<Code className="size-5" />}>
                     <p>
-                      Copy and paste the following command into the PowerShell window. This will modify
-                      the registry to change how Windows displays your CPU name.
+                      The PowerShell script will now run and modify your computer. The script might provide feedback or ask for confirmation.
                     </p>
-                    <CodeBlock
-                      language="powershell"
-                      code={`Set-ItemProperty -Path "HKLM:\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0" -Name "ProcessorNameString" -Value "${cpuNameValue}"`}
-                    />
+                  </Step>
+                  <Step title="Ready" icon={<Check className="size-5" />}>
+                    <p>
+                      Your CPU has been updated. It may take a while for your CPU to be as good as downloaded.
+                    </p>
                   </Step>
                 </Steps>
                 <div>
@@ -313,19 +326,19 @@ function InstallationGuide() {
 
               <TabsContent value="tab-2">
                 <Steps>
-                  <Step title="Open Registry Editor" icon={<Terminal className="h-5 w-5" />}>
+                  <Step title="Open Registry Editor" icon={<Terminal className="size-5" />}>
                     <p>
                       Press <strong>Win+R</strong> on your keyboard to open the Run dialog.
                       Type <strong>"regedit"</strong> and press Enter or click OK. If prompted by User Account Control, click <strong>Yes</strong>.
                     </p>
                   </Step>
-                  <Step title="Navigate to the processor registry key" icon={<Code className="h-5 w-5" />}>
+                  <Step title="Navigate to the processor registry key" icon={<Code className="size-5" />}>
                     <p>
                       In Registry Editor, navigate to the following path by expanding the folders in the left panel or paste it into the address bar:
                     </p>
                     <CodeBlock language="text" code={`HKEY_LOCAL_MACHINE\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0`} />
                   </Step>
-                  <Step title="Modify the ProcessorNameString value" icon={<ListOrdered className="h-5 w-5" />}>
+                  <Step title="Modify the ProcessorNameString value" icon={<ListOrdered className="size-5" />}>
                     <p>Use this value as your CPU name:</p>
                     <CodeBlock language="text" code={cpuNameValue} />
                     <ul className="list-disc pl-5 space-y-1 mt-4">
