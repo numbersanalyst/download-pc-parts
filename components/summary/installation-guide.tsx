@@ -13,6 +13,7 @@ import { HardwareSelection } from "./hardware-selection";
 import { useStoreSelectors } from "@/stores/store";
 import { Step, Steps } from "./steps";
 import { CodeBlock } from "../ui/code-block";
+import { ShinyButton } from "../magicui/shiny-button";
 
 interface HardwareData {
   title: string;
@@ -274,7 +275,7 @@ function InstallationGuide() {
                       Use button or scroll bellow and download from <b>Configuration Scripts</b> - <b>{hardwareData[selectedHardware].scripts[0].name}</b> script.
                     </p>
 
-                    <button className="mt-2 px-12 py-2 bg-secondary rounded-md" onClick={()=>{downloadScript(hardwareData[selectedHardware].scripts[0].name, hardwareData[selectedHardware].scripts[0].content)}}>Download now</button>
+                    <ShinyButton className="mt-2 px-12 py-2 bg-secondary rounded-md" onClick={()=>{downloadScript(hardwareData[selectedHardware].scripts[0].name, hardwareData[selectedHardware].scripts[0].content)}}>Download now</ShinyButton>
                   </Step>
                   <Step
                     title="Run with PowerShell"
