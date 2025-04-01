@@ -26,10 +26,10 @@ export function Step({ children, className, title, icon }: StepProps) {
     <li className={cn("relative pb-10 last:pb-0", className)}>
       {/* Mobile view */}
       <div className="md:hidden flex items-center mb-2">
-        <div className="flex h-8 w-8 items-center justify-center shrink-0 rounded-full bg-zinc-900 text-sm font-medium text-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 mr-3">
+        <div className="flex h-8 w-8 items-center justify-center shrink-0 rounded-full bg-secondary text-sm font-medium dark:bg-zinc-800 dark:text-zinc-300 mr-3">
           <div className="step-circle" />
         </div>
-        <h3 className="font-heading scroll-m-20 text-xl font-semibold tracking-tight flex items-center">
+        <h3 className="font-heading scroll-m-20 text-lg font-semibold tracking-tight flex items-center">
           {icon && (
             <span className="hidden mr-2 sm:inline-flex items-center">{icon}</span>
           )}
@@ -39,10 +39,10 @@ export function Step({ children, className, title, icon }: StepProps) {
 
       {/* Desktop view */}
       <div className="hidden md:block pl-12">
-        <div className="absolute left-0 flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-sm font-medium text-zinc-200 dark:bg-zinc-800 dark:text-zinc-300">
+        <div className="absolute left-0 flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-sm font-medium dark:bg-zinc-800 dark:text-zinc-300">
           <div className="step-circle" />
         </div>
-        <h3 className="font-heading scroll-m-20 text-xl font-semibold tracking-tight flex items-center">
+        <h3 className="font-heading scroll-m-20 text-lg font-semibold tracking-tight flex items-center">
           {icon && (
             <span className="mr-2 inline-flex items-center">{icon}</span>
           )}

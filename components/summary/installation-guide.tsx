@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Terminal, Download, Bot, ListOrdered } from "lucide-react";
+import { Terminal, Download, Bot, ListOrdered, Code } from "lucide-react";
 import { Card } from "../ui/card";
-import { Tabs, TabsList } from "../ui/tabs";
+import { Tabs, TabsContent, TabsList } from "../ui/tabs";
 import { TabsTrigger } from "@radix-ui/react-tabs";
 import { motion } from "framer-motion";
 import { SelectedCpuDetails } from "../configuration/selected-cpu-details";
@@ -11,6 +11,8 @@ import { SelectedGpuDetails } from "../configuration/selected-gpu-details";
 import { SelectedRamDetails } from "../configuration/selected-ram-details";
 import { HardwareSelection } from "./hardware-selection";
 import { useStoreSelectors } from "@/stores/store";
+import { Step, Steps } from "./steps";
+import { CodeBlock } from "../ui/code-block";
 
 interface HardwareData {
   title: string;
@@ -71,8 +73,8 @@ function InstallationGuide() {
     ? selectedCpuBrand === "AMD"
       ? `${selectedCpuBrand} ${selectedProcessor.model} ${selectedProcessor.coreCount}-Core Processor`
       : selectedCpuBrand === "Intel"
-      ? `Intel(R) ${selectedProcessor.model} CPU @ ${selectedProcessor.coreClock}`
-      : `${selectedCpuBrand} ${selectedProcessor.model} ${selectedProcessor.coreClock}`
+        ? `Intel(R) ${selectedProcessor.model} CPU @ ${selectedProcessor.coreClock}`
+        : `${selectedCpuBrand} ${selectedProcessor.model} ${selectedProcessor.coreClock}`
     : "Your Custom CPU Name";
 
   const hardwareData: Record<string, HardwareData> = {
@@ -226,7 +228,7 @@ function InstallationGuide() {
 
         {selectedHardware && (
           <Card className="p-8 relative mt-20">
-            <Tabs>
+            <Tabs defaultValue="tab-1" onValueChange={setActiveTab}>
               <div className="absolute -top-7 left-0 right-0 flex justify-center">
                 <TabsList className="gap-3 bg-white dark:bg-black border border-border px-2 py-6 rounded-full shadow-lg mb-3">
                   <CustomTabsTrigger
@@ -255,80 +257,87 @@ function InstallationGuide() {
                   </CustomTabsTrigger>
                 </TabsList>
               </div>
+
+              <h2 className="text-2xl font-bold mb-2">
+                {hardwareData[selectedHardware].title}
+              </h2>
+              <h3 className="text-xl font-semibold mb-6">Installation Steps</h3>
+
+              <TabsContent value="tab-1">
+                <Steps>
+                  <Step title="Open Windows Terminal as Administrator" icon={<Terminal className="h-5 w-5" />}>
+                    <p>
+                      Right-click on the <strong>Start menu</strong> and select <strong>"Windows Terminal (Admin)"</strong> or search for
+                      "Windows Terminal" in the Start menu, right-click it, and select <strong>"Run as administrator"</strong>.
+                    </p>
+                  </Step>
+                  <Step title="Run the PowerShell command to change CPU name" icon={<Code className="h-5 w-5" />}>
+                    <p>
+                      Copy and paste the following command into the PowerShell window. This will modify
+                      the registry to change how Windows displays your CPU name.
+                    </p>
+                    <CodeBlock
+                      language="powershell"
+                      code={`Set-ItemProperty -Path "HKLM:\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0" -Name "ProcessorNameString" -Value "${cpuNameValue}"`}
+                    />
+                  </Step>
+                </Steps>
+                <div>
+                  <h3 className="text-xl font-semibold mb-4">
+                    Configuration Scripts
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {hardwareData[selectedHardware].scripts.map((script) => (
+                      <div
+                        key={script.name}
+                        className="bg-secondary hover:bg-secondary/50 rounded-lg p-4 flex items-center justify-between transition-colors"
+                      >
+                        <div className="flex items-center space-x-3">
+                          <Terminal className="w-5 h-5 text-gray-500" />
+                          <span className="font-medium">{script.name}</span>
+                        </div>
+                        <button
+                          onClick={() =>
+                            downloadScript(script.name, script.content)
+                          }
+                          className="flex items-center space-x-2 text-primary hover:text-gray-500"
+                        >
+                          <Download className="w-5 h-5" />
+                          <span>Download</span>
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="tab-2">
+                <Steps>
+                  <Step title="Open Registry Editor" icon={<Terminal className="h-5 w-5" />}>
+                    <p>
+                      Press <strong>Win+R</strong> on your keyboard to open the Run dialog.
+                      Type <strong>"regedit"</strong> and press Enter or click OK. If prompted by User Account Control, click <strong>Yes</strong>.
+                    </p>
+                  </Step>
+                  <Step title="Navigate to the processor registry key" icon={<Code className="h-5 w-5" />}>
+                    <p>
+                      In Registry Editor, navigate to the following path by expanding the folders in the left panel or paste it into the address bar:
+                    </p>
+                    <CodeBlock language="text" code={`HKEY_LOCAL_MACHINE\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0`} />
+                  </Step>
+                  <Step title="Modify the ProcessorNameString value" icon={<ListOrdered className="h-5 w-5" />}>
+                    <p>Use this value as your CPU name:</p>
+                    <CodeBlock language="text" code={cpuNameValue} />
+                    <ul className="list-disc pl-5 space-y-1 mt-4">
+                      <li>In the right panel, find the <strong>"ProcessorNameString"</strong> value.</li>
+                      <li>Right-click on it and select <strong>"Modify"</strong>.</li>
+                      <li>Enter your desired CPU name in the <strong>"Value data"</strong> field.</li>
+                      <li>Click <strong>OK</strong> to save the changes.</li>
+                    </ul>
+                  </Step>
+                </Steps>
+              </TabsContent>
             </Tabs>
-            <h2 className="text-2xl font-bold mb-2">
-              {hardwareData[selectedHardware].title}
-            </h2>
-
-            <div className="mb-8">
-              <h3 className="text-xl font-semibold mb-4">Installation Steps</h3>
-              <div className="space-y-4">
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
-                    1
-                  </div>
-                  <div>
-                    <h4 className="font-semibold">Preparation</h4>
-                    <p className="text-gray-600 dark:text-gray-300">
-                      Ensure your workspace is clean and static-free. Gather all
-                      necessary tools.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
-                    2
-                  </div>
-                  <div>
-                    <h4 className="font-semibold">Power Down</h4>
-                    <p className="text-gray-600 dark:text-gray-300">
-                      Completely shut down your system and disconnect all power
-                      sources.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
-                    3
-                  </div>
-                  <div>
-                    <h4 className="font-semibold">Installation</h4>
-                    <p className="text-gray-600 dark:text-gray-300">
-                      Follow the manufacturer's guidelines for proper
-                      installation.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-xl font-semibold mb-4">
-                Configuration Scripts
-              </h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                {hardwareData[selectedHardware].scripts.map((script) => (
-                  <div
-                    key={script.name}
-                    className="bg-secondary hover:bg-secondary/50 rounded-lg p-4 flex items-center justify-between transition-colors"
-                  >
-                    <div className="flex items-center space-x-3">
-                      <Terminal className="w-5 h-5 text-gray-500" />
-                      <span className="font-medium">{script.name}</span>
-                    </div>
-                    <button
-                      onClick={() =>
-                        downloadScript(script.name, script.content)
-                      }
-                      className="flex items-center space-x-2 text-primary hover:text-gray-500"
-                    >
-                      <Download className="w-5 h-5" />
-                      <span>Download</span>
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
           </Card>
         )}
       </div>
