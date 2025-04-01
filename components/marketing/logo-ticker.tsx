@@ -25,7 +25,10 @@ const logos = [
 
 export const LogoTicker = () => {
   return (
-    <div id="companies" className="bg-black text-white py-[72px] sm:py-24 flex justify-center">
+    <div
+      id="companies"
+      className="bg-black text-white py-[72px] sm:py-24 flex justify-center"
+    >
       <div className="container">
         <h2 className="text-xl text-center text-white/70">
           Trusted by the world&apos;s most innovative teams
@@ -48,7 +51,9 @@ export const LogoTicker = () => {
                 key={index}
                 src={logo.src}
                 alt={logo.alt}
-                className={`object-contain h-10 lg:h-12 filter grayscale opacity-65 transition-[opacity, grayscale] duration-300 ease-in-out hover:grayscale-0 hover:opacity-100 ${logo.invert ? 'invert hue-rotate-180' : ''}`}
+                className={`object-contain h-10 lg:h-12 filter grayscale opacity-65 transition-[opacity, grayscale] duration-300 ease-in-out hover:grayscale-0 hover:opacity-100 ${
+                  logo.invert ? "invert hue-rotate-180" : ""
+                }`}
               />
             ))}
             {/* Image loop goes here */}
@@ -57,7 +62,9 @@ export const LogoTicker = () => {
                 key={index + logos.length} // Ensure unique keys for the loop
                 src={logo.src}
                 alt={logo.alt}
-                className={`object-contain h-10 lg:h-12 filter grayscale opacity-65 transition-[opacity, grayscale] duration-300 ease-in-out hover:grayscale-0 hover:opacity-100 ${logo.invert ? 'invert hue-rotate-180' : ''}`}
+                className={`object-contain h-10 lg:h-12 filter grayscale opacity-65 transition-[opacity, grayscale] duration-300 ease-in-out hover:grayscale-0 hover:opacity-100 ${
+                  logo.invert ? "invert hue-rotate-180" : ""
+                }`}
               />
             ))}
           </motion.div>

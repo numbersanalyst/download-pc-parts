@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -14,8 +13,8 @@ import { Chakra_Petch } from "next/font/google";
 import clsx from "clsx";
 const chakraPetch = Chakra_Petch({
   weight: "400",
-  subsets: ['latin'],
-})
+  subsets: ["latin"],
+});
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,18 +28,36 @@ export const Navbar = () => {
       <div className="px-4">
         <div className="py-4 flex items-center justify-between">
           <a href="#">
-          <div className="flex items-center gap-3">
-            <div className="relative">
-              <div className="absolute w-full top-2 bottom-0 bg-[linear-gradient(to_right,#F87BFF,#FB92CF,#FFDD98,#C2F0B1,#2FD8FE)] blur-md opacity-25"></div>
-              <Image src={logoImage} alt="Saas logo" className="h-12 w-12 relative" />
+            <div className="flex items-center gap-3">
+              <div className="relative">
+                <div className="absolute w-full top-2 bottom-0 bg-[linear-gradient(to_right,#F87BFF,#FB92CF,#FFDD98,#C2F0B1,#2FD8FE)] blur-md opacity-25"></div>
+                <Image
+                  src={logoImage}
+                  alt="Saas logo"
+                  className="h-12 w-12 relative"
+                />
+              </div>
+              <div className="flex flex-col text-white select-none">
+                <span
+                  className={clsx(
+                    "font-medium leading-tight text-xl",
+                    chakraPetch.className
+                  )}
+                >
+                  Download
+                </span>
+                <span
+                  className={clsx(
+                    "font-medium leading-tight text-gray-300",
+                    chakraPetch.className
+                  )}
+                >
+                  PC Parts
+                </span>
+              </div>
             </div>
-            <div className="flex flex-col text-white select-none">
-              <span className={clsx("font-medium leading-tight text-xl", chakraPetch.className)}>Download</span>
-              <span className={clsx("font-medium leading-tight text-gray-300", chakraPetch.className)}>PC Parts</span>
-            </div>
-          </div>
           </a>
-          <button 
+          <button
             className="border border-white border-opacity-30 h-10 w-10 inline-flex justify-center items-center rounded-lg md:hidden"
             onClick={toggleMenu}
           >
@@ -52,29 +69,89 @@ export const Navbar = () => {
           </button>
           {/* Computer menu */}
           <nav className="gap-4 md:gap-6 items-center hidden md:flex">
-            <a href="#companies" className="text-opacity-60 text-white hover:text-opacity-100 transition">Companies</a>
-            <a href="#features" className="text-opacity-60 text-white hover:text-opacity-100 transition">Features</a>
-            <a href="#customers" className="text-opacity-60 text-white hover:text-opacity-100 transition">Customers</a>
-            <a href="#app" className="text-opacity-60 text-white hover:text-opacity-100 transition">App</a>
-            <a href="#faq" className="text-opacity-60 text-white hover:text-opacity-100 transition">FAQ</a>
+            <a
+              href="#companies"
+              className="text-opacity-60 text-white hover:text-opacity-100 transition"
+            >
+              Companies
+            </a>
+            <a
+              href="#features"
+              className="text-opacity-60 text-white hover:text-opacity-100 transition"
+            >
+              Features
+            </a>
+            <a
+              href="#customers"
+              className="text-opacity-60 text-white hover:text-opacity-100 transition"
+            >
+              Customers
+            </a>
+            <a
+              href="#app"
+              className="text-opacity-60 text-white hover:text-opacity-100 transition"
+            >
+              App
+            </a>
+            <a
+              href="#faq"
+              className="text-opacity-60 text-white hover:text-opacity-100 transition"
+            >
+              FAQ
+            </a>
             <ModeToggle />
-            <Link href={"/configure"} scroll={false} className="bg-white py-2 px-4 rounded-lg dark:text-black">Get for free</Link>
+            <Link
+              href={"/configure"}
+              scroll={false}
+              className="bg-white py-2 px-4 rounded-lg dark:text-black"
+            >
+              Get for free
+            </Link>
           </nav>
         </div>
       </div>
-      
+
       {/* Mobile menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-black border-t border-white border-opacity-10">
           <div className="flex flex-col px-4 py-2">
-            <a href="#companies" className="text-opacity-60 text-white hover:text-opacity-100 transition">Companies</a>
-            <a href="#features" className="text-opacity-60 text-white hover:text-opacity-100 transition">Features</a>
-            <a href="#customers" className="text-opacity-60 text-white hover:text-opacity-100 transition">Customers</a>
-            <a href="#app" className="text-opacity-60 text-white hover:text-opacity-100 transition">App</a>
-            <a href="#faq" className="text-opacity-60 text-white hover:text-opacity-100 transition">FAQ</a>
+            <a
+              href="#companies"
+              className="text-opacity-60 text-white hover:text-opacity-100 transition"
+            >
+              Companies
+            </a>
+            <a
+              href="#features"
+              className="text-opacity-60 text-white hover:text-opacity-100 transition"
+            >
+              Features
+            </a>
+            <a
+              href="#customers"
+              className="text-opacity-60 text-white hover:text-opacity-100 transition"
+            >
+              Customers
+            </a>
+            <a
+              href="#app"
+              className="text-opacity-60 text-white hover:text-opacity-100 transition"
+            >
+              App
+            </a>
+            <a
+              href="#faq"
+              className="text-opacity-60 text-white hover:text-opacity-100 transition"
+            >
+              FAQ
+            </a>
             <div className="py-3 flex items-center gap-x-6">
               <ModeToggle />
-              <Link href={"/configure"} scroll={false} className="block w-full bg-white py-2 px-4 rounded-lg text-center dark:text-black">
+              <Link
+                href={"/configure"}
+                scroll={false}
+                className="block w-full bg-white py-2 px-4 rounded-lg text-center dark:text-black"
+              >
                 Get for free
               </Link>
             </div>

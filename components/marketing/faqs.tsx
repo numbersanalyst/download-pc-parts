@@ -12,8 +12,7 @@ const items = [
   },
   {
     question: "How much does it cost?",
-    answer:
-      "It’s free! Because innovation like this shouldn’t cost a dime.",
+    answer: "It’s free! Because innovation like this shouldn’t cost a dime.",
   },
   {
     question: "Can I download an entire PC at once?",
@@ -29,10 +28,16 @@ const items = [
     question: "What operating systems can I download PC parts for?",
     answer:
       "Currently, we only support Windows 10 and Windows 11. We plan to add support for other operating systems in the future.",
-  }
+  },
 ];
 
-const AccordionItem = ({ question, answer }: { question: string; answer: string }) => {
+const AccordionItem = ({
+  question,
+  answer,
+}: {
+  question: string;
+  answer: string;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -54,9 +59,14 @@ const AccordionItem = ({ question, answer }: { question: string; answer: string 
 
 export const FAQs = () => {
   return (
-    <div id="faq" className="bg-black text-white bg-gradient-to-b from-[#5D2CA8] to-black py-[72px] sm:py-24">
+    <div
+      id="faq"
+      className="bg-black text-white bg-gradient-to-b from-[#5D2CA8] to-black py-[72px] sm:py-24"
+    >
       <div className="container">
-        <h2 className="text-center text-5xl sm:text-6xl sm:max-w-[648px] mx-auto font-bold tracking-tighter">Frequently asked questions</h2>
+        <h2 className="text-center text-5xl sm:text-6xl sm:max-w-[648px] mx-auto font-bold tracking-tighter">
+          Frequently asked questions
+        </h2>
         <div className="mt-12 max-w-[648px mx-auto]">
           {items.map(({ question, answer }) => (
             <AccordionItem question={question} answer={answer} key={question} />
