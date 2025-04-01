@@ -7,6 +7,7 @@ import { Testimonials } from "@/components/marketing/testamonials";
 import { ProductShowcase } from "@/components/marketing/product-showcase";
 import { FAQs } from "@/components/marketing/faqs";
 import { CallToAction } from "@/components/marketing/call-to-action";
+import { Footer } from "@/components/marketing/footer";
 
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
       <ProductShowcase />
       <FAQs />
       <CallToAction />
+      <Footer />
     </>
   );
 }
