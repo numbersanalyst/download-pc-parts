@@ -4,7 +4,7 @@ import emojiStarImage from "@/public/images/emojistar.png";
 
 export const CallToAction = () => {
   return (
-    <div className="bg-black text-white py-[72px] sm:py-24 text-center">
+    <div id="contact" className="bg-black text-white py-[72px] sm:py-24 text-center">
       <div className="container max-w-xl relative">
         <Image src={helixImage} alt="" className="absolute top-6 left-[calc(100%-24px)]" />
         <Image src={emojiStarImage} alt="" className="absolute -top-[120px] right-[calc(100%-24px)]" />

@@ -19,7 +19,7 @@ export function TestimonialsSection({
   className 
 }: TestimonialsSectionProps) {
   return (
-    <section className={cn(
+    <section id="customers" className={cn(
       "bg-white dark:bg-black text-black dark:text-white",
       "py-[72px] sm:py-24 px-0",
       className
