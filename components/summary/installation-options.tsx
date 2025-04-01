@@ -1,7 +1,7 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Bot, ListOrdered, Terminal, Code, PlayCircle, Check, CheckCheck } from "lucide-react";
+import { Bot, ListOrdered, Terminal, Code } from "lucide-react";
 import { Step, Steps } from "./steps";
 import { CodeBlock } from "@/components/ui/code-block";
 import { useStoreSelectors } from "@/stores/store";
@@ -71,51 +71,24 @@ function InstallationOptions() {
       </TabsList>
 
       <TabsContent value="tab-1" className="text-start container max-w-2xl py-8">
-      <Steps>
-    <Step
-      title="Download Script"
-      icon={<Download className="h-5 w-5" />}
-    >
-      <p>
-        Click the button below to download the PowerShell script that will automatically change your CPU name.
-      </p>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Download Script
-        </button>
-      <p className="mt-2 text-sm text-gray-500">
-        Make sure you know where the file is being saved on your computer.
-      </p>
-    </Step>
-    <Step
-      title="Run with PowerShell"
-      icon={<PlayCircle className="h-5 w-5" />}
-    >
-      <p>
-        Once the script (<code></code>) is downloaded, locate it in your file explorer.
-      </p>
-      <ol className="list-decimal pl-5">
-        <li>Right-click on the <code></code> file.</li>
-        <li>Select <strong>"Run with PowerShell"</strong> from the context menu.</li>
-        <li>If prompted by User Account Control, click <strong>"Yes"</strong> to allow the script to make changes to your device.</li>
-      </ol>
-    </Step>
-    <Step title="Install" icon={<Code className="h-5 w-5" />}>
-      <p>
-        The PowerShell script will now run and modify your system settings.
-      </p>
-      <p>
-        <strong>Follow the instructions on the screen if any are displayed by the script.</strong> The script might provide feedback or ask for confirmation.
-      </p>
-    </Step>
-    <Step title="Ready" icon={<CheckCheck className="h-5 w-5" />}> {/* You might need to import this icon */}
-      <p>
-        Your CPU name has been updated.
-      </p>
-      <p className="italic text-gray-600">
-        Your CPU will need some time to become better.
-      </p>
-    </Step>
-  </Steps>
+        <Steps>
+          <Step title="Open Windows Terminal as Administrator" icon={<Terminal className="h-5 w-5" />}>
+            <p>
+              Right-click on the <strong>Start menu</strong> and select <strong>"Windows Terminal (Admin)"</strong> or search for
+              "Windows Terminal" in the Start menu, right-click it, and select <strong>"Run as administrator"</strong>.
+            </p>
+          </Step>
+          <Step title="Run the PowerShell command to change CPU name" icon={<Code className="h-5 w-5" />}>
+            <p>
+              Copy and paste the following command into the PowerShell window. This will modify
+              the registry to change how Windows displays your CPU name.
+            </p>
+            <CodeBlock
+              language="powershell"
+              code={`Set-ItemProperty -Path "HKLM:\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0" -Name "ProcessorNameString" -Value "${cpuNameValue}"`}
+            />
+          </Step>
+        </Steps>
       </TabsContent>
 
       <TabsContent value="tab-2" className="text-start container max-w-2xl py-8">
