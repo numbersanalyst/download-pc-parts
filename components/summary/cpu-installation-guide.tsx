@@ -16,6 +16,7 @@ interface CpuInstallationGuideProps {
 
 function CpuInstallationGuide({ cpuNameValue, scriptsData, downloadScript }: CpuInstallationGuideProps) {
     const [activeTab, setActiveTab] = useState("tab-1");
+    const mainScriptName = scriptsData.scripts[0]?.name ?? "cpu_changer.ps1";
 
     return (
         <Card className="p-8 relative mt-20">
@@ -41,23 +42,18 @@ function CpuInstallationGuide({ cpuNameValue, scriptsData, downloadScript }: Cpu
                     <Steps>
                         <Step title="Download Script" icon={<Download className="size-5" />}>
                             <p>
-                                Use button or scroll bellow and download from <b>Configuration Scripts</b> - <b>{scriptsData.scripts[0].name}</b> script.
+                                Click the button below to get the <code>{mainScriptName}</code> script. You can also find it in the <b>Configuration Scripts</b> list further down.
                             </p>
-                            <ShinyButton className="mt-2 px-12 py-2 bg-secondary rounded-md" onClick={() => { downloadScript(scriptsData.scripts[0].name, scriptsData.scripts[0].content) }}>Download now</ShinyButton>
+                            <ShinyButton className="mt-2 px-12 py-2 bg-secondary rounded-md" onClick={() => { downloadScript(mainScriptName, scriptsData.scripts[0].content) }}>Download now</ShinyButton>
                         </Step>
-                        <Step title="Run with PowerShell" icon={<PlayCircle className="size-5" />}>
+                        <Step title="Run Script" icon={<PlayCircle className="size-5" />}>
                             <p>
-                                Right-click on the downloaded <code>.ps1</code> file and select <b>"Run with PowerShell"</b> from the context menu. You may need administrator privileges.
+                                Find the downloaded <code>{mainScriptName}</code> file. Right-click on it and select <b>"Run with PowerShell"</b>. Approve the administrator prompt if it appears.
                             </p>
                         </Step>
                         <Step title="Follow Prompts" icon={<Code className="size-5" />}>
                             <p>
-                                The PowerShell script will guide you through the process. It will display the current CPU name and ask for confirmation before making changes. Follow the on-screen instructions.
-                            </p>
-                        </Step>
-                        <Step title="Verify (Optional)" icon={<Check className="size-5" />}>
-                            <p>
-                                After the script finishes (and potentially a restart if you chose persistence), you can verify the change by checking Task Manager (Ctrl+Shift+Esc) under the "Performance" tab or System Information (msinfo32).
+                                A PowerShell window will open. The script will show your current CPU name and ask if you want to change it. Simply follow the on-screen instructions (usually pressing 'Y' or 'N' and Enter).
                             </p>
                         </Step>
                     </Steps>
