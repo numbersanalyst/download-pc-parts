@@ -117,31 +117,31 @@ export const Navbar = () => {
           <div className="flex flex-col px-4 py-2">
             <a
               href="#companies"
-              className="text-opacity-60 text-white hover:text-opacity-100 transition"
+              className="text-white py-3 border-b border-white border-opacity-10"
             >
               Companies
             </a>
             <a
               href="#features"
-              className="text-opacity-60 text-white hover:text-opacity-100 transition"
+              className="text-white py-3 border-b border-white border-opacity-10"
             >
               Features
             </a>
             <a
               href="#customers"
-              className="text-opacity-60 text-white hover:text-opacity-100 transition"
+              className="text-white py-3 border-b border-white border-opacity-10"
             >
               Customers
             </a>
             <a
               href="#app"
-              className="text-opacity-60 text-white hover:text-opacity-100 transition"
+              className="text-white py-3 border-b border-white border-opacity-10"
             >
               App
             </a>
             <a
               href="#faq"
-              className="text-opacity-60 text-white hover:text-opacity-100 transition"
+              className="text-white py-3 border-b border-white border-opacity-10"
             >
               FAQ
             </a>
