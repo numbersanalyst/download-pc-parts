@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList } from "../ui/tabs";
 import { Step, Steps } from "./steps";
 import { CodeBlock } from "../ui/code-block";
 import { ShinyButton } from "../magicui/shiny-button";
-import { HardwareTypeData } from "@/data/hardware-data";
+import { getCpuNameValue, HardwareTypeData } from "@/data/hardware-data";
 import { CustomTabsTrigger } from "@/components/ui/custom-tabs-trigger";
 
 interface CpuInstallationGuideProps {
@@ -16,6 +16,7 @@ interface CpuInstallationGuideProps {
 function CpuInstallationGuide({scriptsData, downloadScript }: CpuInstallationGuideProps) {
     const [activeTab, setActiveTab] = useState("tab-1");
     const mainScriptName = scriptsData.scripts[0]?.name ?? "cpu_changer.ps1";
+    const cpuNameValue = getCpuNameValue();
 
     return (
         <Card className="p-8 relative mt-20">

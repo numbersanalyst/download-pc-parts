@@ -16,17 +16,21 @@ export interface HardwareData {
   ram: HardwareTypeData;
 }
 
-export function getHardwareScriptsData(): HardwareData {
+export function getCpuNameValue(): string {
   const selectedCpuBrand = useStoreSelectors.use.selectedCpuBrand();
   const selectedProcessor = useStoreSelectors.use.selectedProcessor();
 
-  const cpuNameValue = selectedProcessor
+  return selectedProcessor
     ? selectedCpuBrand === "AMD"
       ? `${selectedCpuBrand} ${selectedProcessor.model} ${selectedProcessor.coreCount}-Core Processor`
       : selectedCpuBrand === "Intel"
         ? `Intel(R) ${selectedProcessor.model} CPU @ ${selectedProcessor.coreClock}`
         : `${selectedCpuBrand} ${selectedProcessor.model} ${selectedProcessor.coreClock}`
     : "Your Custom CPU Name";
+}
+
+export function getHardwareScriptsData(): HardwareData {
+  const cpuNameValue = getCpuNameValue();
 
   return {
     cpu: {
