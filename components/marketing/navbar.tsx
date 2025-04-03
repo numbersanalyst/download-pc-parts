@@ -112,8 +112,8 @@ export const Navbar = () => {
       </div>
 
       {/* Mobile menu */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-black border-t border-white border-opacity-10">
+      <div className={`md:hidden border-t border-white border-opacity-10 transition-height duration-700 ${isMenuOpen ? 'max-h-screen' : 'max-h-0 overflow-hidden'}`}>
+        {isMenuOpen && (
           <div className="flex flex-col px-4 py-2">
             <a
               href="#companies"
@@ -156,8 +156,8 @@ export const Navbar = () => {
               </Link>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
