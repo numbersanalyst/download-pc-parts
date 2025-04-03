@@ -102,7 +102,6 @@ export const Navbar = () => {
             <ModeToggle />
             <Link
               href={"/configure"}
-              scroll={false}
               className="bg-white py-2 px-4 rounded-lg dark:text-black"
             >
               Get for free
@@ -148,7 +147,7 @@ export const Navbar = () => {
             <div className="py-3 flex items-center gap-x-6">
               <ModeToggle />
               <Link
-                href={"/configure"}
+                href={"/configure/#"}
                 scroll={false}
                 className="block w-full bg-white py-2 px-4 rounded-lg text-center dark:text-black"
               >

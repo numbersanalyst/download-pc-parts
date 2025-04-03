@@ -89,7 +89,7 @@ export const Hero = () => {
         </div>
 
         <div className="flex justify-center mt-8">
-          <Link href={"/configure"} scroll={false}>
+          <Link href={"/configure"}>
             <RainbowButton>Get for free</RainbowButton>
           </Link>
         </div>
