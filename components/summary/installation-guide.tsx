@@ -42,7 +42,7 @@ function InstallationGuide() {
 
   return (
     <div className="min-h-screen">
-      <div className="container mx-auto px-4 py-12 mb-4">
+      <div className="container mx-auto px-4 py-12 mb-4 max-w-6xl">
         <h1 className="text-4xl font-bold text-center mb-2">
           Hardware Configuration Guide
         </h1>
