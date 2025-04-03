@@ -11,8 +11,8 @@ export const Footer = () => {
       <div className="container">
         <div className=" flex flex-col gap-4 sm:flex-row sm:justify-between">
           <div className="text-center flex gap-x-2 items-center">
-            Made with pain in Poland
-            <Image className="size-6" src={flagIcon} alt="icon" />
+            Made with pain in
+            <Image className="w-5 h-4 object-none rounded-sm" src={flagIcon} alt="Poland flag" />
           </div>
           <ul className="flex justify-center gap-2.5">
             <li>
