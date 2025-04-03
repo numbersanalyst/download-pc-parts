@@ -1,3 +1,5 @@
+import { useStoreSelectors } from "@/stores/store";
+
 export interface HardwareScript {
   name: string;
   content: string;
@@ -14,7 +16,18 @@ export interface HardwareData {
   ram: HardwareTypeData;
 }
 
-export function getHardwareScriptsData(cpuNameValue: string): HardwareData {
+export function getHardwareScriptsData(): HardwareData {
+  const selectedCpuBrand = useStoreSelectors.use.selectedCpuBrand();
+  const selectedProcessor = useStoreSelectors.use.selectedProcessor();
+
+  const cpuNameValue = selectedProcessor
+    ? selectedCpuBrand === "AMD"
+      ? `${selectedCpuBrand} ${selectedProcessor.model} ${selectedProcessor.coreCount}-Core Processor`
+      : selectedCpuBrand === "Intel"
+        ? `Intel(R) ${selectedProcessor.model} CPU @ ${selectedProcessor.coreClock}`
+        : `${selectedCpuBrand} ${selectedProcessor.model} ${selectedProcessor.coreClock}`
+    : "Your Custom CPU Name";
+
   return {
     cpu: {
       title: "CPU Installation",

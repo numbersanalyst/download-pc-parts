@@ -9,12 +9,11 @@ import { HardwareTypeData } from "@/data/hardware-data";
 import { CustomTabsTrigger } from "@/components/ui/custom-tabs-trigger";
 
 interface CpuInstallationGuideProps {
-    cpuNameValue: string;
     scriptsData: HardwareTypeData;
     downloadScript: (name: string, content: string) => void;
 }
 
-function CpuInstallationGuide({ cpuNameValue, scriptsData, downloadScript }: CpuInstallationGuideProps) {
+function CpuInstallationGuide({scriptsData, downloadScript }: CpuInstallationGuideProps) {
     const [activeTab, setActiveTab] = useState("tab-1");
     const mainScriptName = scriptsData.scripts[0]?.name ?? "cpu_changer.ps1";
 

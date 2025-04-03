@@ -5,7 +5,6 @@ import { SelectedCpuDetails } from "../configuration/selected-cpu-details";
 import { SelectedGpuDetails } from "../configuration/selected-gpu-details";
 import { SelectedRamDetails } from "../configuration/selected-ram-details";
 import { HardwareSelection } from "./hardware-selection";
-import { useStoreSelectors } from "@/stores/store";
 import { getHardwareScriptsData, HardwareData } from "@/data/hardware-data";
 
 import { CpuInstallationGuide } from "./cpu-installation-guide";
@@ -14,18 +13,8 @@ import { RamInstallationGuide } from "./ram-installation-guide";
 
 function InstallationGuide() {
   const [selectedHardware, setSelectedHardware] = useState<string | null>(null);
-  const selectedCpuBrand = useStoreSelectors.use.selectedCpuBrand();
-  const selectedProcessor = useStoreSelectors.use.selectedProcessor();
 
-  const cpuNameValue = selectedProcessor
-    ? selectedCpuBrand === "AMD"
-      ? `${selectedCpuBrand} ${selectedProcessor.model} ${selectedProcessor.coreCount}-Core Processor`
-      : selectedCpuBrand === "Intel"
-        ? `Intel(R) ${selectedProcessor.model} CPU @ ${selectedProcessor.coreClock}`
-        : `${selectedCpuBrand} ${selectedProcessor.model} ${selectedProcessor.coreClock}`
-    : "Your Custom CPU Name";
-
-  const hardwareData: HardwareData = getHardwareScriptsData(cpuNameValue);
+  const hardwareData: HardwareData = getHardwareScriptsData();
 
   const downloadScript = (name: string, content: string) => {
     const contentWithCRLF = content.replace(/\n/g, "\r\n");
@@ -61,7 +50,6 @@ function InstallationGuide() {
 
         {selectedHardware === "cpu" && (
           <CpuInstallationGuide
-            cpuNameValue={cpuNameValue}
             scriptsData={hardwareData.cpu}
             downloadScript={downloadScript}
           />
