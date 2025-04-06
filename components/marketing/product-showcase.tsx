@@ -1,5 +1,5 @@
 import Image from "next/image";
-import appScreen from "@/public/images/app-screen-cpu-select.png";
+import appScreen from "@/public/images/computer.webp";
 
 export const ProductShowcase = () => {
   return (
@@ -9,12 +9,11 @@ export const ProductShowcase = () => {
     >
       <div className="container">
         <h2 className="text-center text-5xl sm:text-6xl font-bold tracking-tighter">
-          Intuitive interface
+          Exclusive technology
         </h2>
         <div className="max-w-xl mx-auto">
           <p className="text-xl text-center text-white/70 mt-5">
-            Celebraty the joy of working with an app designed to make your PC
-            better in just a few clicks
+            We have something you can't find anywhere else. We're changing the way the world works.
           </p>
         </div>
         <Image
