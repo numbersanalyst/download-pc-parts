@@ -54,7 +54,7 @@ export const SelectModelCarousel = <T extends ItemType>({
               const isSelected = selectedItem && selectedItem.model === item.model;
               const borderColor = (brand && brandBorderColors[brand]) || "border-gray-500";
               const borderClass = isSelected ? `border ${borderColor} border-opacity-60` : "";
-              
+
               return (
                 <CarouselItem
                   key={item.id}
@@ -66,6 +66,15 @@ export const SelectModelCarousel = <T extends ItemType>({
                 >
                   <Card className={cn(borderClass)}>
                     <CardContent className="flex flex-col items-center justify-center p-6 select-none">
+                      <motion.div
+                        initial={{ opacity: 0.0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{
+                          delay: 0.2,
+                          duration: 0.5,
+                          ease: "easeInOut",
+                        }}
+                      >
                         <Image
                           src={item.image}
                           alt={`${item.model} ${type} image`}
@@ -73,6 +82,7 @@ export const SelectModelCarousel = <T extends ItemType>({
                           height={130}
                           className="object-contain text-center select-none w-[130px] h-[130px] group-hover:scale-105 transition-scale duration-300 ease-in-out animate-in fade-in duration-700"
                         />
+                      </motion.div>
                       <div className="text-center mt-4">
                         <p className="text-lg font-semibold whitespace-nowrap">{item.model}</p>
                         <p className="text-gray-600">${item.price}</p>
