@@ -117,7 +117,7 @@ export function getHardwareScriptsData(): HardwareData {
       exit
   }
 
-  Write-Host "CPU Name Persistence Task Deleter" -ForegroundColor Cyan
+  Write-Host "CPU Persistence Task Deleter" -ForegroundColor Cyan
   Write-Host "----------------------------------" -ForegroundColor Cyan
 
   $taskName = "SetCPUAtStartup"
@@ -230,40 +230,33 @@ if (\$changeConfirm.ToUpper() -eq "Y") {
         exit 1
     }
 
-    \$persistConfirm = Read-Host "Do you want to make this change persist after restarts (via Scheduled Task)? (Y/N) [Default: N]"
-    if ([string]::IsNullOrEmpty(\$persistConfirm)) { \$persistConfirm = "N" }
+    $persistConfirm = Read-Host "Do you want to make this change persist after restarts (via Scheduled Task)? (Y/N) [Default: N]"
+    if ([string]::IsNullOrEmpty($persistConfirm)) { $persistConfirm = "N" }
 
-    if (\$persistConfirm.ToUpper() -eq "Y") {
-        \$taskName = "SetGPUFriendlyNameAtStartup"
-        \$taskDescription = "Sets the GPU FriendlyName for \$($selectedGpu.FriendlyName) to '\$NewGpuName' at startup."
-        \$commandArg = "-Command \`"New-ItemProperty -Path '\$(\$gpuRegPath -replace \"'\", \"''\")' -Name 'FriendlyName' -Value '\$(\$NewGpuName -replace \"'\", \"''\")' -PropertyType String -Force\`""
-
+    if ($persistConfirm.ToUpper() -eq "Y") {
+        $taskName = "SetGPUFriendlyNameAtStartup"
+        $commandArg = "-Command \`"& { New-ItemProperty -Path '$($gpuRegPath -replace \"'\", \"''\")' -Name FriendlyName -Value '$($NewGpuName -replace \"'\", \"''\")' -PropertyType String -Force }\`""
+        
         try {
-            Get-ScheduledTask -TaskName \$taskName -ErrorAction Stop
-            Write-Warning "Scheduled task '\$taskName' already exists. Use gpu_uninstaller.ps1 to remove it."
-        }
-        catch {
-            if (\$_.Exception -is [Microsoft.Management.Infrastructure.CimException] -and \$_.Exception.MessageId -like "*ItemNotFound*") {
-                Write-Host "Creating scheduled task '\$taskName' for persistence..." -ForegroundColor Green
-                try {
-                    \$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument \$commandArg
-                    \$trigger = New-ScheduledTaskTrigger -AtStartup
-                    \$principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
-                    \$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -Compatibility Win8
+            Get-ScheduledTask -TaskName $taskName -ErrorAction Stop
+            Write-Warning "Scheduled task '$taskName' already exists. Use the GPU uninstaller script to remove it."
+        } catch {
+            # Create the scheduled task
+            Write-Host "Creating scheduled task '$taskName' for persistence..." -ForegroundColor Green
+            try {
+                $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument $commandArg
+                $trigger = New-ScheduledTaskTrigger -AtStartup
+                $principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
+                $settings = New-ScheduledTaskSettingsSet -Compatibility Win8 -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
 
-                    Register-ScheduledTask -TaskName \$taskName -Action \$action -Trigger \$trigger -Principal \$principal -Settings \$settings -Description \$taskDescription -Force -ErrorAction Stop
-                    Write-Host "Scheduled task '\$taskName' created successfully." -ForegroundColor Green
-                }
-                catch {
-                    Write-Error "An error occurred while creating the scheduled task: \$_"
-                }
-            }
-            else {
-                Write-Error "An unexpected error occurred while checking for the existing scheduled task: \$_"
+                Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal -Settings $settings -Description "Persist GPU name change" -Force
+                Write-Host "Scheduled task created successfully." -ForegroundColor Green
+            } catch {
+                Write-Error "Failed to create scheduled task: $_"
             }
         }
     } else {
-        Write-Host "The new GPU will likely not persist after driver updates or maybe restarts." -ForegroundColor Yellow
+        Write-Host "The new GPU will likely not persist after driver updates or restarts." -ForegroundColor Yellow
     }
 } else {
     Write-Host "Operation cancelled." -ForegroundColor Yellow
@@ -276,8 +269,41 @@ exit 0
         },
         {
           name: "gpu_uninstaller.ps1",
-          content:
-            '#!/bin/bash\n\n# GPU Benchmark Script (Placeholder)\necho "Running GPU benchmarks..."\n# Add actual benchmark commands here, e.g., using glmark2 or unigine-heaven',
+          content: `
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+    Write-Host "This script requires administrator privileges. Restarting with elevated permissions..." -ForegroundColor Yellow
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File \`"$PSCommandPath\`"" -Verb RunAs
+    exit
+}
+
+Write-Host "GPU Persistence Task Deleter" -ForegroundColor Cyan
+Write-Host "-----------------------------------" -ForegroundColor Cyan
+
+$taskName = "SetGPUFriendlyNameAtStartup"
+
+$task = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
+if ($task) {
+    # Ask for confirmation to delete the task
+    $deleteConfirm = Read-Host "The scheduled task '\$taskName' exists. Do you want to delete it? (Y/N) [Default: Y]"
+    if ([string]::IsNullOrEmpty($deleteConfirm)) { $deleteConfirm = "Y" }
+    if ($deleteConfirm.ToUpper() -eq "Y") {
+        try {
+            # Delete the scheduled task
+            Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
+            Write-Host "Scheduled task '\$taskName' has been deleted successfully." -ForegroundColor Green
+        } catch {
+            Write-Host "An error occurred while deleting the scheduled task: \$_" -ForegroundColor Red
+        }
+    } else {
+        Write-Host "Operation cancelled. The scheduled task was not deleted." -ForegroundColor Yellow
+    }
+} else {
+    Write-Host "No scheduled task named '\$taskName' was found." -ForegroundColor Yellow
+}
+
+Write-Host "Press any key to exit..." -ForegroundColor Cyan
+$null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+            `.trim(),
         },
       ],
     },
