@@ -66,13 +66,13 @@ export const SelectModelCarousel = <T extends ItemType>({
                 >
                   <Card className={cn(borderClass)}>
                     <CardContent className="flex flex-col items-center justify-center p-6 select-none">
-                      <Image
-                        src={item.image}
-                        alt={`${item.model} ${type} image`}
-                        width={130}
-                        height={130}
-                        className="object-contain text-center select-none w-[130px] h-[130px] group-hover:scale-105 transition-scale duration-300 ease-in-out"
-                      />
+                        <Image
+                          src={item.image}
+                          alt={`${item.model} ${type} image`}
+                          width={130}
+                          height={130}
+                          className="object-contain text-center select-none w-[130px] h-[130px] group-hover:scale-105 transition-scale duration-300 ease-in-out animate-in fade-in duration-700"
+                        />
                       <div className="text-center mt-4">
                         <p className="text-lg font-semibold whitespace-nowrap">{item.model}</p>
                         <p className="text-gray-600">${item.price}</p>
