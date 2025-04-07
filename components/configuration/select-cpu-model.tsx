@@ -11,32 +11,15 @@ export const SelectCpuModel = () => {
 
   if (!selectedCpuBrand) return null;
 
-  // const items = processors[selectedCpuBrand];
-
-  const amdCpus = processors["AMD"];
-  const intelCpus = processors["Intel"];
+  const items = processors[selectedCpuBrand];
 
   return (
-    <>
-      {selectedCpuBrand && selectedCpuBrand == "AMD" && (
-        <SelectModelCarousel<ProcessorType>
-          type="CPU"
-          brand={selectedCpuBrand}
-          items={amdCpus}
-          selectedItem={selectedProcessor}
-          setSelectedItem={setProcessor}
-        />
-      )}
-
-      {selectedCpuBrand && selectedCpuBrand == "Intel" && (
-        <SelectModelCarousel<ProcessorType>
-          type="CPU"
-          brand={selectedCpuBrand}
-          items={intelCpus}
-          selectedItem={selectedProcessor}
-          setSelectedItem={setProcessor}
-        />
-      )}
-    </>
+    <SelectModelCarousel<ProcessorType>
+      type="CPU"
+      brand={selectedCpuBrand}
+      items={items}
+      selectedItem={selectedProcessor}
+      setSelectedItem={setProcessor}
+    />
   );
 };

@@ -48,7 +48,7 @@ export const SelectModelCarousel = <T extends ItemType>({
       <div className="relative">
         <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-background/50 dark:from-background/75 to-transparent z-10" />
         <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-background/50 dark:from-background/75 to-transparent z-10" />
-        <Carousel className="w-full" opts={{ slidesToScroll: "auto", loop: true }}>
+        <Carousel className="w-full" opts={{ slidesToScroll: "auto", loop: true}}>
           <CarouselContent className="-ml-2 md:-ml-4">
             {items.map((item) => {
               const isSelected = selectedItem && selectedItem.model === item.model;
@@ -66,23 +66,13 @@ export const SelectModelCarousel = <T extends ItemType>({
                 >
                   <Card className={cn(borderClass)}>
                     <CardContent className="flex flex-col items-center justify-center p-6 select-none">
-                      <motion.div
-                        initial={{ opacity: 0.0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                          delay: 0.2,
-                          duration: 0.5,
-                          ease: "easeInOut",
-                        }}
-                      >
                         <Image
                           src={item.image}
                           alt={`${item.model} ${type} image`}
                           width={130}
                           height={130}
-                          className="object-contain text-center select-none w-[130px] h-[130px] group-hover:scale-105 transition-scale duration-300 ease-in-out animate-in fade-in duration-700"
+                          className="object-contain text-center select-none w-[130px] h-[130px] group-hover:scale-105 transition-scale ease-in-out duration-300"
                         />
-                      </motion.div>
                       <div className="text-center mt-4">
                         <p className="text-lg font-semibold whitespace-nowrap">{item.model}</p>
                         <p className="text-gray-600">${item.price}</p>
