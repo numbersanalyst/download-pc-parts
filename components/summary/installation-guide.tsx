@@ -18,7 +18,9 @@ function InstallationGuide() {
 
   const downloadScript = (name: string, content: string) => {
     const contentWithCRLF = content.replace(/\n/g, "\r\n");
-    const blob = new Blob([contentWithCRLF], { type: "text/plain;charset=utf-8" });
+    const blob = new Blob([contentWithCRLF], {
+      type: "text/plain;charset=utf-8",
+    });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -36,7 +38,8 @@ function InstallationGuide() {
           Hardware Configuration Guide
         </h1>
         <p className="text-center text-muted-foreground mb-8">
-          Select a component below to view configuration instructions and utilities.
+          Select a component below to view configuration instructions and
+          utilities.
         </p>
 
         <HardwareSelection
@@ -44,29 +47,34 @@ function InstallationGuide() {
           selectedHardware={selectedHardware}
         />
 
-        {selectedHardware === "cpu" && <SelectedCpuDetails />}
-        {selectedHardware === "gpu" && <SelectedGpuDetails />}
-        {selectedHardware === "ram" && <SelectedRamDetails />}
-
         {selectedHardware === "cpu" && (
-          <CpuInstallationGuide
-            scriptsData={hardwareData.cpu}
-            downloadScript={downloadScript}
-          />
+          <>
+            <SelectedCpuDetails />
+            <CpuInstallationGuide
+              scriptsData={hardwareData.cpu}
+              downloadScript={downloadScript}
+            />
+          </>
         )}
 
         {selectedHardware === "gpu" && (
-           <GpuInstallationGuide
-             scriptsData={hardwareData.gpu}
-             downloadScript={downloadScript}
-           />
+          <>
+            <SelectedGpuDetails />
+            <GpuInstallationGuide
+              scriptsData={hardwareData.gpu}
+              downloadScript={downloadScript}
+            />
+          </>
         )}
 
         {selectedHardware === "ram" && (
-           <RamInstallationGuide
-             scriptsData={hardwareData.ram}
-             downloadScript={downloadScript}
-           />
+          <>
+            <SelectedRamDetails />
+            <RamInstallationGuide
+              scriptsData={hardwareData.ram}
+              downloadScript={downloadScript}
+            />
+          </>
         )}
       </div>
     </div>
