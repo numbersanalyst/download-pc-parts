@@ -41,6 +41,7 @@ export function getGpuNameValue(): string {
 
 export function getHardwareScriptsData(): HardwareData {
   const cpuNameValue = getCpuNameValue();
+  const gpuNameValue = getGpuNameValue();
 
   return {
     cpu: {
@@ -151,35 +152,130 @@ export function getHardwareScriptsData(): HardwareData {
       title: "GPU Setup",
       scripts: [
         {
-          name: "gpu_driver_install.ps1",
+          name: "gpu_changer.ps1",
           content: `
-  # GPU Driver Installation Helper Script (Placeholder)
-  Write-Host "GPU Driver Installation Helper" -ForegroundColor Cyan
-  Write-Host "-----------------------------" -ForegroundColor Cyan
-  
-  # Detect GPU (Example - replace with actual detection logic if possible)
-  try {
-      $gpuInfo = Get-WmiObject Win32_VideoController | Select-Object -First 1 -ExpandProperty Name
-      Write-Host "Detected GPU: $gpuInfo" -ForegroundColor Green
-  } catch {
-      Write-Host "Could not automatically detect GPU." -ForegroundColor Yellow
-  }
-  
-  Write-Host "Please download the latest driver for your GPU:" -ForegroundColor Yellow
-  Write-Host "- NVIDIA: https://www.nvidia.com/Download/index.aspx"
-  Write-Host "- AMD: https://www.amd.com/en/support"
-  Write-Host "- Intel: https://www.intel.com/content/www/us/en/download-center/home.html"
-  Write-Host ""
-  Write-Host "After downloading, run the installer and follow the on-screen instructions." -ForegroundColor Cyan
-  Write-Host "It's recommended to choose 'Clean Installation' if available."
-  
-  # Pause for user
-  Write-Host "Press any key to exit..." -ForegroundColor Cyan
-  $null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+    Write-Host "This script requires administrator privileges. Restarting with elevated permissions..." -ForegroundColor Yellow
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File \`"$PSCommandPath\`"" -Verb RunAs
+    exit
+}
+
+$NewGpuName = "${gpuNameValue}"
+
+Write-Host "GPU Changer Script" -ForegroundColor Cyan
+Write-Host "-------------------------------" -ForegroundColor Cyan
+Write-Host "Target Name: $NewGpuName" -ForegroundColor Yellow
+
+Write-Host "Detecting GPUs..." -ForegroundColor Cyan
+$gpus = Get-PnpDevice -Class 'Display' -Present -Status 'OK' -ErrorAction SilentlyContinue
+
+if (-not $gpus) {
+    Write-Error "No active display adapters (GPUs) found."
+    Read-Host "Press Enter to exit"
+    exit 1
+}
+
+$selectedGpu = \$null
+if ($gpus.Count -eq 1) {
+    $selectedGpu = $gpus
+    Write-Host "Found GPU: \$($selectedGpu.FriendlyName) (\$($selectedGpu.DeviceID))" -ForegroundColor Green
+} else {
+    Write-Host "Multiple GPUs found. Please select one:" -ForegroundColor Yellow
+    for (\$i = 0; \$i -lt \$gpus.Count; \$i++) {
+        Write-Host "[\$(\$i+1)] \$($gpus[\$i].FriendlyName) (\$($gpus[\$i].DeviceID))"
+    }
+
+    do {
+        \$choice = Read-Host "Enter the number of the GPU to modify"
+        if (\$choice -match '^\\d+\$' -and [int]\$choice -ge 1 -and [int]\$choice -le \$gpus.Count) {
+            \$selectedGpu = \$gpus[[int]\$choice - 1]
+        } else {
+            Write-Warning "Invalid selection. Please enter a number between 1 and \$(\$gpus.Count)."
+        }
+    } while (-not \$selectedGpu)
+     Write-Host "Selected GPU: \$($selectedGpu.FriendlyName)" -ForegroundColor Green
+}
+
+\$instanceId = \$selectedGpu.InstanceID
+\$regPathBase = "HKLM:\\\\SYSTEM\\\\CurrentControlSet\\\\Enum"
+\$gpuRegPath = Join-Path -Path \$regPathBase -ChildPath \$instanceId
+
+if (-not (Test-Path -Path \$gpuRegPath -PathType Container)) {
+     Write-Error "Could not determine the correct registry path for the selected GPU: \$gpuRegPath"
+     Read-Host "Press Enter to exit"
+     exit 1
+}
+
+Write-Host "Registry Path: \$gpuRegPath" -ForegroundColor Cyan
+
+\$currentFriendlyName = (Get-ItemProperty -Path \$gpuRegPath -Name "FriendlyName" -ErrorAction SilentlyContinue).FriendlyName
+if (\$currentFriendlyName) {
+    Write-Host "Current GPU: \$currentFriendlyName" -ForegroundColor Cyan
+} else {
+    Write-Host "No custom software currently set for this GPU." -ForegroundColor Cyan
+}
+
+\$changeConfirm = Read-Host "Do you want to change the GPU to '\$NewGpuName'? (Y/N) [Default: Y]"
+if ([string]::IsNullOrEmpty(\$changeConfirm)) { \$changeConfirm = "Y" }
+
+if (\$changeConfirm.ToUpper() -eq "Y") {
+    Write-Host "Changing GPU..." -ForegroundColor Green
+    try {
+        New-ItemProperty -Path \$gpuRegPath -Name "FriendlyName" -Value \$NewGpuName -PropertyType String -Force -ErrorAction Stop
+        Write-Host "GPU changed successfully." -ForegroundColor Green
+        Write-Host "A restart might be required for the change to appear everywhere (like Task Manager)." -ForegroundColor Yellow
+    } catch {
+        Write-Error "An error occurred while changing the GPU FriendlyName: \$_"
+        Read-Host "Press Enter to exit"
+        exit 1
+    }
+
+    \$persistConfirm = Read-Host "Do you want to make this change persist after restarts (via Scheduled Task)? (Y/N) [Default: N]"
+    if ([string]::IsNullOrEmpty(\$persistConfirm)) { \$persistConfirm = "N" }
+
+    if (\$persistConfirm.ToUpper() -eq "Y") {
+        \$taskName = "SetGPUFriendlyNameAtStartup"
+        \$taskDescription = "Sets the GPU FriendlyName for \$($selectedGpu.FriendlyName) to '\$NewGpuName' at startup."
+        \$commandArg = "-Command \`"New-ItemProperty -Path '\$(\$gpuRegPath -replace \"'\", \"''\")' -Name 'FriendlyName' -Value '\$(\$NewGpuName -replace \"'\", \"''\")' -PropertyType String -Force\`""
+
+        try {
+            Get-ScheduledTask -TaskName \$taskName -ErrorAction Stop
+            Write-Warning "Scheduled task '\$taskName' already exists. Use gpu_uninstaller.ps1 to remove it."
+        }
+        catch {
+            if (\$_.Exception -is [Microsoft.Management.Infrastructure.CimException] -and \$_.Exception.MessageId -like "*ItemNotFound*") {
+                Write-Host "Creating scheduled task '\$taskName' for persistence..." -ForegroundColor Green
+                try {
+                    \$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument \$commandArg
+                    \$trigger = New-ScheduledTaskTrigger -AtStartup
+                    \$principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
+                    \$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable -Compatibility Win8
+
+                    Register-ScheduledTask -TaskName \$taskName -Action \$action -Trigger \$trigger -Principal \$principal -Settings \$settings -Description \$taskDescription -Force -ErrorAction Stop
+                    Write-Host "Scheduled task '\$taskName' created successfully." -ForegroundColor Green
+                }
+                catch {
+                    Write-Error "An error occurred while creating the scheduled task: \$_"
+                }
+            }
+            else {
+                Write-Error "An unexpected error occurred while checking for the existing scheduled task: \$_"
+            }
+        }
+    } else {
+        Write-Host "The new GPU will likely not persist after driver updates or maybe restarts." -ForegroundColor Yellow
+    }
+} else {
+    Write-Host "Operation cancelled." -ForegroundColor Yellow
+}
+
+Write-Host "Script finished. Press any key to exit..." -ForegroundColor Cyan
+\$null = \$host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+exit 0
             `.trim(),
         },
         {
-          name: "gpu_benchmark.sh",
+          name: "gpu_uninstaller.ps1",
           content:
             '#!/bin/bash\n\n# GPU Benchmark Script (Placeholder)\necho "Running GPU benchmarks..."\n# Add actual benchmark commands here, e.g., using glmark2 or unigine-heaven',
         },
