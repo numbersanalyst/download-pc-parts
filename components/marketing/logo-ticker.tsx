@@ -33,7 +33,7 @@ export const LogoTicker = () => {
         <h2 className="text-xl text-center text-white/70">
           Trusted by the world&apos;s most innovative teams
         </h2>
-        <div className="overflow-hidden mt-9 relative before:content-[''] after:content-[''] before:absolute after:absolute before:h-full after:h-full before:w-48 after:w-48 before:left-0 after:right-0 before:top-0 after:top-0 before:bg-[linear-gradient(to_right,#000,rgba(0,0,0,0))] after:bg-[linear-gradient(to_left,#000,rgba(0,0,0,0))] before:z-10 after:z-10">
+        <div className="overflow-hidden mt-9 relative before:content-[''] after:content-[''] before:absolute after:absolute before:h-full after:h-full before:w-24 md:before:w-48 after:w-24 md:after:w-48 before:left-0 after:right-0 before:top-0 after:top-0 before:bg-[linear-gradient(to_right,#000,rgba(0,0,0,0))] after:bg-[linear-gradient(to_left,#000,rgba(0,0,0,0))] before:z-10 after:z-10">
           <motion.div
             className="flex gap-8 sm:gap-12 md:gap-16"
             animate={{
@@ -51,7 +51,7 @@ export const LogoTicker = () => {
                 key={index}
                 src={logo.src}
                 alt={logo.alt}
-                className={`object-contain h-10 lg:h-12 filter grayscale opacity-65 transition-[opacity, grayscale] duration-300 ease-in-out hover:grayscale-0 hover:opacity-100 ${
+                className={`object-contain h-7 md:h-10 lg:h-12 filter grayscale opacity-65 transition-[opacity, grayscale] duration-300 ease-in-out hover:grayscale-0 hover:opacity-100 ${
                   logo.invert ? "invert hue-rotate-180" : ""
                 }`}
               />
@@ -62,7 +62,7 @@ export const LogoTicker = () => {
                 key={index + logos.length} // Ensure unique keys for the loop
                 src={logo.src}
                 alt={logo.alt}
-                className={`object-contain h-10 lg:h-12 filter grayscale opacity-65 transition-[opacity, grayscale] duration-300 ease-in-out hover:grayscale-0 hover:opacity-100 ${
+                className={`object-contain h-7 md:h-10 lg:h-12 filter grayscale opacity-65 transition-[opacity, grayscale] duration-300 ease-in-out hover:grayscale-0 hover:opacity-100 ${
                   logo.invert ? "invert hue-rotate-180" : ""
                 }`}
               />
