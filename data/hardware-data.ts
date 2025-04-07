@@ -24,9 +24,19 @@ export function getCpuNameValue(): string {
     ? selectedCpuBrand === "AMD"
       ? `${selectedCpuBrand} ${selectedProcessor.model} ${selectedProcessor.coreCount}-Core Processor`
       : selectedCpuBrand === "Intel"
-        ? `Intel(R) ${selectedProcessor.model} CPU @ ${selectedProcessor.coreClock}`
-        : `${selectedCpuBrand} ${selectedProcessor.model} ${selectedProcessor.coreClock}`
+      ? `Intel(R) ${selectedProcessor.model} CPU @ ${selectedProcessor.coreClock}`
+      : `${selectedCpuBrand} ${selectedProcessor.model} ${selectedProcessor.coreClock}`
     : "Your Custom CPU Name";
+}
+
+export function getGpuNameValue(): string {
+  const selectedGpuBrand = useStoreSelectors.use.selectedGpuBrand();
+  const selectedGraphicCard = useStoreSelectors.use.selectedGraphicCard();
+
+  return (
+    `${selectedGpuBrand} ${selectedGraphicCard?.model} ${selectedGraphicCard?.vram}` ||
+    "Your Custom GPU Name"
+  );
 }
 
 export function getHardwareScriptsData(): HardwareData {
