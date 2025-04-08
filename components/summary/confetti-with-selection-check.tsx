@@ -5,16 +5,17 @@ import { ConfettiSideCannons } from "./confetti";
 import { NoSelectionOverlay } from "./no-selection-overlay";
 
 const ConfettiWithSelectionCheck = () => {
-  const selectedCpu = useStoreSelectors.use.selectedProcessor();
-  const selectedGpu = useStoreSelectors.use.selectedGraphicCard();
-  const selectedRam = useStoreSelectors.use.selectedRam();
-
-  const isAnyPartSelected = selectedCpu || selectedGpu || selectedRam;
+  const isDataEmpty = useStoreSelectors.use.isDataEmpty();
 
   return (
     <>
-      {isAnyPartSelected && <ConfettiSideCannons />}
-      {!isAnyPartSelected && <NoSelectionOverlay />}
+      {
+        !isDataEmpty() ? (
+          <ConfettiSideCannons />
+        ) : (
+          <NoSelectionOverlay />
+        )
+      }
     </>
   );
 };

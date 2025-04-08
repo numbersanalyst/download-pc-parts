@@ -3,14 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-
 import { ModeToggle } from "../theme-changer";
-
 import logoImage from "@/public/logos/logo-dark.png";
 import { Menu, X } from "lucide-react";
-
 import { Chakra_Petch } from "next/font/google";
 import clsx from "clsx";
+import { useStoreSelectors } from "@/stores/store";
+
 const chakraPetch = Chakra_Petch({
   weight: "400",
   subsets: ["latin"],
@@ -18,6 +17,7 @@ const chakraPetch = Chakra_Petch({
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const resetData = useStoreSelectors.use.resetData();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -103,8 +103,9 @@ export const Navbar = () => {
             <Link
               href={"/configure"}
               className="bg-white py-2 px-4 rounded-lg dark:text-black"
+              onClick={() => { resetData() }}
             >
-              Get for free
+              Get Started
             </Link>
           </nav>
         </div>
@@ -150,8 +151,9 @@ export const Navbar = () => {
                 href={"/configure/#"}
                 scroll={false}
                 className="block w-full bg-white py-2 px-4 rounded-lg text-center dark:text-black"
+                onClick={() => { resetData() }}
               >
-                Get for free
+                Get Started
               </Link>
             </div>
           </div>

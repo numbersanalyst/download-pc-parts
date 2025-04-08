@@ -1,6 +1,6 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import { createSelectors } from "./create-selectors";
-
 import { ProcessorType } from "@/data/processors";
 import { GraphicsCardsType } from "@/data/graphics-cards";
 import { RamType } from "@/data/rams";
@@ -18,9 +18,10 @@ type StoreData = {
   setGraphicCard: (gpu: GraphicsCardsType | null) => void;
   setRam: (ram: RamType | null) => void;
   resetData: () => void;
+  isDataEmpty: () => boolean;
 };
 
-const useStore = create<StoreData>((set) => ({
+const useStore = create<StoreData>()(persist((set, get) => ({
   selectedCpuBrand: "",
   selectedGpuBrand: "",
   selectedProcessor: null,
@@ -46,6 +47,16 @@ const useStore = create<StoreData>((set) => ({
       selectedGraphicCard: null,
       selectedRam: null,
     }),
+  isDataEmpty: () => {
+    const state = get();
+    return !state.selectedCpuBrand && 
+           !state.selectedGpuBrand && 
+           !state.selectedProcessor && 
+           !state.selectedGraphicCard && 
+           !state.selectedRam;
+  },
+}), {
+  name: "downloadpcparts-data",
 }));
 
 export const useStoreSelectors = createSelectors(useStore);
