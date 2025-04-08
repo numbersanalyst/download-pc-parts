@@ -12,8 +12,8 @@ export const Hero = () => {
       <Image
         src={heroBgPhoto}
         alt="Hero Background"
-        layout="fill"
-        objectFit="cover"
+        fill
+        className="object-cover"
         priority
       />
 
