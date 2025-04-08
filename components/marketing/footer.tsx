@@ -3,6 +3,7 @@ import XSocial from "@/public/icons/x-social.svg";
 import TiktokIcon from "@/public/icons/tiktok.svg";
 import YoutubeIcon from "@/public/icons/youtube.svg";
 import flagIcon from "@/public/icons/poland.png";
+import GitHub from "@/public/icons/github.svg"
 import Image from "next/image";
 
 export const Footer = () => {
@@ -16,16 +17,30 @@ export const Footer = () => {
           </div>
           <ul className="flex justify-center gap-2.5">
             <li>
-              <Image className="invert" src={XSocial} alt="icon" />
+              <a href="https://github.com/numbersanalyst/download-pc-parts" target="_blank" className="flex items-center gap-x-4 mr-10">
+                View project on 
+                <Image className="invert size-5" src={GitHub} alt="icon" />
+              </a>
             </li>
             <li>
-              <Image className="invert" src={InstaIcon} alt="icon" />
+              <a href="https://twitter.com/swiatlinuksa" target="_blank">
+                <Image className="invert" src={XSocial} alt="icon" />
+              </a>
             </li>
             <li>
-              <Image className="invert" src={TiktokIcon} alt="icon" />
+              <a href="http://www.instagram.com/olimpia22111?igsh=OWZmcjlqdHgwbjRy" target="_blank">
+                <Image className="invert" src={InstaIcon} alt="icon" />
+              </a>
             </li>
             <li>
-              <Image className="invert" src={YoutubeIcon} alt="icon" />
+              <a href="http://www.tiktok.com/@itzk.ali2?_t=ZN-8vMPK0AOVgE&_r=1" target="_blank">
+                <Image className="invert" src={TiktokIcon} alt="icon" />
+              </a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/@szqr0tka714" target="_blank">
+                <Image className="invert" src={YoutubeIcon} alt="icon" />
+              </a>
             </li>
           </ul>
         </div>
