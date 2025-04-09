@@ -33,10 +33,19 @@ export function getGpuNameValue(): string {
   const selectedGpuBrand = useStoreSelectors.use.selectedGpuBrand();
   const selectedGraphicCard = useStoreSelectors.use.selectedGraphicCard();
 
-  return (
-    `${selectedGpuBrand} ${selectedGraphicCard?.model} ${selectedGraphicCard?.vram}` ||
-    "Your Custom GPU Name"
-  );
+  if (!selectedGraphicCard) {
+    return "Your Custom GPU Name";
+  }
+
+  if (selectedGraphicCard.model && !selectedGpuBrand && !selectedGraphicCard.vram) {
+    return selectedGraphicCard.model;
+  }
+
+  return selectedGpuBrand === "AMD"
+    ? `${selectedGpuBrand} ${selectedGraphicCard.model} ${selectedGraphicCard.vram}`
+    : selectedGpuBrand === "Intel"
+    ? `Intel(R) ${selectedGraphicCard.model} ${selectedGraphicCard.vram}`
+    : `${selectedGpuBrand} ${selectedGraphicCard.model} ${selectedGraphicCard.vram}`;
 }
 
 export function getHardwareScriptsData(): HardwareData {
