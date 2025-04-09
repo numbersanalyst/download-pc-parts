@@ -1,10 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ShieldBan } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const NoSelectionOverlay = () => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   if (!isVisible) return null;
 
