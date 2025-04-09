@@ -23,11 +23,11 @@ function CpuInstallationGuide({scriptsData, downloadScript }: CpuInstallationGui
             <Tabs defaultValue="tab-1" onValueChange={setActiveTab}>
                 <div className="absolute -top-7 left-0 right-0 flex justify-center">
                     <TabsList className="gap-3 bg-white dark:bg-black border border-border px-2 py-6 rounded-full shadow-lg mb-3">
-                        <CustomTabsTrigger value="tab-1" isActive={activeTab === "tab-1"}>
+                        <CustomTabsTrigger value="tab-1" isActive={activeTab === "tab-1"} layoutId="lamp-cpu">
                             <Bot className="-ms-0.5 me-1.5 opacity-60" size={16} strokeWidth={2} aria-hidden="true" />
                             Automatically
                         </CustomTabsTrigger>
-                        <CustomTabsTrigger value="tab-2" isActive={activeTab === "tab-2"}>
+                        <CustomTabsTrigger value="tab-2" isActive={activeTab === "tab-2"} layoutId="lamp-cpu">
                             <ListOrdered className="-ms-0.5 me-1.5 opacity-60" size={16} strokeWidth={2} aria-hidden="true" />
                             Manual
                         </CustomTabsTrigger>

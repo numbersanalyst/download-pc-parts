@@ -7,12 +7,14 @@ type CustomTabsTriggerProps = {
   value: string;
   isActive: boolean | undefined;
   children: React.ReactNode;
+  layoutId?: string;
 };
 
 export function CustomTabsTrigger({
   value,
   isActive,
   children,
+  layoutId="lamp",
 }: CustomTabsTriggerProps) {
   return (
     <TabsTrigger
@@ -22,7 +24,7 @@ export function CustomTabsTrigger({
       {children}
       {isActive && (
         <motion.div
-          layoutId="lamp"
+          layoutId={layoutId}
           className="absolute inset-0 w-full bg-primary/5 rounded-full z-1"
           initial={false}
           transition={{
