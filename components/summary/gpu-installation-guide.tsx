@@ -15,6 +15,7 @@ interface GpuInstallationGuideProps {
 
 function GpuInstallationGuide({ scriptsData, downloadScript }: GpuInstallationGuideProps) {
   const [activeTab, setActiveTab] = useState("tab-1");
+  const mainScriptName = scriptsData.scripts[0]?.name ?? "gpu_changer.ps1";
   const gpuNameValue = getGpuNameValue();
 
   return (
@@ -24,7 +25,7 @@ function GpuInstallationGuide({ scriptsData, downloadScript }: GpuInstallationGu
           <TabsList className="gap-3 bg-white dark:bg-black border border-border px-2 py-6 rounded-full shadow-lg mb-3">
             <CustomTabsTrigger value="tab-1" isActive={activeTab === "tab-1"}>
               <Bot className="-ms-0.5 me-1.5 opacity-60" size={16} strokeWidth={2} aria-hidden="true" />
-              Instructions
+              Automatically
             </CustomTabsTrigger>
             <CustomTabsTrigger value="tab-2" isActive={activeTab === "tab-2"}>
               <ListOrdered className="-ms-0.5 me-1.5 opacity-60" size={16} strokeWidth={2} aria-hidden="true" />
@@ -39,25 +40,20 @@ function GpuInstallationGuide({ scriptsData, downloadScript }: GpuInstallationGu
         {/* Automatic/Instructions Tab */}
         <TabsContent value="tab-1">
           <Steps>
-            <Step title="Run Helper Script (Optional)" icon={<PlayCircle className="size-5" />}>
+            <Step title="Download Script" icon={<Download className="size-5" />}>
               <p>
-                Download and run the <code>{scriptsData.scripts[0].name}</code> script for guidance and links. Right-click and select "Run with PowerShell".
+                Click the button below to get the <code>{mainScriptName}</code> script. You can also find it in the <b>Configuration Scripts</b> list further down.
               </p>
-              <ShinyButton className="mt-2 px-6 py-1.5 bg-secondary rounded-md" onClick={() => { downloadScript(scriptsData.scripts[0].name, scriptsData.scripts[0].content) }}>Download Helper</ShinyButton>
+              <ShinyButton className="mt-2 px-12 py-2 bg-secondary rounded-md" onClick={() => { downloadScript(mainScriptName, scriptsData.scripts[0].content) }}>Download now</ShinyButton>
             </Step>
-            <Step title="Download Driver" icon={<Download className="size-5" />}>
+            <Step title="Run Script" icon={<PlayCircle className="size-5" />}>
               <p>
-                Go to your GPU manufacturer's website (NVIDIA, AMD, or Intel) and download the latest stable driver for your specific GPU model and operating system.
-              </p>
-            </Step>
-            <Step title="Install Driver" icon={<Code className="size-5" />}>
-              <p>
-                Run the downloaded installer. Follow the on-screen instructions. It's often recommended to select the "Clean Installation" option if available to remove old driver files.
+                Find the downloaded <code>{mainScriptName}</code> file. Right-click on it and select <b>"Run with PowerShell"</b>. Approve the administrator prompt if it appears.
               </p>
             </Step>
-            <Step title="Restart & Verify" icon={<Check className="size-5" />}>
+            <Step title="Follow Prompts" icon={<Code className="size-5" />}>
               <p>
-                Restart your computer after the installation is complete. Verify the driver installation by checking the Device Manager (devmgmt.msc) under "Display adapters" or using the manufacturer's control panel software (e.g., NVIDIA Control Panel, AMD Software: Adrenalin Edition).
+                A PowerShell window will open. The script will show your current GPUs and ask which one you want to change. Simply follow the on-screen instructions (usually pressing 'Y' or 'N' and Enter).
               </p>
             </Step>
           </Steps>
@@ -137,6 +133,7 @@ function GpuInstallationGuide({ scriptsData, downloadScript }: GpuInstallationGu
                 <li>Paste the desired GPU name (from the code block above) into the <strong>"Value data"</strong> field.</li>
                 <li>Click <strong>OK</strong>.</li>
               </ul>
+              <p><b>Note:</b> This change is temporary and may revert on restart or driver update unless you also set up the persistence task described in the automatic script.</p>
             </Step>
           </Steps>
         </TabsContent>
