@@ -10,7 +10,7 @@ import clsx from "clsx";
 import { motion } from "framer-motion";
 
 import { Chakra_Petch } from "next/font/google";
-import { ArrowRight, Book } from "lucide-react";
+import { ArrowRight, MonitorCheck } from "lucide-react";
 import { useStoreSelectors } from "@/stores/store";
 const chakraPetch = Chakra_Petch({
   weight: "400",
@@ -25,18 +25,17 @@ export const Hero = () => {
 
       <div className="container mx-auto max-w-screen-xl relative">
         <div className="flex items-center justify-center">
-          <a
-            href="#"
+          <div
             className="inline-flex gap-3 border py-1 px-3 rounded-lg border-white/30"
           >
             <span className="bg-[linear-gradient(to_right,#F87AFF,#FB93D0,#FFDD99,#C3F0B2,#2FD8FE)] text-transparent bg-clip-text">
               Version 2.0 is here
             </span>
             <span className="inline-flex items-center gap-2">
-              <span>Read More</span>
-              <Book size={16} />
+              <span>Test it now</span>
+              <MonitorCheck size={16} />
             </span>
-          </a>
+          </div>
         </div>
 
         <div className="flex justify-center mt-8">
@@ -91,7 +90,7 @@ export const Hero = () => {
 
         <div className="flex justify-center mt-8">
           <Link href={"/configure"}>
-            <RainbowButton>{isDataEmpty() ? "Get Started Now" : "Continue Configuration"}<ArrowRight className="ml-2 size-4"/></RainbowButton>
+            <RainbowButton>{isDataEmpty() ? "Get Started Now" : "Continue Configuration"}<ArrowRight className="ml-2 size-4" /></RainbowButton>
           </Link>
         </div>
       </div>
