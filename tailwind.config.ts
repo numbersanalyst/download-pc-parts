@@ -15,6 +15,12 @@ export default {
       container: {
         padding: "1rem",
         center: true,
+        screens: {
+          sm: '640px',
+          md: '768px',
+          lg: '1024px',
+          xl: '1280px',
+        },
       },
       colors: {
         background: "hsl(var(--background))",
