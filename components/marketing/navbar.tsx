@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ModeToggle } from "../theme-changer";
 import logoImage from "@/public/logos/logo-dark.png";
 import { Menu, X } from "lucide-react";
@@ -17,15 +17,28 @@ const chakraPetch = Chakra_Petch({
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const resetData = useStoreSelectors.use.resetData();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <div className="bg-black sticky top-0 z-50">
-      <div className="px-4">
+    <div className={clsx(
+      "bg-black sticky top-0 z-50 transition-all duration-300",
+      isScrolled && "backdrop-blur-md bg-black/80"
+    )}>
+      <div className="max-w-screen-2xl mx-auto px-4">
         <div className="py-4 flex items-center justify-between">
           <a href="#">
             <div className="flex items-center gap-3">
