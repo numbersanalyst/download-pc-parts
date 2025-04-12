@@ -12,8 +12,9 @@ import { motion } from "framer-motion";
 import { Chakra_Petch } from "next/font/google";
 import { ArrowRight, MonitorCheck } from "lucide-react";
 import { useStoreSelectors } from "@/stores/store";
+
 const chakraPetch = Chakra_Petch({
-  weight: "400",
+  weight: "500",
   subsets: ["latin"],
 });
 
@@ -42,7 +43,7 @@ export const Hero = () => {
           <div className="inline-flex relative">
             <h1
               className={clsx(
-                "text-7xl sm:text-9xl font-bold tracking-tighter text-center inline-flex",
+                "text-7xl sm:text-9xl tracking-tighter text-center inline-flex",
                 chakraPetch.className
               )}
             >
