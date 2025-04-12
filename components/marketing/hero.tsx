@@ -60,7 +60,15 @@ export const Hero = () => {
               <br /> PC PARTS
             </h1>
             <motion.div
-              className="absolute right-[-350px] top-[80px] rotate-3 hidden lg:block"
+              className="absolute right-[-350px] top-[80px] hidden lg:block"
+              initial={{ opacity: 0.0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0, rotate: 3 }}
+              whileDrag={{ scale: 1.1, rotate: 0 }}
+              transition={{
+                delay: 0.2,
+                duration: 0.3,
+                ease: "easeInOut",
+              }}
               drag
               dragSnapToOrigin
             >
@@ -74,7 +82,15 @@ export const Hero = () => {
               />
             </motion.div>
             <motion.div
-              className="absolute left-[-320px] top-[80px] -rotate-3 hidden lg:block"
+              className="absolute left-[-320px] top-[80px] hidden lg:block"
+              initial={{ opacity: 0.0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0, rotate: -3 }}
+              whileDrag={{ scale: 1.1, rotate: 0 }}
+              transition={{
+                delay: 0.2,
+                duration: 0.3,
+                ease: "easeInOut",
+              }}
               drag
               dragSnapToOrigin
             >
