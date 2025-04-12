@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
 import { Chakra_Petch } from "next/font/google";
 import { ArrowRight, MonitorCheck } from "lucide-react";
 import { useStoreSelectors } from "@/stores/store";
+import { useEffect, useState } from "react";
 
 const chakraPetch = Chakra_Petch({
   weight: "500",
@@ -19,7 +20,15 @@ const chakraPetch = Chakra_Petch({
 });
 
 export const Hero = () => {
+  const [isContinue, setIsContinue] = useState<boolean>(false);
   const isDataEmpty = useStoreSelectors.use.isDataEmpty();
+
+  useEffect(() => {
+    if (!isDataEmpty()) {
+      setIsContinue(true);
+    }
+  }, []);
+
   return (
     <div className="bg-black text-white bg-[linear-gradient(to_bottom,#000,#200D42_34%,#4F21A1_65%,#A46EDB_82%)] py-[72px] sm:py-24 relative overflow-hidden">
       <div className="absolute h-[375px] w-[750px] sm:w-[1536px] sm:h-[768px] lg:w-[2400px] lg:h-[1200px] rounded-[100%] left-1/2 -translate-x-1/2 border border-[#B48CDE] bg-[radial-gradient(closest-side,#000_82%,#9560EB)] top-[calc(100%-96px)] sm:top-[calc(100%-120px)]"></div>
@@ -91,7 +100,7 @@ export const Hero = () => {
 
         <div className="flex justify-center mt-8">
           <Link href={"/configure"}>
-            <RainbowButton>{isDataEmpty() ? "Get Started Now" : "Continue Configuration"}<ArrowRight className="ml-2 size-4" /></RainbowButton>
+            <RainbowButton>{isContinue ? "Continue Configuration" : "Get Started Now"}<ArrowRight className="ml-2 size-4" /></RainbowButton>
           </Link>
         </div>
       </div>
