@@ -2,7 +2,7 @@ import { Banner } from "@/components/ui/banner-template";
 
 export function RainbowBanner() {
   return (
-    <div className="relative w-full">
+    <div className="relative w-full bg-background">
       <Banner
         message="🎉 The Future is Now!"
         height="60px"

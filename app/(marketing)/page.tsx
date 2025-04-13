@@ -9,7 +9,6 @@ import { FAQs } from "@/components/marketing/faqs";
 import { CallToAction } from "@/components/marketing/call-to-action";
 import { Footer } from "@/components/marketing/footer";
 
-
 export default function Home() {
   return (
     <>
