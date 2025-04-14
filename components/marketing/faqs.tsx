@@ -29,6 +29,11 @@ const items = [
     answer:
       "Currently, we only support Windows 10 and Windows 11. We plan to add support for other operating systems in the future.",
   },
+  {
+    question: "Can I choose other parts to download?",
+    answer:
+      "Yes, absolutely! To select specific parts, don't choose any initially and proceed to the summary. You'll be able to customize your selection there."
+  },  
 ];
 
 const AccordionItem = ({
