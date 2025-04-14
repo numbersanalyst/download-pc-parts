@@ -6,7 +6,7 @@ import { ArrowRightIcon } from "lucide-react";
 interface PcPartProps {
   partSrc: string;
   type: string;
-  brand?: string;
+  brand?: string | null;
   title: string;
   subtitle: string;
   onClick?: () => void;
