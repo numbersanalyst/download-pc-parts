@@ -14,7 +14,7 @@ type Property = {
 
 type SelectedComponentDetailsProps = {
   type: string;
-  brand?: string;
+  brand?: string | null;
   selectedItem: {
     image: string;
     model: string;

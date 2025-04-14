@@ -20,6 +20,10 @@ export function getCpuNameValue(): string {
   const selectedCpuBrand = useStoreSelectors.use.selectedCpuBrand();
   const selectedProcessor = useStoreSelectors.use.selectedProcessor();
 
+  if (!selectedCpuBrand && selectedProcessor?.model) {
+    return selectedProcessor.model;
+  }
+
   return selectedProcessor
     ? selectedCpuBrand === "AMD"
       ? `${selectedCpuBrand} ${selectedProcessor.model} ${selectedProcessor.coreCount}-Core Processor`
@@ -37,7 +41,7 @@ export function getGpuNameValue(): string {
     return "Your Custom GPU Name";
   }
 
-  if (selectedGraphicCard.model && !selectedGpuBrand && !selectedGraphicCard.vram) {
+  if (!selectedGpuBrand && selectedGraphicCard.model) {
     return selectedGraphicCard.model;
   }
 

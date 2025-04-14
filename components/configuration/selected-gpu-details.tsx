@@ -3,11 +3,16 @@
 import { useStoreSelectors } from "@/stores/store";
 import { SelectedComponentDetails } from "./selected-part-details";
 
-export const SelectedGpuDetails = () => {
+interface SelectedGpuDetailsProps {
+  showCustomGpu?: boolean;
+}
+export const SelectedGpuDetails = ({showCustomGpu = false} : SelectedGpuDetailsProps) => {
   const selectedGpuBrand = useStoreSelectors.use.selectedGpuBrand();
   const selectedGraphicCard = useStoreSelectors.use.selectedGraphicCard();
 
   if (!selectedGraphicCard) return null;
+
+  if (!showCustomGpu && !selectedGpuBrand) return null;
 
   const properties = [
     { title: "Model", key: "model" },

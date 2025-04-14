@@ -6,8 +6,8 @@ export type ProcessorType = {
   secondImage?: string;
   microarchitecture: string;
   socket: string;
-  coreCount: number;
-  threadCount: number;
+  coreCount: number | null;
+  threadCount: number | null;
   coreClock: string;
   boostClock: string | null;
   tdp: string;

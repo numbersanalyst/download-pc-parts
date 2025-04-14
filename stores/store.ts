@@ -6,14 +6,14 @@ import { GraphicsCardsType } from "@/data/graphics-cards";
 import { RamType } from "@/data/rams";
 
 type StoreData = {
-  selectedCpuBrand: "AMD" | "Intel" | "";
-  selectedGpuBrand: "AMD" | "Intel" | "Nvidia" | "";
+  selectedCpuBrand: "AMD" | "Intel" | null;
+  selectedGpuBrand: "AMD" | "Intel" | "Nvidia" | null;
   selectedProcessor: ProcessorType | null;
   selectedGraphicCard: GraphicsCardsType | null;
   selectedRam: RamType | null;
 
-  setCpuBrand: (brand: "AMD" | "Intel" | "") => void;
-  setGpuBrand: (brand: "AMD" | "Intel" | "Nvidia" | "") => void;
+  setCpuBrand: (brand: "AMD" | "Intel" | null) => void;
+  setGpuBrand: (brand: "AMD" | "Intel" | "Nvidia" | null) => void;
   setProcessor: (processor: ProcessorType | null) => void;
   setGraphicCard: (gpu: GraphicsCardsType | null) => void;
   setRam: (ram: RamType | null) => void;
@@ -22,8 +22,8 @@ type StoreData = {
 };
 
 const useStore = create<StoreData>()(persist((set, get) => ({
-  selectedCpuBrand: "",
-  selectedGpuBrand: "",
+  selectedCpuBrand: null,
+  selectedGpuBrand: null,
   selectedProcessor: null,
   selectedGraphicCard: null,
   selectedRam: null,
@@ -41,8 +41,8 @@ const useStore = create<StoreData>()(persist((set, get) => ({
   setRam: (ram) => set({ selectedRam: ram }),
   resetData: () =>
     set({
-      selectedCpuBrand: "",
-      selectedGpuBrand: "",
+      selectedCpuBrand: null,
+      selectedGpuBrand: null,
       selectedProcessor: null,
       selectedGraphicCard: null,
       selectedRam: null,

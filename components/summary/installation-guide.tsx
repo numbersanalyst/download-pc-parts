@@ -10,6 +10,8 @@ import { getHardwareScriptsData, HardwareData } from "@/data/hardware-data";
 import { CpuInstallationGuide } from "./cpu-installation-guide";
 import { GpuInstallationGuide } from "./gpu-installation-guide";
 import { RamInstallationGuide } from "./ram-installation-guide";
+import { CustomCpuInput } from "./custom-cpu-input";
+import { CustomGpuInput } from "./custom-gpu-input";
 
 function InstallationGuide() {
   const [selectedHardware, setSelectedHardware] = useState<string | null>(null);
@@ -49,7 +51,8 @@ function InstallationGuide() {
 
         {selectedHardware === "cpu" && (
           <>
-            <SelectedCpuDetails />
+            <CustomCpuInput />
+            <SelectedCpuDetails showCustomCpu={true} />
             <CpuInstallationGuide
               scriptsData={hardwareData.cpu}
               downloadScript={downloadScript}
@@ -59,7 +62,8 @@ function InstallationGuide() {
 
         {selectedHardware === "gpu" && (
           <>
-            <SelectedGpuDetails />
+            <CustomGpuInput />
+            <SelectedGpuDetails showCustomGpu={true} />
             <GpuInstallationGuide
               scriptsData={hardwareData.gpu}
               downloadScript={downloadScript}
