@@ -3,9 +3,10 @@
 import Image from "next/image";
 import helixImage from "@/public/images/helix2.png";
 import emojiStarImage from "@/public/images/emojistar.png";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { CheckCircle2 } from "lucide-react";
+import { CircleCheckIcon } from "../ui/circle-check";
 
 export const CallToAction = () => {
   const [email, setEmail] = useState("");
@@ -71,16 +72,21 @@ export const CallToAction = () => {
             Contact
           </button>
         </form>
-        {isSubmitted && (
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-6 flex items-center justify-center gap-2 text-green-400 absolute -bottom-14 md:-bottom-12 md:left-0 md:right-0 left-14 right-14"
-          >
-            <CheckCircle2 className="md:size-4 size-5" />
-            <p>Thanks! We'll bombard you with messages, stay tuned! 🚀</p>
-          </motion.div>
-        )}
+        <AnimatePresence>
+          {isSubmitted && (
+            <motion.div
+              key="success-message"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.3 }}
+              className="mt-6 flex items-center justify-center gap-2 text-green-400 absolute -bottom-14 md:-bottom-12 md:left-0 md:right-0 left-14 right-14"
+            >
+              <CircleCheckIcon size={20} className="text-green-400" />
+              <p>Thanks! We'll bombard you with messages, stay tuned! 🚀</p>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
