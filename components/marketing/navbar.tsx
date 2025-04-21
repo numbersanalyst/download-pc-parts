@@ -5,10 +5,10 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { ModeToggle } from "../theme-changer";
 import logoImage from "@/public/logos/logo-dark.png";
-import { Menu, X } from "lucide-react";
 import { Chakra_Petch } from "next/font/google";
 import clsx from "clsx";
 import { useStoreSelectors } from "@/stores/store";
+import { MenuIcon } from "../ui/menu";
 
 const chakraPetch = Chakra_Petch({
   weight: "400",
@@ -74,14 +74,10 @@ export const Navbar = () => {
             className="border border-white border-opacity-30 h-10 w-10 inline-flex justify-center items-center rounded-lg md:hidden"
             onClick={toggleMenu}
           >
-            {isMenuOpen ? (
-              <X className="h-6 w-6 text-white" />
-            ) : (
-              <Menu className="h-6 w-6 text-white" />
-            )}
+            <MenuIcon size={24} className="text-white" isOpen={isMenuOpen} />
           </button>
           {/* Computer menu */}
-          <nav className="gap-4 md:gap-6 items-center hidden md:flex">
+          <nav className="gap-4 lg:gap-6 items-center hidden md:flex">
             <a
               href="#companies"
               className="text-opacity-60 text-white hover:text-opacity-100 transition"
