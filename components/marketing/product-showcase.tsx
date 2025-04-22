@@ -19,7 +19,7 @@ export const ProductShowcase = () => {
   return (
     <div
       id="app"
-      className="bg-black text-white bg-gradient-to-b from-black to-[#5D2CA8] py-[72px] lg:py-24"
+      className="bg-black text-white bg-gradient-to-b from-black to-[#5D2CA8] py-[72px] lg:py-24 overflow-hidden"
     >
       <div className="container">
         <h2 className="text-center text-5xl sm:text-6xl font-bold tracking-tighter">
