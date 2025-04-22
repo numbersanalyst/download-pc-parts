@@ -31,11 +31,11 @@ export const CallToAction = () => {
   return (
     <div
       id="contact"
-      className="bg-black text-white py-[72px] sm:py-24 text-center"
+      className="bg-black text-white py-[72px] sm:py-24 text-center overflow-hidden"
     >
       <div className="container max-w-xl relative">
         <motion.div
-          className="absolute top-6 left-[calc(100%-24px)]"
+          className="absolute top-6 left-[calc(100%-24px)] hidden lg:block"
           drag
           dragSnapToOrigin
         >
@@ -47,7 +47,7 @@ export const CallToAction = () => {
           />
         </motion.div>
         <motion.div
-          className="absolute -top-[120px] right-[calc(100%-24px)]"
+          className="absolute -top-[100px] right-[calc(100%-24px)] hidden lg:block"
           drag
           dragSnapToOrigin>
           <Image
