@@ -28,12 +28,6 @@ function CodeBlock({
         language={language}
         style={vscDarkPlus}
         showLineNumbers={showLineNumbers}
-        codeTagProps={{
-          style: {
-            whiteSpace: "pre-wrap",
-            wordBreak: "break-word",
-          },
-        }}
         customStyle={{
           margin: 0,
           borderRadius: "0.5rem",
@@ -45,13 +39,13 @@ function CodeBlock({
       </SyntaxHighlighter>
       <button
         onClick={handleCopy}
-        className="absolute right-4 top-4 h-6 w-6 rounded-md hover:bg-zinc-700 inline-flex items-center justify-center"
+        className="absolute right-8 top-4 size-7 rounded-md hover:bg-zinc-700 inline-flex items-center justify-center shadow-md bg-zinc-800/70 backdrop-blur-sm"
         aria-label={copied ? "Copied" : "Copy to clipboard"}
       >
         {copied ? (
-          <Check className="h-3 w-3 text-zinc-50" />
+          <Check className="size-4 text-zinc-50" />
         ) : (
-          <Clipboard className="h-3 w-3 text-zinc-50" />
+          <Clipboard className="size-4 text-zinc-50" />
         )}
         <span className="sr-only">{copied ? "Copied" : "Copy"}</span>
       </button>

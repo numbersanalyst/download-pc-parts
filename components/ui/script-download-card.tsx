@@ -1,27 +1,50 @@
-import { Download, Terminal } from "lucide-react";
+import { useState } from "react";
+import { Download, Terminal, Eye } from "lucide-react";
+import { ScriptPreviewModal } from "./script-preview-modal";
 
 interface ScriptDownloadCardProps {
   scriptName: string;
+  scriptContent: string;
   onDownload: (name: string) => void;
 }
 
-export function ScriptDownloadCard({ scriptName, onDownload }: ScriptDownloadCardProps) {
+export function ScriptDownloadCard({ scriptName, scriptContent, onDownload }: ScriptDownloadCardProps) {
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+
   return (
-    <div
-      className="bg-secondary hover:bg-secondary/50 rounded-lg p-4 flex items-center justify-between transition-colors"
-    >
-      <div className="flex items-center space-x-3">
-        <Terminal className="w-5 h-5 text-gray-500 flex-shrink-0" />
-        <span className="font-medium truncate">{scriptName}</span>
+    <>
+      <div className="bg-secondary hover:bg-secondary/50 rounded-lg p-4 flex items-center justify-between transition-colors">
+        <div className="flex items-center space-x-3 min-w-0">
+          <Terminal className="size-5 text-gray-500 flex-shrink-0" />
+          <span className="font-medium truncate">{scriptName}</span>
+        </div>
+        <div className="flex items-center gap-6 flex-shrink-0 ml-2">
+          <button
+            onClick={() => setIsPreviewOpen(true)}
+            className="flex items-center space-x-2 text-primary/75 hover:text-gray-700"
+            aria-label={`Preview ${scriptName}`}
+          >
+            <Eye className="size-5" />
+            <span className="hidden lg:inline">Preview</span>
+          </button>
+          <button
+            onClick={() => onDownload(scriptName)}
+            className="flex items-center space-x-2 text-primary hover:text-gray-500"
+            aria-label={`Download ${scriptName}`}
+          >
+            <Download className="size-5" />
+            <span className="hidden sm:inline">Download</span>
+          </button>
+        </div>
       </div>
-      <button
-        onClick={() => onDownload(scriptName)}
-        className="flex items-center space-x-2 text-primary hover:text-gray-500 flex-shrink-0 ml-2"
-        aria-label={`Download ${scriptName}`}
-      >
-        <Download className="w-5 h-5" />
-        <span className="hidden sm:inline">Download</span>
-      </button>
-    </div>
+
+      {/* Script Preview Modal */}
+      <ScriptPreviewModal
+        isOpen={isPreviewOpen}
+        onClose={() => setIsPreviewOpen(false)}
+        scriptName={scriptName}
+        scriptContent={scriptContent}
+      />
+    </>
   );
 } 

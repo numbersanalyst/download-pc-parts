@@ -24,6 +24,7 @@ export function ScriptsGrid({ scripts, downloadScript, title = "Configuration Sc
           <ScriptDownloadCard
             key={script.name}
             scriptName={script.name}
+            scriptContent={script.content}
             onDownload={(name) => downloadScript(name, script.content)}
           />
         ))}
