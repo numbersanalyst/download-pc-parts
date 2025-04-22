@@ -1,112 +1,51 @@
-'use client';
-
-import type { Variants } from 'motion/react';
-import { motion, useAnimation } from 'motion/react';
-import type { HTMLAttributes } from 'react';
-import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
+import { forwardRef, HTMLAttributes } from 'react';
 import { cn } from '@/lib/utils';
-
-export interface MenuIconHandle {
-  startAnimation: () => void;
-  stopAnimation: () => void;
-}
 
 interface MenuIconProps extends HTMLAttributes<HTMLDivElement> {
   size?: number;
   isOpen?: boolean;
 }
 
-const lineVariants: Variants = {
-  normal: {
-    rotate: 0,
-    y: 0,
-    opacity: 1,
-  },
-  animate: (custom: number) => ({
-    rotate: custom === 1 ? 45 : custom === 3 ? -45 : 0,
-    y: custom === 1 ? 6 : custom === 3 ? -6 : 0,
-    opacity: custom === 2 ? 0 : 1,
-    transition: {
-      type: 'spring',
-      stiffness: 260,
-      damping: 20,
-    },
-  }),
-};
+export interface MenuIconHandle {
+  startAnimation: () => void;
+  stopAnimation: () => void;
+}
 
-const MenuIcon = forwardRef<MenuIconHandle, MenuIconProps>(
-  ({ className, size = 28, isOpen = false, ...props }, ref) => {
-    const controls = useAnimation();
-    const isControlledRef = useRef(false);
-
-    useEffect(() => {
-      if (isOpen) {
-        controls.start('animate');
-      } else {
-        controls.start('normal');
-      }
-    }, [isOpen, controls]);
-
-    useImperativeHandle(ref, () => {
-      isControlledRef.current = true;
-      return {
-        startAnimation: () => controls.start('animate'),
-        stopAnimation: () => controls.start('normal'),
-      };
-    });
-
+export const MenuIcon = forwardRef<MenuIconHandle, MenuIconProps>(
+  ({ className, size = 24, isOpen = false, ...props }, ref) => {
     return (
       <div
         className={cn(
-          `cursor-pointer select-none p-2 flex items-center justify-center`,
+          "flex items-center justify-center",
           className
         )}
         {...props}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={size}
-          height={size}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <motion.line
-            x1="4"
-            y1="6"
-            x2="20"
-            y2="6"
-            variants={lineVariants}
-            animate={controls}
-            custom={1}
+        <div className="relative" style={{ width: size, height: size }}>
+          <span 
+            className={cn(
+              "absolute left-0 w-full h-0.5 bg-current transition-all duration-300 ease-in-out",
+              isOpen ? "top-1/2 -translate-y-1/2 rotate-45" : ""
+            )}
+            style={{ top: isOpen ? "50%" : "20%" }}
           />
-          <motion.line
-            x1="4"
-            y1="12"
-            x2="20"
-            y2="12"
-            variants={lineVariants}
-            animate={controls}
-            custom={2}
+          <span 
+            className={cn(
+              "absolute top-1/2 left-0 w-full h-0.5 bg-current -translate-y-1/2 transition-all duration-300 ease-in-out",
+              isOpen && "opacity-0"
+            )}
           />
-          <motion.line
-            x1="4"
-            y1="18"
-            x2="20"
-            y2="18"
-            variants={lineVariants}
-            animate={controls}
-            custom={3}
+          <span 
+            className={cn(
+              "absolute left-0 w-full h-0.5 bg-current transition-all duration-300 ease-in-out",
+              isOpen ? "top-1/2 -translate-y-1/2 -rotate-45" : ""
+            )}
+            style={{ bottom: isOpen ? "auto" : "20%", top: isOpen ? "50%" : "auto" }}
           />
-        </svg>
+        </div>
       </div>
     );
   }
 );
 
 MenuIcon.displayName = 'MenuIcon';
-
-export { MenuIcon };
