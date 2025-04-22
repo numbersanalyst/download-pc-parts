@@ -1,8 +1,11 @@
-import { Terminal, Download, Code, Check, PlayCircle, FlaskConical } from "lucide-react";
+import { useState } from "react";
+import { Terminal, Download, Check, PlayCircle, FlaskConical, Gauge, ChevronUp } from "lucide-react";
 import { Card } from "../ui/card";
+import { Tabs, TabsContent, TabsList } from "../ui/tabs";
 import { Step, Steps } from "./steps";
 import { ShinyButton } from "../magicui/shiny-button";
 import { HardwareTypeData } from "@/data/hardware-data";
+import { CustomTabsTrigger } from "@/components/ui/custom-tabs-trigger";
 
 interface RamInstallationGuideProps {
   scriptsData: HardwareTypeData;
@@ -10,62 +13,155 @@ interface RamInstallationGuideProps {
 }
 
 function RamInstallationGuide({ scriptsData, downloadScript }: RamInstallationGuideProps) {
-  return (
-    <Card className="p-8 mt-20">
-      <h2 className="text-2xl font-bold mb-2 relative">{scriptsData.title}<span className="text-sm font-semibold mb-2 absolute top-0 right-2 border border-border px-3 py-2 rounded-full inline-flex gap-x-2 items-center">Beta <FlaskConical size={14}/></span></h2>
-      <h3 className="text-xl font-semibold mb-6">Configuration & Verification</h3>
-      <div>
-        <Steps>
-          <Step title="Check BIOS/UEFI Settings" icon={<Code className="size-5" />}>
-            <p>
-              Restart your computer and enter the BIOS/UEFI setup (usually by pressing DEL, F2, or F12 during boot). Navigate to the memory settings and ensure that the XMP, EXPO, or DOCP profile is enabled to run your RAM at its advertised speed. Save changes and exit.
-            </p>
-          </Step>
-          <Step title="Run Info Script (Optional)" icon={<PlayCircle className="size-5" />}>
-            <p>
-              Download and run the <code>{scriptsData.scripts[0].name}</code> script to view details about your installed RAM modules in Windows. Right-click the file and select "Run with PowerShell".
-            </p>
-            <ShinyButton className="mt-2 px-6 py-1.5 bg-secondary rounded-md" onClick={() => { downloadScript(scriptsData.scripts[0].name, scriptsData.scripts[0].content) }}>Download Info Script</ShinyButton>
-          </Step>
-          <Step title="Verify in Windows" icon={<Check className="size-5" />}>
-            <p>
-              Open Task Manager (Ctrl+Shift+Esc), go to the "Performance" tab, and select "Memory". Check the listed speed – it should match (or be very close to) the speed advertised by your RAM kit's profile (e.g., 3200MHz, 3600MHz, 6000MHz). Note that DDR (Double Data Rate) RAM speed is often shown halved in some tools; e.g., 1600MHz might mean DDR4-3200.
-            </p>
-          </Step>
-          <Step title="Stability Test (Recommended)" icon={<Terminal className="size-5" />}>
-            <p>
-              For thorough testing, especially after enabling XMP/EXPO/DOCP or overclocking, consider running a dedicated memory test like MemTest86/Memtest86+ (requires creating a bootable USB drive) or Windows Memory Diagnostic (search from Start Menu).
-            </p>
-          </Step>
-        </Steps>
+  const [activeTab, setActiveTab] = useState("check");
+  const mainScriptName = scriptsData.scripts[0]?.name ?? "ram_info.ps1";
 
-        <div>
-          <h3 className="text-xl font-semibold my-4 pt-4 border-t">
-            Utility Scripts
-          </h3>
-          <div className="grid md:grid-cols-2 gap-4">
-            {scriptsData.scripts.map((script) => (
-              <div
-                key={script.name}
-                className="bg-secondary hover:bg-secondary/50 rounded-lg p-4 flex items-center justify-between transition-colors"
-              >
-                <div className="flex items-center space-x-3">
-                  <Terminal className="w-5 h-5 text-gray-500" />
-                  <span className="font-medium">{script.name}</span>
-                </div>
-                <button
-                  onClick={() => downloadScript(script.name, script.content)}
-                  className="flex items-center space-x-2 text-primary hover:text-gray-500"
-                  aria-label={`Download ${script.name}`}
-                >
-                  <Download className="w-5 h-5" />
-                  <span>Download</span>
-                </button>
-              </div>
-            ))}
-          </div>
+  return (
+    <Card className="p-8 relative mt-20">
+      <Tabs defaultValue="check" onValueChange={setActiveTab}>
+        <div className="absolute -top-7 left-0 right-0 flex justify-center">
+          <TabsList className="gap-3 bg-white dark:bg-black border border-border px-2 py-6 rounded-full shadow-lg mb-3">
+            <CustomTabsTrigger value="check" isActive={activeTab === "check"} layoutId="lamp-ram">
+              <Check className="-ms-0.5 me-1.5 opacity-60" size={16} strokeWidth={2} aria-hidden="true" />
+              Check
+            </CustomTabsTrigger>
+            <CustomTabsTrigger value="optimize" isActive={activeTab === "optimize"} layoutId="lamp-ram">
+              <Gauge className="-ms-0.5 me-1.5 opacity-60" size={16} strokeWidth={2} aria-hidden="true" />
+              Optimize
+            </CustomTabsTrigger>
+          </TabsList>
         </div>
-      </div>
+
+        <h2 className="text-2xl font-bold mb-2 relative">{scriptsData.title}<span className="text-sm font-semibold mb-2 absolute top-0 right-2 border border-border px-3 py-2 rounded-full inline-flex gap-x-2 items-center">Beta <FlaskConical size={14} /></span></h2>
+        <h3 className="text-xl font-semibold">Memory Verification & Optimization</h3>
+        <h4 className="mb-6">(we currently working on new RAM installation solution)</h4>
+
+        {/* Check Tab */}
+        <TabsContent value="check">
+          <Steps>
+            <Step title="Download Info Script" icon={<Download className="size-5" />}>
+              <p>
+                Click the button below to get the <code>{mainScriptName}</code> script that will help you check your RAM details.
+              </p>
+              <ShinyButton className="mt-2 px-12 py-2 bg-secondary rounded-md" onClick={() => { downloadScript(scriptsData.scripts[0].name, scriptsData.scripts[0].content) }}>Download RAM Info Script</ShinyButton>
+            </Step>
+            <Step title="Run the Script" icon={<PlayCircle className="size-5" />}>
+              <p>
+                Find the downloaded <code>{mainScriptName}</code> file. Right-click on it and select <b>"Run with PowerShell"</b>. This will show you detailed information about your RAM modules.
+              </p>
+            </Step>
+            <Step title="Check Current Speed" icon={<Gauge className="size-5" />}>
+              <p>
+                First, verify your current RAM speed in Task Manager or using the RAM Info script. If your RAM is running at a lower speed than its rating (e.g., 2133MHz instead of 3200MHz), you need to enable XMP/EXPO/DOCP. Follow steps bellow to do that. That will boost your FPS.
+              </p>
+            </Step>
+            <Step title="Enter BIOS/UEFI" icon={<ChevronUp className="size-5" />}>
+              <p>
+                Restart your computer and enter BIOS/UEFI by pressing the designated key during startup (usually DEL, F2, or F12, depending on your motherboard). Check your motherboard manual if unsure.
+              </p>
+            </Step>
+            <Step title="Enable XMP/EXPO/DOCP" icon={<Check className="size-5" />}>
+              <p>
+                Navigate to the memory settings section (often called "Overclocking", "Advanced", or "AI Tweaker"). Look for XMP (Intel), EXPO (AMD), or DOCP (ASUS) and enable it. Select Profile 1 if multiple profiles are available. Save changes and exit (usually F10).
+              </p>
+              <p className="mt-2">
+                After your system reboots, run the RAM Info script again or check Task Manager to verify the speed has increased to the rated value.
+              </p>
+            </Step>
+          </Steps>
+          <div>
+            <h3 className="text-xl font-semibold my-4 pt-4 border-t">
+              Utility Scripts
+            </h3>
+            <div className="grid md:grid-cols-2 gap-4">
+              {scriptsData.scripts.map((script) => (
+                <div
+                  key={script.name}
+                  className="bg-secondary hover:bg-secondary/50 rounded-lg p-4 flex items-center justify-between transition-colors"
+                >
+                  <div className="flex items-center space-x-3">
+                    <Terminal className="w-5 h-5 text-gray-500" />
+                    <span className="font-medium">{script.name}</span>
+                  </div>
+                  <button
+                    onClick={() => downloadScript(script.name, script.content)}
+                    className="flex items-center space-x-2 text-primary hover:text-gray-500"
+                    aria-label={`Download ${script.name}`}
+                  >
+                    <Download className="w-5 h-5" />
+                    <span>Download</span>
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </TabsContent>
+
+        {/* Optimize Tab */}
+        <TabsContent value="optimize">
+          <Steps>
+            <Step title="Download Memory Cleaner" icon={<Download className="size-5" />}>
+              <p>
+                Download Windows Memory Cleaner, a free memory optimization tool that uses native Windows features to clean up RAM. This helps speed up your system by freeing memory without needing to restart.
+              </p>
+              <div className="mt-2">
+                <a href="https://github.com/IgorMundstein/WinMemoryCleaner/releases/latest" target="_blank" rel="noopener noreferrer">
+                  <ShinyButton className="px-6 py-3 bg-secondary rounded-md inline-flex items-center gap-2">
+                    Donwload RAM Optimization Tool
+                  </ShinyButton>
+                </a>
+              </div>
+            </Step>
+            <Step title="Run the Application" icon={<PlayCircle className="size-5" />}>
+              <p>
+                After downloading, run the executable file. The application requires administrator privileges to work properly. When prompted, click "Yes" to allow the program to make changes to your device.
+              </p>
+            </Step>
+            <Step title="Optimize Your Memory" icon={<Gauge className="size-5" />}>
+              <p>
+                Click the "Optimize" button in the application to free up unused memory. You can also set up automatic optimization based on:
+              </p>
+              <ul className="list-disc pl-6 mt-2 space-y-1">
+                <li>Time intervals (every X hours)</li>
+                <li>When free memory falls below a certain percentage</li>
+              </ul>
+              <p className="mt-2">
+                The application will clean several memory areas, including standby lists, working sets, and modified page lists, helping to recover RAM that applications failed to release properly.
+              </p>
+            </Step>
+          </Steps>
+
+          <div className="mt-8 p-6 border border-border rounded-lg bg-secondary/30">
+            <div className="flex flex-col md:flex-row items-center gap-4">
+              <div className="flex items-center gap-3">
+                <div className="h-12 w-12 relative overflow-hidden rounded-full bg-primary/10 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.29 7 12 12 20.71 7"></polyline><line x1="12" y1="22" x2="12" y2="12"></line></svg>
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold">Windows Memory Cleaner</h4>
+                  <p className="text-sm opacity-70">By Igor Mundstein • Free & Open Source</p>
+                </div>
+              </div>
+              <div className="flex-grow"></div>
+              <a href="https://github.com/IgorMundstein/WinMemoryCleaner/releases/latest" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md w-full md:w-fit">
+                <Download className="size-5" />
+                <span>Download</span>
+              </a>
+            </div>
+            <div className="mt-4">
+              <p className="text-sm">
+                This free RAM cleaner uses native Windows features to clean memory areas. It helps speed up your system when programs fail to release allocated memory, letting you continue working without restarting your computer.
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <span className="text-xs bg-primary/10 px-2 py-1 rounded">Windows 10/11</span>
+                <span className="text-xs bg-primary/10 px-2 py-1 rounded">Portable</span>
+                <span className="text-xs bg-primary/10 px-2 py-1 rounded">No Installation</span>
+                <span className="text-xs bg-primary/10 px-2 py-1 rounded">3.2k+ Stars on GitHub</span>
+              </div>
+            </div>
+          </div>
+        </TabsContent>
+      </Tabs>
     </Card>
   );
 }
