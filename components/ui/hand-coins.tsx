@@ -38,6 +38,9 @@ const circleVariants: Variants = {
       damping: 10,
       bounce: 0.8,
       duration: 1,
+      repeat: Infinity,
+      repeatType: "reverse",
+      repeatDelay: 1
     },
   },
 };
@@ -67,6 +70,9 @@ const secondCircleVariants: Variants = {
       damping: 10,
       bounce: 0.8,
       duration: 1,
+      repeat: Infinity,
+      repeatType: "reverse",
+      repeatDelay: 1
     },
   },
 };
@@ -74,28 +80,54 @@ const secondCircleVariants: Variants = {
 const HandCoinsIcon = forwardRef<HandCoinsIconHandle, HandCoinsIconProps>(
   ({ className, size = 28, ...props }, ref) => {
     const controls = useAnimation();
-    const isControlledRef = useRef(false);
+    const isMounted = useRef(false);
+    const iconRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-      const sequence = async () => {
-        while (true) {
-          await controls.start('animate');
-          await controls.start('normal');
+      isMounted.current = true;
+      
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && isMounted.current) {
+              controls.start('animate');
+            } else if (isMounted.current) {
+              controls.stop();
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      
+      if (iconRef.current) {
+        observer.observe(iconRef.current);
+      }
+      
+      return () => {
+        isMounted.current = false;
+        if (iconRef.current) {
+          observer.unobserve(iconRef.current);
         }
+        observer.disconnect();
       };
-      sequence();
     }, [controls]);
 
-    useImperativeHandle(ref, () => {
-      isControlledRef.current = true;
-      return {
-        startAnimation: () => controls.start('animate'),
-        stopAnimation: () => controls.start('normal'),
-      };
-    });
+    useImperativeHandle(ref, () => ({
+      startAnimation: () => {
+        if (isMounted.current) {
+          controls.start('animate');
+        }
+      },
+      stopAnimation: () => {
+        if (isMounted.current) {
+          controls.start('normal');
+        }
+      },
+    }));
 
     return (
       <div
+        ref={iconRef}
         className={cn(
           `cursor-pointer select-none p-2 flex items-center justify-center`,
           className
@@ -120,6 +152,7 @@ const HandCoinsIcon = forwardRef<HandCoinsIconHandle, HandCoinsIconProps>(
             cx="16"
             cy="9"
             r="2.9"
+            initial="normal"
             animate={controls}
             variants={circleVariants}
           />
@@ -127,6 +160,7 @@ const HandCoinsIcon = forwardRef<HandCoinsIconHandle, HandCoinsIconProps>(
             cx="6"
             cy="5"
             r="3"
+            initial="normal"
             animate={controls}
             variants={secondCircleVariants}
           />

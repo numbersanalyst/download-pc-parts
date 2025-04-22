@@ -26,31 +26,68 @@ const pathVariants: Variants = {
   },
 };
 
+const shieldVariants: Variants = {
+  normal: {
+    scale: 1,
+    opacity: 1,
+  },
+  animate: {
+    scale: [1, 1.1],
+    opacity: [1, 0.8],
+  },
+};
+
 const ShieldCheckIcon = forwardRef<ShieldCheckIconHandle, ShieldCheckIconProps>(
   ({ className, size = 28, ...props }, ref) => {
     const controls = useAnimation();
-    const isControlledRef = useRef(false);
+    const isMounted = useRef(false);
+    const iconRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-      const sequence = async () => {
-        while (true) {
-          await controls.start('animate');
-          await controls.start('normal');
+      isMounted.current = true;
+      
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && isMounted.current) {
+              controls.start('animate');
+            } else if (isMounted.current) {
+              controls.stop();
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      
+      if (iconRef.current) {
+        observer.observe(iconRef.current);
+      }
+      
+      return () => {
+        isMounted.current = false;
+        if (iconRef.current) {
+          observer.unobserve(iconRef.current);
         }
+        observer.disconnect();
       };
-      sequence();
     }, [controls]);
 
-    useImperativeHandle(ref, () => {
-      isControlledRef.current = true;
-      return {
-        startAnimation: () => controls.start('animate'),
-        stopAnimation: () => controls.start('normal'),
-      };
-    });
+    useImperativeHandle(ref, () => ({
+      startAnimation: () => {
+        if (isMounted.current) {
+          controls.start('animate');
+        }
+      },
+      stopAnimation: () => {
+        if (isMounted.current) {
+          controls.start('normal');
+        }
+      },
+    }));
 
     return (
       <div
+        ref={iconRef}
         className={cn(
           `cursor-pointer select-none p-2 flex items-center justify-center`,
           className
@@ -70,18 +107,10 @@ const ShieldCheckIcon = forwardRef<ShieldCheckIconHandle, ShieldCheckIconProps>(
         >
           <motion.path
             d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+            initial="normal"
             animate={controls}
             transition={{ duration: 1, repeat: Infinity, repeatType: "reverse" }}
-            variants={{
-              normal: {
-                scale: 1,
-                opacity: 1,
-              },
-              animate: {
-                scale: [1, 1.1],
-                opacity: [1, 0.8],
-              },
-            }}
+            variants={shieldVariants}
           />
           <motion.path
             variants={pathVariants}
