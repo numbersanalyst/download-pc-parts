@@ -339,9 +339,6 @@ $null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
       Write-Host "Memory Module Details:" -ForegroundColor Cyan
       Get-CimInstance Win32_PhysicalMemory | Format-Table BankLabel, DeviceLocator, Capacity, Speed, Manufacturer, PartNumber -AutoSize
   
-      # Check XMP/DOCP profile status (Advanced - Requires specific WMI providers or tools, often BIOS check is easier)
-      # This is a placeholder example, actual implementation varies greatly
-      Write-Host "Note: Checking XMP/DOCP status programmatically is complex." -ForegroundColor Yellow
       Write-Host "Please verify XMP/DOCP/EXPO is enabled in your system BIOS/UEFI for optimal performance." -ForegroundColor Yellow
   
   } catch {
@@ -352,11 +349,6 @@ $null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
   Write-Host "Press any key to exit..." -ForegroundColor Cyan
   $null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
             `.trim(),
-        },
-        {
-          name: "ram_test.sh",
-          content:
-            '#!/bin/bash\n\n# RAM Testing Script (Placeholder)\necho "Testing RAM stability..."\n# Consider using tools like memtest86+ (bootable) for thorough testing.',
         },
       ],
     },
