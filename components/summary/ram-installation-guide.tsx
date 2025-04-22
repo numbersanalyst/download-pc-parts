@@ -6,6 +6,7 @@ import { Step, Steps } from "./steps";
 import { ShinyButton } from "../magicui/shiny-button";
 import { HardwareTypeData } from "@/data/hardware-data";
 import { CustomTabsTrigger } from "@/components/ui/custom-tabs-trigger";
+import { ScriptsGrid } from "../ui/scripts-grid";
 
 interface RamInstallationGuideProps {
   scriptsData: HardwareTypeData;
@@ -69,32 +70,12 @@ function RamInstallationGuide({ scriptsData, downloadScript }: RamInstallationGu
               </p>
             </Step>
           </Steps>
-          <div>
-            <h3 className="text-xl font-semibold my-4 pt-4 border-t">
-              Utility Scripts
-            </h3>
-            <div className="grid md:grid-cols-2 gap-4">
-              {scriptsData.scripts.map((script) => (
-                <div
-                  key={script.name}
-                  className="bg-secondary hover:bg-secondary/50 rounded-lg p-4 flex items-center justify-between transition-colors"
-                >
-                  <div className="flex items-center space-x-3">
-                    <Terminal className="w-5 h-5 text-gray-500" />
-                    <span className="font-medium">{script.name}</span>
-                  </div>
-                  <button
-                    onClick={() => downloadScript(script.name, script.content)}
-                    className="flex items-center space-x-2 text-primary hover:text-gray-500"
-                    aria-label={`Download ${script.name}`}
-                  >
-                    <Download className="w-5 h-5" />
-                    <span>Download</span>
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
+
+          <ScriptsGrid
+            scripts={scriptsData.scripts}
+            downloadScript={downloadScript}
+            title="Utility Scripts"
+          />
         </TabsContent>
 
         {/* Optimize Tab */}
