@@ -10,7 +10,7 @@ import clsx from "clsx";
 import { motion } from "framer-motion";
 
 import { Chakra_Petch } from "next/font/google";
-import { ArrowRight, MonitorCheck } from "lucide-react";
+import { ArrowRight, MonitorCheck, Cpu, Sparkles } from "lucide-react";
 import { useStoreSelectors } from "@/stores/store";
 import { useEffect, useState } from "react";
 
@@ -108,7 +108,7 @@ export const Hero = () => {
 
         <div className="flex justify-center">
           <p className="text-center text-xl mt-8 max-w-md">
-            Trusted by the World’s Most Gullible Tech Enthusiasts. Seamlessly
+            Trusted by the World's Most Gullible Tech Enthusiasts. Seamlessly
             acquire top-tier hardware components with unparalleled speed and
             efficiency.
           </p>
@@ -116,7 +116,7 @@ export const Hero = () => {
 
         <div className="flex justify-center mt-8">
           <Link href={"/configure"}>
-            <RainbowButton>{isContinue ? "Continue Configuration" : "Get Started Now"}<ArrowRight className="ml-2 size-4" /></RainbowButton>
+            <RainbowButton className="group">{isContinue ? "Continue Configuration" : "Get Started Now"}<ArrowRight className="ml-1 size-4 group-hover:translate-x-1 transition-transform duration-300" /></RainbowButton>
           </Link>
         </div>
       </div>

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import { scrollToElement } from "@/lib/utils";
 import { triggerConfetti } from "./confetti";
+import { Download } from "lucide-react";
 
 export const Hero = () => {
   return (
@@ -39,12 +40,13 @@ export const Hero = () => {
             download high-quality PC parts to power your dream machine.
           </div>
           <button
-            className="bg-white rounded-full w-fit text-black px-4 py-2 relative z-10"
+            className="bg-white rounded-full w-fit text-black px-5 py-3 relative z-10 flex items-center gap-2 hover:scale-105 transition-transform hover:shadow-lg animate-pulse-slow group"
             onClick={() => {
               scrollToElement("#hardware-selection");
             }}
           >
             Start downloading
+            <Download className="size-5 group-hover:animate-bounce" />
           </button>
         </motion.div>
       </div>

@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import { scrollToElement } from "@/lib/utils";
 import Image from "next/image";
+import { Rocket } from "lucide-react";
 
 import whitePcImage from "@/public/pc/white.png";
 import darkPcImage from "@/public/pc/dark.webp";
@@ -46,8 +47,12 @@ export const HeroBackground = () => {
         <div className="font-extralight text-2xl md:text-4xl dark:text-neutral-200 py-4 text-center relative z-10">
           We can offer you the best PC parts
         </div>
-        <button className="bg-black dark:bg-white rounded-full w-fit text-white dark:text-black px-4 py-2 relative z-10" onClick={() => {scrollToElement("#cpu-brands")}}>
+        <button 
+          className="bg-black dark:bg-white rounded-full w-fit text-white dark:text-black px-5 py-3 relative z-10 flex items-center gap-2 hover:scale-105 transition-all duration-300 group hover:shadow-lg" 
+          onClick={() => {scrollToElement("#cpu-brands")}}
+        >
           Upgrade now
+          <Rocket className="size-5 group-hover:rotate-12 transition-transform group-hover:animate-pulse" />
         </button>
       </motion.div>
     </AuroraBackground>
