@@ -63,100 +63,100 @@ export function getHardwareScriptsData(): HardwareData {
         {
           name: "cpu_changer.ps1",
           content: `
-  if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-      Write-Host "This script requires administrator privileges. Restarting with elevated permissions..." -ForegroundColor Yellow
-      Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File \`"$PSCommandPath\`"" -Verb RunAs
-      exit
-  }
-  
-  Write-Host "CPU Changer Script" -ForegroundColor Cyan
-  Write-Host "------------------------" -ForegroundColor Cyan
-  
-  $currentName = (Get-ItemProperty -Path "HKLM:\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0").ProcessorNameString
-  Write-Host "Current CPU: $currentName" -ForegroundColor Cyan
-  
-  $changeConfirm = Read-Host "Do you want to change the CPU to '${cpuNameValue}'? (Y/N) [Default: Y]"
-  if ([string]::IsNullOrEmpty($changeConfirm)) { $changeConfirm = "Y" }
-  
-  if ($changeConfirm.ToUpper() -eq "Y") {
-      # Change CPU immediately
-      Write-Host "Changing CPU..." -ForegroundColor Green
-      try {
-          Set-ItemProperty -Path "HKLM:\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0" -Name "ProcessorNameString" -Value "${cpuNameValue}"
-          Write-Host "CPU changed successfully." -ForegroundColor Green
-      } catch {
-          Write-Host "An error occurred while changing the CPU: $_" -ForegroundColor Red
-      }
-  
-      $persistConfirm = Read-Host "Do you want to make this change persist after restarts? (Y/N) [Default: N]"
-      if ([string]::IsNullOrEmpty($persistConfirm)) { $persistConfirm = "N" }
-  
-      if ($persistConfirm.ToUpper() -eq "Y") {
-          # Set up persistence with a scheduled task
-          $taskName = "SetCPUAtStartup"
-          try {
-              $task = Get-ScheduledTask -TaskName $taskName -ErrorAction Stop
-              Write-Host "Scheduled task '$taskName' already exists. Use cpu_uninstaller.ps1 to remove it." -ForegroundColor Yellow
-          } catch {
-              # Create the scheduled task
-              $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-Command \`"Set-ItemProperty -Path 'HKLM:\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0' -Name 'ProcessorNameString' -Value '${cpuNameValue}'\`""
-              $trigger = New-ScheduledTaskTrigger -AtStartup
-              $principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
-              try {
-                  Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal -Description "Set CPU (name) at startup"
-                  Write-Host "Scheduled task '$taskName' created to persist CPU name change." -ForegroundColor Green
-              } catch {
-                  Write-Host "An error occurred while creating the scheduled task: $_" -ForegroundColor Red
-              }
-          }
-      } else {
-          Write-Host "The new CPU will not persist after restart." -ForegroundColor Yellow
-      }
-  } else {
-      Write-Host "Operation cancelled." -ForegroundColor Yellow
-  }
-  
-  # Pause for user to read output
-  Write-Host "Press any key to exit..." -ForegroundColor Cyan
-  $null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+    Write-Host "This script requires administrator privileges. Restarting with elevated permissions..." -ForegroundColor Yellow
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File \`"$PSCommandPath\`"" -Verb RunAs
+    exit
+}
+
+Write-Host "CPU Changer Script" -ForegroundColor Cyan
+Write-Host "------------------------" -ForegroundColor Cyan
+
+$currentName = (Get-ItemProperty -Path "HKLM:\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0").ProcessorNameString
+Write-Host "Current CPU: $currentName" -ForegroundColor Cyan
+
+$changeConfirm = Read-Host "Do you want to change the CPU to '${cpuNameValue}'? (Y/N) [Default: Y]"
+if ([string]::IsNullOrEmpty($changeConfirm)) { $changeConfirm = "Y" }
+
+if ($changeConfirm.ToUpper() -eq "Y") {
+    # Change CPU immediately
+    Write-Host "Changing CPU..." -ForegroundColor Green
+    try {
+        Set-ItemProperty -Path "HKLM:\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0" -Name "ProcessorNameString" -Value "${cpuNameValue}"
+        Write-Host "CPU changed successfully." -ForegroundColor Green
+    } catch {
+        Write-Host "An error occurred while changing the CPU: $_" -ForegroundColor Red
+    }
+
+    $persistConfirm = Read-Host "Do you want to make this change persist after restarts? (Y/N) [Default: N]"
+    if ([string]::IsNullOrEmpty($persistConfirm)) { $persistConfirm = "N" }
+
+    if ($persistConfirm.ToUpper() -eq "Y") {
+        # Set up persistence with a scheduled task
+        $taskName = "SetCPUAtStartup"
+        try {
+            $task = Get-ScheduledTask -TaskName $taskName -ErrorAction Stop
+            Write-Host "Scheduled task '$taskName' already exists. Use cpu_uninstaller.ps1 to remove it." -ForegroundColor Yellow
+        } catch {
+            # Create the scheduled task
+            $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-Command \`"Set-ItemProperty -Path 'HKLM:\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0' -Name 'ProcessorNameString' -Value '${cpuNameValue}'\`""
+            $trigger = New-ScheduledTaskTrigger -AtStartup
+            $principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
+            try {
+                Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal -Description "Set CPU (name) at startup"
+                Write-Host "Scheduled task '$taskName' created to persist CPU name change." -ForegroundColor Green
+            } catch {
+                Write-Host "An error occurred while creating the scheduled task: $_" -ForegroundColor Red
+            }
+        }
+    } else {
+        Write-Host "The new CPU will not persist after restart." -ForegroundColor Yellow
+    }
+} else {
+    Write-Host "Operation cancelled." -ForegroundColor Yellow
+}
+
+# Pause for user to read output
+Write-Host "Press any key to exit..." -ForegroundColor Cyan
+$null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
             `.trim(),
         },
         {
           name: "cpu_uninstaller.ps1",
           content: `
-  if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-      Write-Host "This script requires administrator privileges. Restarting with elevated permissions..." -ForegroundColor Yellow
-      Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File \`"$PSCommandPath\`"" -Verb RunAs
-      exit
-  }
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+    Write-Host "This script requires administrator privileges. Restarting with elevated permissions..." -ForegroundColor Yellow
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File \`"$PSCommandPath\`"" -Verb RunAs
+    exit
+}
 
-  Write-Host "CPU Persistence Task Deleter" -ForegroundColor Cyan
-  Write-Host "----------------------------------" -ForegroundColor Cyan
+Write-Host "CPU Persistence Task Deleter" -ForegroundColor Cyan
+Write-Host "----------------------------------" -ForegroundColor Cyan
 
-  $taskName = "SetCPUAtStartup"
+$taskName = "SetCPUAtStartup"
 
-  $task = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
-  if ($task) {
-      # Ask for confirmation to delete the task
-      $deleteConfirm = Read-Host "The scheduled task '$taskName' exists. Do you want to delete it? (Y/N) [Default: Y]"
-      if ([string]::IsNullOrEmpty($deleteConfirm)) { $deleteConfirm = "Y" }
-      if ($deleteConfirm.ToUpper() -eq "Y") {
-          try {
-              # Delete the scheduled task
-              Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
-              Write-Host "Scheduled task '$taskName' has been deleted successfully." -ForegroundColor Green
-          } catch {
-              Write-Host "An error occurred while deleting the scheduled task: $_" -ForegroundColor Red
-          }
-      } else {
-          Write-Host "Operation cancelled. The scheduled task was not deleted." -ForegroundColor Yellow
-      }
-  } else {
-      Write-Host "No scheduled task named '$taskName' was found." -ForegroundColor Yellow
-  }
+$task = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
+if ($task) {
+    # Ask for confirmation to delete the task
+    $deleteConfirm = Read-Host "The scheduled task '$taskName' exists. Do you want to delete it? (Y/N) [Default: Y]"
+    if ([string]::IsNullOrEmpty($deleteConfirm)) { $deleteConfirm = "Y" }
+    if ($deleteConfirm.ToUpper() -eq "Y") {
+        try {
+            # Delete the scheduled task
+            Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
+            Write-Host "Scheduled task '$taskName' has been deleted successfully." -ForegroundColor Green
+        } catch {
+            Write-Host "An error occurred while deleting the scheduled task: $_" -ForegroundColor Red
+        }
+    } else {
+        Write-Host "Operation cancelled. The scheduled task was not deleted." -ForegroundColor Yellow
+    }
+} else {
+    Write-Host "No scheduled task named '$taskName' was found." -ForegroundColor Yellow
+}
 
-  Write-Host "Press any key to exit..." -ForegroundColor Cyan
-  $null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+Write-Host "Press any key to exit..." -ForegroundColor Cyan
+$null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
             `.trim(),
         },
       ],
@@ -326,28 +326,27 @@ $null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
         {
           name: "ram_check_info.ps1",
           content: `
-  # RAM Information Script
-  Write-Host "RAM Information" -ForegroundColor Cyan
-  Write-Host "---------------" -ForegroundColor Cyan
-  
-  try {
-      # Get total physical memory
-      $totalMemory = (Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory / 1GB
-      Write-Host "Total Installed RAM: $($totalMemory.ToString('F2')) GB" -ForegroundColor Green
-  
-      # Get detailed RAM stick information
-      Write-Host "Memory Module Details:" -ForegroundColor Cyan
-      Get-CimInstance Win32_PhysicalMemory | Format-Table BankLabel, DeviceLocator, Capacity, Speed, Manufacturer, PartNumber -AutoSize
-  
-      Write-Host "Please verify XMP/DOCP/EXPO is enabled in your system BIOS/UEFI for optimal performance." -ForegroundColor Yellow
-  
-  } catch {
-      Write-Host "An error occurred while retrieving RAM information: $_" -ForegroundColor Red
-  }
-  
-  # Pause for user
-  Write-Host "Press any key to exit..." -ForegroundColor Cyan
-  $null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+Write-Host "RAM Information" -ForegroundColor Cyan
+Write-Host "---------------" -ForegroundColor Cyan
+
+try {
+    # Get total physical memory
+    $totalMemory = (Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory / 1GB
+    Write-Host "Total Installed RAM: $($totalMemory.ToString('F2')) GB" -ForegroundColor Green
+
+    # Get detailed RAM stick information
+    Write-Host "Memory Module Details:" -ForegroundColor Cyan
+    Get-CimInstance Win32_PhysicalMemory | Format-Table BankLabel, DeviceLocator, Capacity, Speed, Manufacturer, PartNumber -AutoSize
+
+    Write-Host "Please verify XMP/DOCP/EXPO is enabled in your system BIOS/UEFI for optimal performance." -ForegroundColor Yellow
+
+} catch {
+    Write-Host "An error occurred while retrieving RAM information: $_" -ForegroundColor Red
+}
+
+# Pause for user
+Write-Host "Press any key to exit..." -ForegroundColor Cyan
+$null = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
             `.trim(),
         },
       ],
