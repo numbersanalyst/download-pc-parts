@@ -15,7 +15,9 @@ const dmSans = DM_Sans({ subsets: ["latin"] });
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
+      <head>
+        <meta name="apple-mobile-web-app-title" content="PC Parts" />
+      </head>
       <body className={clsx(dmSans.className,'antiased')}>
         <ThemeProvider
           attribute="class"
