@@ -23,7 +23,7 @@ function CodeBlock({
   };
 
   return (
-    <div className="relative w-full rounded-md overflow-hidden mt-5">
+    <div className="relative w-px min-w-[100%] rounded-md overflow-hidden mt-5">
       <SyntaxHighlighter
         language={language}
         style={vscDarkPlus}

@@ -14,7 +14,7 @@ interface CpuInstallationGuideProps {
     downloadScript: (name: string, content: string) => void;
 }
 
-function CpuInstallationGuide({scriptsData, downloadScript }: CpuInstallationGuideProps) {
+function CpuInstallationGuide({ scriptsData, downloadScript }: CpuInstallationGuideProps) {
     const [activeTab, setActiveTab] = useState("tab-1");
     const mainScriptName = scriptsData.scripts[0]?.name ?? "cpu_changer.ps1";
     const cpuNameValue = getCpuNameValue();
@@ -58,8 +58,8 @@ function CpuInstallationGuide({scriptsData, downloadScript }: CpuInstallationGui
                             </p>
                         </Step>
                     </Steps>
-                    
-                    <ScriptsGrid 
+
+                    <ScriptsGrid
                         scripts={scriptsData.scripts}
                         downloadScript={downloadScript}
                         title="Configuration Scripts"
