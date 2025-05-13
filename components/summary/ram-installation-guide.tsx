@@ -14,21 +14,21 @@ interface RamInstallationGuideProps {
 }
 
 function RamInstallationGuide({ scriptsData, downloadScript }: RamInstallationGuideProps) {
-  const [activeTab, setActiveTab] = useState("check");
+  const [activeTab, setActiveTab] = useState("optimize");
   const mainScriptName = scriptsData.scripts[0]?.name ?? "ram_info.ps1";
 
   return (
     <Card className="p-8 relative mt-20">
-      <Tabs defaultValue="check" onValueChange={setActiveTab}>
+      <Tabs defaultValue="optimize" onValueChange={setActiveTab}>
         <div className="absolute -top-7 left-0 right-0 flex justify-center">
           <TabsList className="gap-3 bg-white dark:bg-black border border-border px-2 py-6 rounded-full shadow-lg mb-3">
-            <CustomTabsTrigger value="check" isActive={activeTab === "check"} layoutId="lamp-ram">
-              <Check className="-ms-0.5 me-1.5 opacity-60" size={16} strokeWidth={2} aria-hidden="true" />
-              Check
-            </CustomTabsTrigger>
             <CustomTabsTrigger value="optimize" isActive={activeTab === "optimize"} layoutId="lamp-ram">
               <Gauge className="-ms-0.5 me-1.5 opacity-60" size={16} strokeWidth={2} aria-hidden="true" />
               Optimize
+            </CustomTabsTrigger>
+            <CustomTabsTrigger value="check" isActive={activeTab === "check"} layoutId="lamp-ram">
+              <Check className="-ms-0.5 me-1.5 opacity-60" size={16} strokeWidth={2} aria-hidden="true" />
+              Check
             </CustomTabsTrigger>
           </TabsList>
         </div>
@@ -36,47 +36,6 @@ function RamInstallationGuide({ scriptsData, downloadScript }: RamInstallationGu
         <h2 className="text-2xl font-bold mb-2 relative">{scriptsData.title}<span className="text-sm font-semibold mb-2 absolute top-0 right-2 border border-border px-3 py-2 rounded-full inline-flex gap-x-2 items-center">Beta <FlaskConical size={14} /></span></h2>
         <h3 className="text-xl font-semibold">Memory Verification & Optimization</h3>
         <h4 className="mb-6">(we currently working on new RAM installation solution)</h4>
-
-        {/* Check Tab */}
-        <TabsContent value="check">
-          <Steps>
-            <Step title="Download Info Script" icon={<Download className="size-5" />}>
-              <p>
-                Click the button below to get the <code>{mainScriptName}</code> script that will help you check your RAM details.
-              </p>
-              <ShinyButton className="mt-2 px-12 py-2 bg-secondary rounded-md" onClick={() => { downloadScript(scriptsData.scripts[0].name, scriptsData.scripts[0].content) }}>Download RAM Info Script</ShinyButton>
-            </Step>
-            <Step title="Run the Script" icon={<PlayCircle className="size-5" />}>
-              <p>
-                Find the downloaded <code>{mainScriptName}</code> file. Right-click on it and select <b>"Run with PowerShell"</b>. This will show you detailed information about your RAM modules.
-              </p>
-            </Step>
-            <Step title="Check Current Speed" icon={<Gauge className="size-5" />}>
-              <p>
-                First, verify your current RAM speed in Task Manager or using the RAM Info script. If your RAM is running at a lower speed than its rating (e.g., 2133MHz instead of 3200MHz), you need to enable XMP/EXPO/DOCP. Follow steps bellow to do that. That will boost your FPS.
-              </p>
-            </Step>
-            <Step title="Enter BIOS/UEFI" icon={<ChevronUp className="size-5" />}>
-              <p>
-                Restart your computer and enter BIOS/UEFI by pressing the designated key during startup (usually DEL, F2, or F12, depending on your motherboard). Check your motherboard manual if unsure.
-              </p>
-            </Step>
-            <Step title="Enable XMP/EXPO/DOCP" icon={<Check className="size-5" />}>
-              <p>
-                Navigate to the memory settings section (often called "Overclocking", "Advanced", or "AI Tweaker"). Look for XMP (Intel), EXPO (AMD), or DOCP (ASUS) and enable it. Select Profile 1 if multiple profiles are available. Save changes and exit (usually F10).
-              </p>
-              <p className="mt-2">
-                After your system reboots, run the RAM Info script again or check Task Manager to verify the speed has increased to the rated value.
-              </p>
-            </Step>
-          </Steps>
-
-          <ScriptsGrid
-            scripts={scriptsData.scripts}
-            downloadScript={downloadScript}
-            title="Utility Scripts"
-          />
-        </TabsContent>
 
         {/* Optimize Tab */}
         <TabsContent value="optimize">
@@ -141,6 +100,47 @@ function RamInstallationGuide({ scriptsData, downloadScript }: RamInstallationGu
               </div>
             </div>
           </div>
+        </TabsContent>
+
+        {/* Check Tab */}
+        <TabsContent value="check">
+          <Steps>
+            <Step title="Download Info Script" icon={<Download className="size-5" />}>
+              <p>
+                Click the button below to get the <code>{mainScriptName}</code> script that will help you check your RAM details.
+              </p>
+              <ShinyButton className="mt-2 px-12 py-2 bg-secondary rounded-md" onClick={() => { downloadScript(scriptsData.scripts[0].name, scriptsData.scripts[0].content) }}>Download RAM Info Script</ShinyButton>
+            </Step>
+            <Step title="Run the Script" icon={<PlayCircle className="size-5" />}>
+              <p>
+                Find the downloaded <code>{mainScriptName}</code> file. Right-click on it and select <b>"Run with PowerShell"</b>. This will show you detailed information about your RAM modules.
+              </p>
+            </Step>
+            <Step title="Check Current Speed" icon={<Gauge className="size-5" />}>
+              <p>
+                First, verify your current RAM speed in Task Manager or using the RAM Info script. If your RAM is running at a lower speed than its rating (e.g., 2133MHz instead of 3200MHz), you need to enable XMP/EXPO/DOCP. Follow steps bellow to do that. That will boost your FPS.
+              </p>
+            </Step>
+            <Step title="Enter BIOS/UEFI" icon={<ChevronUp className="size-5" />}>
+              <p>
+                Restart your computer and enter BIOS/UEFI by pressing the designated key during startup (usually DEL, F2, or F12, depending on your motherboard). Check your motherboard manual if unsure.
+              </p>
+            </Step>
+            <Step title="Enable XMP/EXPO/DOCP" icon={<Check className="size-5" />}>
+              <p>
+                Navigate to the memory settings section (often called "Overclocking", "Advanced", or "AI Tweaker"). Look for XMP (Intel), EXPO (AMD), or DOCP (ASUS) and enable it. Select Profile 1 if multiple profiles are available. Save changes and exit (usually F10).
+              </p>
+              <p className="mt-2">
+                After your system reboots, run the RAM Info script again or check Task Manager to verify the speed has increased to the rated value.
+              </p>
+            </Step>
+          </Steps>
+
+          <ScriptsGrid
+            scripts={scriptsData.scripts}
+            downloadScript={downloadScript}
+            title="Utility Scripts"
+          />
         </TabsContent>
       </Tabs>
     </Card>
