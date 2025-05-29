@@ -3,10 +3,12 @@
 import Image from "next/image";
 import helixImage from "@/public/images/helix2.png";
 import emojiStarImage from "@/public/images/emojistar.png";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import { CheckCircle2 } from "lucide-react";
 import { CircleCheckIcon } from "../ui/circle-check";
+import { useScroll } from "framer-motion";
+import { useRef } from "react";
 
 export const CallToAction = () => {
   const [email, setEmail] = useState("");
@@ -28,13 +30,19 @@ export const CallToAction = () => {
     }
   }, [isSubmitted]);
 
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end end"]  });
+  const translateY = useTransform(scrollYProgress, [0,1], [-80, 0]);
+
   return (
     <div
+      ref={containerRef}
       id="contact"
-      className="bg-black text-white py-[72px] sm:py-24 text-center overflow-hidden"
+      className="bg-black text-white py-[72px] sm:py-24 text-center"
     >
       <div className="container max-w-xl relative">
         <motion.div
+          style={{translateY}}
           className="absolute top-6 left-[calc(100%-24px)] hidden lg:block"
           drag
           dragSnapToOrigin
@@ -47,6 +55,7 @@ export const CallToAction = () => {
           />
         </motion.div>
         <motion.div
+          style={{translateY}}
           className="absolute -top-[100px] right-[calc(100%-24px)] hidden lg:block"
           drag
           dragSnapToOrigin>
