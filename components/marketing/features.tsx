@@ -1,6 +1,7 @@
 import { EarthIcon } from "../ui/earth";
 import { ShieldCheckIcon } from "../ui/shield-check";
 import { HandCoinsIcon } from "../ui/hand-coins";
+import { FeatureCard } from "./features-card";
 
 const features = [
   {
@@ -37,17 +38,13 @@ export const Features = () => {
           </p>
         </div>
         <div className="mt-16 flex flex-col sm:flex-row justify-center gap-4">
-          {features.map(({ title, description, icon }) => (
-            <div
-              key={title}
-              className="border border-white/30 px-5 py-14 text-center rounded-xl sm:flex-1"
-            >
-              <div className="inline-flex w-14 h-14 bg-white text-black justify-center items-center rounded-lg">
-                {icon}
-              </div>
-              <h3 className="mt-6 font-bold">{title}</h3>
-              <p className="mt-2 text-white/80">{description}</p>
-            </div>
+          {features.map((feature) => (
+            <FeatureCard
+              key={feature.title}
+              title={feature.title}
+              description={feature.description}
+              icon={feature.icon}
+            />
           ))}
         </div>
       </div>
