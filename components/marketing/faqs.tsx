@@ -47,7 +47,7 @@ const AccordionItem = ({
 
   return (
     <div className="py-7 border-white/30" onClick={() => setIsOpen(!isOpen)}>
-      <div className="flex items-center">
+      <div className="flex items-center cursor-pointer">
         <span className="flex-1 text-lg font-bold">{question}</span>
         {isOpen ? <MinusIcon /> : <PlusIcon />}
       </div>
