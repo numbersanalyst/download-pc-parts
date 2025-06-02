@@ -3,7 +3,7 @@ import { Navbar } from "@/components/marketing/navbar";
 import { Hero } from "@/components/marketing/hero";
 import { LogoTicker } from "@/components/marketing/logo-ticker";
 import { Features } from "@/components/marketing/features";
-import { Testimonials } from "@/components/marketing/testamonials";
+import { Testimonials } from "@/components/marketing/testimonials";
 import { ProductShowcase } from "@/components/marketing/product-showcase";
 import { FAQs } from "@/components/marketing/faqs";
 import { CallToAction } from "@/components/marketing/call-to-action";

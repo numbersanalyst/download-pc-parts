@@ -31,7 +31,7 @@ export function TestimonialCard({
         "p-4 text-start sm:p-6",
         "hover:from-muted/60 hover:to-muted/20",
         "max-w-[320px] sm:max-w-[320px]",
-        "transition-colors duration-300",
+        "transition-colors duration-300 h-fit",
         className
       )}
     >
@@ -48,7 +48,7 @@ export function TestimonialCard({
           </p>
         </div>
       </div>
-      <p className="sm:text-md mt-4 text-sm text-muted-foreground">
+      <p className="mt-4 text-muted-foreground">
         {text}
       </p>
     </Card>
