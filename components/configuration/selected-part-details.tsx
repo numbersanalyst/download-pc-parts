@@ -1,14 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Card } from "../ui/card";
 import { Separator } from "../ui/separator";
 import { ScrollArea } from "../ui/scroll-area";
 import { Button } from "../ui/button";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, Loader2, CloudAlert } from "lucide-react";
 import { DetailsItem } from "./details-item";
+import { cn } from "@/lib/utils";
 
 type Property = {
   title: string;
@@ -34,6 +35,13 @@ export const SelectedComponentDetails = ({
   properties,
 }: SelectedComponentDetailsProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [imageLoading, setImageLoading] = useState(true);
+  const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    setImageLoading(true);
+    setImageError(false);
+  }, [selectedItem.image]);
 
   const renderDetailsContent = () => (
     <div className="flex flex-col gap-4 p-10 pb-24 md:pb-10">
@@ -60,13 +68,36 @@ export const SelectedComponentDetails = ({
         className="flex flex-col md:flex-row h-full z-20 overflow-hidden"
       >
         <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-10 relative">
-          <Image
-            src={selectedItem?.secondImage ?? selectedItem.image}
-            alt={`${selectedItem.model} ${type} image`}
-            width={350}
-            height={350}
-            className="object-contain w-[350px] h-[350px] text-center"
-          />
+          <div className="relative w-[350px] h-[350px]">
+            {(imageLoading || imageError) && (
+              <div className="absolute inset-0 bg-gray-200 dark:bg-neutral-900 opacity-40 animate-pulse rounded-md flex items-center justify-center">
+                {imageLoading ? (
+                  <Loader2 className="w-8 h-8 text-black dark:text-gray-500 animate-spin" />
+                ) : (
+                  <div className="flex flex-col items-center justify-center text-gray-500 text-xs">
+                    <CloudAlert className="w-8 h-8 text-gray-400 dark:text-gray-500" />
+                    <span>Failed to load</span>
+                  </div>
+                )}
+              </div>
+            )}
+            <Image
+              src={selectedItem?.secondImage ?? selectedItem.image}
+              alt={`${selectedItem.model} ${type} image`}
+              width={350}
+              height={350}
+              className={cn(
+                "object-contain w-[350px] h-[350px] text-center transition-opacity duration-300 ease-in-out",
+                (imageLoading || imageError) ? "opacity-0" : "opacity-100"
+              )}
+              onLoad={() => setImageLoading(false)}
+              onError={() => {
+                setImageLoading(false);
+                setImageError(true);
+              }}
+              priority={true}
+            />
+          </div>
         </div>
 
         <Separator className="block md:hidden px-2" orientation="horizontal" />

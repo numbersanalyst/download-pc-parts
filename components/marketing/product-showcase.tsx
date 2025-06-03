@@ -43,6 +43,7 @@ export const ProductShowcase = () => {
             alt="The product screenshot"
             className="mt-14 w-full rounded-xl"
             ref={appImage}
+            quality={90}
           />
         </motion.div>
       </div>

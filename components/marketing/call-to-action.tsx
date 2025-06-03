@@ -52,6 +52,7 @@ export const CallToAction = () => {
             alt="helix image"
             className="max-w-none"
             draggable="false"
+            quality={90}
           />
         </motion.div>
         <motion.div
@@ -64,6 +65,7 @@ export const CallToAction = () => {
             alt="emoji image"
             className="max-w-none"
             draggable="false"
+            quality={90}
           />
         </motion.div>
         <h2 className="font-bold text-5xl tracking-tighter sm:text-6xl">

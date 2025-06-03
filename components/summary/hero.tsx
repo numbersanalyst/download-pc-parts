@@ -15,13 +15,14 @@ export const Hero = () => {
         alt="Hero Background"
         fill
         className="object-cover"
+        placeholder="blur"
         priority
       />
 
       <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
         <motion.div
           initial={{ opacity: 0.0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{
             delay: 0.2,
             duration: 0.5,

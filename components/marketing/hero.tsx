@@ -79,6 +79,7 @@ export const Hero = () => {
                 alt="CPU image"
                 className="max-w-none"
                 draggable="false"
+                quality={90}
               />
             </motion.div>
             <motion.div
@@ -101,6 +102,7 @@ export const Hero = () => {
                 alt="GPU image"
                 className="max-w-none"
                 draggable="false"
+                quality={90}
               />
             </motion.div>
           </div>
