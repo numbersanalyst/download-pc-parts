@@ -45,12 +45,12 @@ const ImagePlaceholder = ({
 }) => (
   <div
     className={cn(
-      "bg-gray-200 dark:bg-gray-700 animate-pulse rounded-md flex items-center justify-center",
+      "bg-gray-200 dark:bg-neutral-900 opacity-40 animate-pulse rounded-md flex items-center justify-center",
       className
     )}
   >
     {isLoading && (
-      <Loader2 className="w-8 h-8 text-gray-400 dark:text-gray-500 animate-spin" />
+      <Loader2 className="w-8 h-8 text-black dark:text-gray-500 animate-spin" />
     )}
   </div>
 );
