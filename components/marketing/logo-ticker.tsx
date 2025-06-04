@@ -11,6 +11,7 @@ import asusLogo from "@/public/logos/asus-logo.webp";
 import amdLogo from "@/public/logos/amd-logo.svg";
 
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const logos = [
   { src: nvidiaLogo, alt: "nvidia logo" },
@@ -24,6 +25,17 @@ const logos = [
 ];
 
 export const LogoTicker = () => {
+  const [isSmall, setIsSmall] = useState(false);
+
+  useEffect(() => {
+    const checkScreen = () => setIsSmall(window.outerWidth < 1024);
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
+
+  const duration = isSmall ? 8 : 20;
+  
   return (
     <div
       id="companies"
@@ -35,12 +47,13 @@ export const LogoTicker = () => {
         </h2>
         <div className="overflow-hidden mt-9 relative before:content-[''] after:content-[''] before:absolute after:absolute before:h-full after:h-full before:w-24 md:before:w-48 after:w-24 md:after:w-48 before:left-0 after:right-0 before:top-0 after:top-0 before:bg-[linear-gradient(to_right,#000,rgba(0,0,0,0))] after:bg-[linear-gradient(to_left,#000,rgba(0,0,0,0))] before:z-10 after:z-10">
           <motion.div
+            key={duration}
             className="flex gap-8 sm:gap-12 md:gap-16"
             animate={{
               translateX: "-50%",
             }}
             transition={{
-              duration: 20,
+              duration,
               repeat: Infinity,
               ease: "linear",
               repeatType: "loop",
@@ -56,10 +69,9 @@ export const LogoTicker = () => {
                 }`}
               />
             ))}
-            {/* Image loop goes here */}
             {logos.map((logo, index) => (
               <Image
-                key={index + logos.length} // Ensure unique keys for the loop
+                key={index + logos.length}
                 src={logo.src}
                 alt={logo.alt}
                 className={`object-contain h-7 md:h-10 lg:h-12 filter grayscale opacity-65 transition-[opacity, grayscale] duration-300 ease-in-out hover:grayscale-0 hover:opacity-100 ${
