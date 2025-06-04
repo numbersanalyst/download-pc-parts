@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import appScreen from "@/public/images/computer.webp";
+import appScreen from "@/public/images/product-showcase-color.png";
+import appPresentation from "@/public/images/computer.webp";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
@@ -28,7 +29,7 @@ export const ProductShowcase = () => {
         <div className="max-w-xl mx-auto">
           <p className="text-xl text-center text-white/70 mt-5">
             We have something you can't find anywhere else. We're changing the
-            way the world works.
+            way the world works. See bellow.
           </p>
         </div>
         <motion.div
@@ -37,12 +38,19 @@ export const ProductShowcase = () => {
             rotateX: rotateX,
             transformPerspective: "800px",
           }}
+          ref={appImage}
         >
           <Image
             src={appScreen}
             alt="The product screenshot"
-            className="mt-14 w-full rounded-xl"
-            ref={appImage}
+            className="hidden md:block mt-14 w-full rounded-xl"
+            quality={95}
+          />
+
+          <Image
+            src={appPresentation}
+            alt="The product screenshot"
+            className="md:hidden mt-14 w-full rounded-xl"
             quality={90}
           />
         </motion.div>
