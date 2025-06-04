@@ -24,7 +24,7 @@ export function TestimonialCard({
   
   return (
     <Card
-      {...(href ? { href } : {})}
+      {...(href ? { href, target: "_blank", rel: "noopener noreferrer" } : {})}
       className={cn(
         "flex flex-col rounded-lg border-t",
         "bg-gradient-to-b from-muted/50 to-muted/10",

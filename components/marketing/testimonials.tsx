@@ -18,6 +18,7 @@ const testimonials = [
         "https://cdn.discordapp.com/avatars/725240640203391066/6beaae2155432e74277a96c24bd9d93f.webp?size=128",
     },
     text: "Thanks to this app, I no longer wonder where to look for PC parts. I just download them 😍",
+    href: "https://www.marektoja.pl/",
   },
   {
     author: {
@@ -36,6 +37,7 @@ const testimonials = [
         "https://cdn.discordapp.com/avatars/366849802048241664/c4a7050f7c1af69f292893e22f0e813a.webp?size=128",
     },
     text: "Thanks to this website, my friends finally don't laugh at me anymore! I have the best RTX card and AMD processor on Earth! Thank you 🤝",
+    href: "https://www.youtube.com/channel/UCuwT-3ardYPIh8Y2K6Lod9w",
   },
 ];
 
