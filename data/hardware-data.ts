@@ -178,26 +178,55 @@ $NewGpuName = "${gpuNameValue}"
 Write-Host "GPU Changer Script" -ForegroundColor Cyan
 Write-Host "-------------------------------" -ForegroundColor Cyan
 Write-Host "Target Name: $NewGpuName" -ForegroundColor Yellow
-
 Write-Host "Detecting GPUs..." -ForegroundColor Cyan
-$gpus = Get-PnpDevice -Class 'Display' -Present -Status 'OK' -ErrorAction SilentlyContinue
 
-if (-not $gpus) {
-    Write-Error "No active display adapters (GPUs) found."
+\$gpus = @()
+
+\$displayGpus = Get-PnpDevice -Class 'Display' -Present -Status 'OK' -ErrorAction SilentlyContinue
+if (\$displayGpus) {
+    \$gpus += \$displayGpus
+}
+
+if (\$gpus.Count -eq 0) {
+    Write-Host "No active display devices found, checking for any display devices..." -ForegroundColor Yellow
+    \$allDisplayGpus = Get-PnpDevice -Class 'Display' -Present -ErrorAction SilentlyContinue
+    if (\$allDisplayGpus) {
+        \$gpus += \$allDisplayGpus
+    }
+}
+
+if (\$gpus.Count -eq 0) {
+    Write-Host "Trying WMI method for integrated graphics..." -ForegroundColor Yellow
+    try {
+        \$wmiGpus = Get-WmiObject -Class Win32_VideoController -ErrorAction SilentlyContinue | Where-Object { \$_.PNPDeviceID -and \$_.Name }
+        foreach (\$wmiGpu in \$wmiGpus) {
+            \$pnpDevice = Get-PnpDevice | Where-Object { \$_.InstanceID -eq \$wmiGpu.PNPDeviceID } -ErrorAction SilentlyContinue
+            if (\$pnpDevice) {
+                \$gpus += \$pnpDevice
+            }
+        }
+    } catch {
+        Write-Warning "WMI method failed: \$_"
+    }
+}
+
+if (-not \$gpus -or \$gpus.Count -eq 0) {
+    Write-Error "No display adapters (GPUs) found using any detection method."
     Read-Host "Press Enter to exit"
     exit 1
 }
 
-$selectedGpu = \$null
-if ($gpus.Count -eq 1) {
-    $selectedGpu = $gpus
-    Write-Host "Found GPU: \$($selectedGpu.FriendlyName) (\$($selectedGpu.DeviceID))" -ForegroundColor Green
+\$gpus = \$gpus | Sort-Object InstanceID -Unique
+
+\$selectedGpu = \$null
+if (\$gpus.Count -eq 1) {
+    \$selectedGpu = \$gpus
+    Write-Host "Found GPU: \$(\$selectedGpu.FriendlyName) (\$(\$selectedGpu.DeviceID))" -ForegroundColor Green
 } else {
     Write-Host "Multiple GPUs found. Please select one:" -ForegroundColor Yellow
     for (\$i = 0; \$i -lt \$gpus.Count; \$i++) {
-        Write-Host "[\$(\$i+1)] \$($gpus[\$i].FriendlyName) (\$($gpus[\$i].DeviceID))"
+        Write-Host "[\$(\$i+1)] \$(\$gpus[\$i].FriendlyName) (\$(\$gpus[\$i].DeviceID))"
     }
-
     do {
         \$choice = Read-Host "Enter the number of the GPU to modify"
         if (\$choice -match '^\\d+\$' -and [int]\$choice -ge 1 -and [int]\$choice -le \$gpus.Count) {
@@ -206,7 +235,7 @@ if ($gpus.Count -eq 1) {
             Write-Warning "Invalid selection. Please enter a number between 1 and \$(\$gpus.Count)."
         }
     } while (-not \$selectedGpu)
-     Write-Host "Selected GPU: \$($selectedGpu.FriendlyName)" -ForegroundColor Green
+    Write-Host "Selected GPU: \$(\$selectedGpu.FriendlyName)" -ForegroundColor Green
 }
 
 \$instanceId = \$selectedGpu.InstanceID
@@ -214,16 +243,31 @@ if ($gpus.Count -eq 1) {
 \$gpuRegPath = Join-Path -Path \$regPathBase -ChildPath \$instanceId
 
 if (-not (Test-Path -Path \$gpuRegPath -PathType Container)) {
-     Write-Error "Could not determine the correct registry path for the selected GPU: \$gpuRegPath"
-     Read-Host "Press Enter to exit"
-     exit 1
+    Write-Error "Could not determine the correct registry path for the selected GPU: \$gpuRegPath"
+    Read-Host "Press Enter to exit"
+    exit 1
 }
 
 Write-Host "Registry Path: \$gpuRegPath" -ForegroundColor Cyan
 
-\$currentFriendlyName = (Get-ItemProperty -Path \$gpuRegPath -Name "FriendlyName" -ErrorAction SilentlyContinue).FriendlyName
-if (\$currentFriendlyName) {
-    Write-Host "Current GPU: \$currentFriendlyName" -ForegroundColor Cyan
+\$isIntelIntegrated = \$selectedGpu.FriendlyName -match "Intel.*Integrated|Intel.*UHD|Intel.*HD Graphics|Intel.*Iris"
+\$propertyToModify = "FriendlyName"
+\$useDeviceDesc = \$false
+
+if (\$isIntelIntegrated) {
+    \$currentDeviceDesc = (Get-ItemProperty -Path \$gpuRegPath -Name "DeviceDesc" -ErrorAction SilentlyContinue).DeviceDesc
+    \$currentFriendlyName = (Get-ItemProperty -Path \$gpuRegPath -Name "FriendlyName" -ErrorAction SilentlyContinue).FriendlyName
+    
+    if (\$currentDeviceDesc -and -not \$currentFriendlyName) {
+        Write-Host "Intel integrated graphics detected, using special property..." -ForegroundColor Yellow
+        \$propertyToModify = "DeviceDesc"
+        \$useDeviceDesc = \$true
+    }
+}
+
+\$currentName = (Get-ItemProperty -Path \$gpuRegPath -Name \$propertyToModify -ErrorAction SilentlyContinue).\$propertyToModify
+if (\$currentName) {
+    Write-Host "Current GPU: \$currentName" -ForegroundColor Cyan
 } else {
     Write-Host "No custom software currently set for this GPU." -ForegroundColor Cyan
 }
@@ -234,34 +278,41 @@ if ([string]::IsNullOrEmpty(\$changeConfirm)) { \$changeConfirm = "Y" }
 if (\$changeConfirm.ToUpper() -eq "Y") {
     Write-Host "Changing GPU..." -ForegroundColor Green
     try {
-        New-ItemProperty -Path \$gpuRegPath -Name "FriendlyName" -Value \$NewGpuName -PropertyType String -Force -ErrorAction Stop
+        if (\$useDeviceDesc) {
+            \$newValue = if (\$currentName -match "^@.*") { 
+                \$NewGpuName 
+            } else { 
+                \$NewGpuName 
+            }
+            New-ItemProperty -Path \$gpuRegPath -Name \$propertyToModify -Value \$newValue -PropertyType String -Force -ErrorAction Stop
+        } else {
+            New-ItemProperty -Path \$gpuRegPath -Name \$propertyToModify -Value \$NewGpuName -PropertyType String -Force -ErrorAction Stop
+        }
         Write-Host "GPU changed successfully." -ForegroundColor Green
         Write-Host "A restart might be required for the change to appear everywhere (like Task Manager)." -ForegroundColor Yellow
     } catch {
-        Write-Error "An error occurred while changing the GPU FriendlyName: \$_"
+        Write-Error "An error occurred while changing the GPU \${propertyToModify}: \$_"
         Read-Host "Press Enter to exit"
         exit 1
     }
-
+    
     $persistConfirm = Read-Host "Do you want to make this change persist after restarts (via Scheduled Task)? (Y/N) [Default: N]"
     if ([string]::IsNullOrEmpty($persistConfirm)) { $persistConfirm = "N" }
-
+    
     if ($persistConfirm.ToUpper() -eq "Y") {
         $taskName = "SetGPUFriendlyNameAtStartup"
-        $commandArg = "-Command \`"& { New-ItemProperty -Path '$($gpuRegPath -replace \"'\", \"''\")' -Name FriendlyName -Value '$($NewGpuName -replace \"'\", \"''\")' -PropertyType String -Force }\`""
+        $commandArg = "-Command \`"& { New-ItemProperty -Path '$($gpuRegPath -replace \"'\", \"''\")' -Name $propertyToModify -Value '$($NewGpuName -replace \"'\", \"''\")' -PropertyType String -Force }\`""
         
         try {
             Get-ScheduledTask -TaskName $taskName -ErrorAction Stop
             Write-Warning "Scheduled task '$taskName' already exists. Use the GPU uninstaller script to remove it."
         } catch {
-            # Create the scheduled task
             Write-Host "Creating scheduled task '$taskName' for persistence..." -ForegroundColor Green
             try {
                 $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument $commandArg
                 $trigger = New-ScheduledTaskTrigger -AtStartup
                 $principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
                 $settings = New-ScheduledTaskSettingsSet -Compatibility Win8 -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
-
                 Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Principal $principal -Settings $settings -Description "Persist GPU name change" -Force
                 Write-Host "Scheduled task created successfully." -ForegroundColor Green
             } catch {
