@@ -13,7 +13,7 @@ const FeatureCard = ({ title, description, icon }: FeatureCardProps) => {
     const borderRef = useRef<HTMLDivElement>(null);
     const offsetX = useMotionValue(-100);
     const offsetY = useMotionValue(-100);
-    const maskImage = useMotionTemplate`radial-gradient(150px 150px at ${offsetX}px ${offsetY}px, black, transparent)`;
+    const maskImage = useMotionTemplate`radial-gradient(200px 200px at ${offsetX}px ${offsetY}px, black, transparent)`;
 
     useEffect(() => {
         const updateMousePosition = (e: MouseEvent) => {
