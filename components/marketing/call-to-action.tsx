@@ -38,7 +38,7 @@ export const CallToAction = () => {
     <div
       ref={containerRef}
       id="contact"
-      className="bg-black text-white py-[72px] sm:py-24 text-center"
+      className="bg-black text-white py-[72px] sm:py-24 text-center mb-[75px]"
     >
       <div className="container max-w-xl relative">
         <motion.div
