@@ -32,7 +32,7 @@ export const CallToAction = () => {
 
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end end"]  });
-  const translateY = useTransform(scrollYProgress, [0,1], [-80, 0]);
+  const translateY = useTransform(scrollYProgress, [0,1], [-100, 0]);
 
   return (
     <div
@@ -43,7 +43,7 @@ export const CallToAction = () => {
       <div className="container max-w-xl relative">
         <motion.div
           style={{translateY}}
-          className="absolute top-6 left-[calc(100%-24px)] hidden lg:block"
+          className="absolute top-2 left-[calc(100%-24px)] hidden lg:block"
           drag
           dragSnapToOrigin
         >
