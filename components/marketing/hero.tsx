@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import cpuImage from "@/public/cpu/intel/intel-i9-14900k.png";
 import gpuImage from "@/public/gpu/amd/RX-9070XT.png";
+import computerImage from "@/public/pc/main.webp";
 import { RainbowButton } from "../magicui/rainbow-button";
 import clsx from "clsx";
 import { motion } from "framer-motion";
@@ -35,9 +36,7 @@ export const Hero = () => {
 
       <div className="container mx-auto max-w-screen-xl relative">
         <div className="flex items-center justify-center">
-          <div
-            className="inline-flex gap-3 border py-1 px-3 rounded-lg border-white/30"
-          >
+          <div className="inline-flex gap-3 border py-1 px-3 rounded-lg border-white/30">
             <span className="bg-[linear-gradient(to_right,#F87AFF,#FB93D0,#FFDD99,#C3F0B2,#2FD8FE)] text-transparent bg-clip-text">
               Version 2.0 is here
             </span>
@@ -48,11 +47,38 @@ export const Hero = () => {
           </div>
         </div>
 
+        <motion.div
+          className="lg:hidden flex flex-col items-center justify-center gap-2 mt-8"
+          initial={{ opacity: 0.0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.2,
+            duration: 0.3,
+            ease: "easeInOut",
+          }}
+        >
+          <Image
+            src={computerImage}
+            height={500}
+            width={500}
+            alt="Computer image"
+            className="max-w-full"
+            draggable="false"
+            quality={90}
+          />
+          <p className="text-sm opacity-50 italic z-10">
+            Best PC build from{" "}
+            <a href="https://powergpu.com/" className="font-semibold">
+              powergpu.com
+            </a>
+          </p>
+        </motion.div>
+
         <div className="flex justify-center mt-8">
           <div className="inline-flex relative">
             <h1
               className={clsx(
-                "text-7xl sm:text-9xl tracking-tighter text-center inline-flex",
+                "text-7xl sm:text-8xl md:text-9xl tracking-tighter text-center inline-flex ",
                 chakraPetch.className
               )}
             >
@@ -118,7 +144,10 @@ export const Hero = () => {
 
         <div className="flex justify-center mt-8">
           <Link href={"/configure"}>
-            <RainbowButton className="group">{isContinue ? "Continue Configuration" : "Get Started Now"}<ArrowRight className="ml-1 size-4 group-hover:translate-x-1 transition-transform duration-300" /></RainbowButton>
+            <RainbowButton className="group">
+              {isContinue ? "Continue Configuration" : "Get Started Now"}
+              <ArrowRight className="ml-1 size-4 group-hover:translate-x-1 transition-transform duration-300" />
+            </RainbowButton>
           </Link>
         </div>
       </div>
