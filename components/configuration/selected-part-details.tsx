@@ -68,7 +68,7 @@ export const SelectedComponentDetails = ({
         className="flex flex-col md:flex-row h-full z-20 overflow-hidden"
       >
         <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-10 relative">
-          <div className="relative w-[350px] h-[350px]">
+          <div className="relative w-full h-full max-w-[350px] max-h-[350px]">
             {(imageLoading || imageError) && (
               <div className="absolute inset-0 bg-gray-200 dark:bg-neutral-900 opacity-40 animate-pulse rounded-md flex items-center justify-center">
                 {imageLoading ? (

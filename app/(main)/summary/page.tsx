@@ -11,7 +11,7 @@ export default function Summary() {
     <>
       <Hero />
       <main className="flex flex-col justify-center items-center">
-        <div className="flex flex-col gap-8 w-full max-w-6xl relative p-8 md:p-12">
+        <div className="flex flex-col gap-8 w-full max-w-6xl relative p-4 sm:p-6 md:p-12">
           <NavigationBtn path="/configure" text="Go back" icon={<MoveLeft />} />
         </div>
 

@@ -19,7 +19,7 @@ export function ScriptsGrid({ scripts, downloadScript, title = "Configuration Sc
           {title}
         </h3>
       )}
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 max-w-full">
         {scripts.map((script) => (
           <ScriptDownloadCard
             key={script.name}
