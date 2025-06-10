@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Terminal, Download, Check, PlayCircle, FlaskConical, Gauge, ChevronUp } from "lucide-react";
+import { Download, Check, PlayCircle, FlaskConical, Gauge, ChevronUp } from "lucide-react";
 import { Card } from "../ui/card";
 import { Tabs, TabsContent, TabsList } from "../ui/tabs";
 import { Step, Steps } from "./steps";
