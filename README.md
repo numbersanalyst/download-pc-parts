@@ -1,3 +1,7 @@
+<h1 align="center">
+  <a href="https://download-pc-parts.vercel.app/" target="_blank"><img src="public/logos/banner.png" alt="Download PC Parts" width="800"></a>
+</h1>
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
