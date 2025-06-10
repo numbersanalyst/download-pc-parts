@@ -9,7 +9,6 @@ import { SelectedGpuDetails } from "@/components/configuration/selected-gpu-deta
 import { SelectRam } from "@/components/configuration/select-ram";
 import { SelectedRamDetails } from "@/components/configuration/selected-ram-details";
 import { HeroBackground } from "@/components/configuration/hero";
-// import { Hero } from "@/components/configuration/hero";
 
 export default function Configure() {
   return (
@@ -18,9 +17,6 @@ export default function Configure() {
       <main className="flex justify-center">
         <div className="flex flex-col gap-8 w-full max-w-6xl relative p-4 sm:p-6 md:p-12">
           <Navigation />
-
-          {/* Dont working on stackblitz */}
-          {/* <Hero /> */}
 
           <SelectionHeader
             step={1}
