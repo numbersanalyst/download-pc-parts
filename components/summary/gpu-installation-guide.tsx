@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Terminal, Download, Bot, ListOrdered, Code, Check, PlayCircle, Settings, Search } from "lucide-react";
+import { Terminal, Download, Bot, ListOrdered, Code, Check, PlayCircle, Settings, Search, Info } from "lucide-react";
 import { Card } from "../ui/card";
 import { Tabs, TabsContent, TabsList } from "../ui/tabs";
 import { Step, Steps } from "./steps";
@@ -40,6 +40,12 @@ function GpuInstallationGuide({ scriptsData, downloadScript }: GpuInstallationGu
 
         {/* Automatic/Instructions Tab */}
         <TabsContent value="tab-1">
+          <div className="bg-secondary/20 dark:bg-secondary/10 border rounded-lg p-4 mb-6 text-sm text-muted-foreground">
+            <p className="flex items-center gap-4">
+              <Info className="size-4 shrink-0" />
+              Note: The automatic script is currently optimized for NVIDIA GPUs. If you encounter any issues with other GPU brands, please use the manual installation method in the tab above.
+            </p>
+          </div>
           <Steps>
             <Step title="Download Script" icon={<Download className="size-5" />}>
               <p>
