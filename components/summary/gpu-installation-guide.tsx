@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Terminal, Download, Bot, ListOrdered, Code, Check, PlayCircle, Settings, Search, Info } from "lucide-react";
+import { Terminal, Download, Bot, ListOrdered, Code, PlayCircle, Settings, Search, Info } from "lucide-react";
 import { Card } from "../ui/card";
 import { Tabs, TabsContent, TabsList } from "../ui/tabs";
 import { Step, Steps } from "./steps";
